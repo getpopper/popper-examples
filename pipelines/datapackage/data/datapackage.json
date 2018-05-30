@@ -1,0 +1,45 @@
+{
+    "profile": "tabular-data-package",
+    "resources": [
+        {
+            "path": "data/datapackage_csv_example.csv",
+            "profile": "tabular-data-resource",
+            "name": "datapackage_csv_example",
+            "format": "csv",
+            "mediatype": "text/csv",
+            "encoding": "utf-8",
+            "schema": {
+                "fields": [
+                    {
+                        "name": "atomic number",
+                        "type": "integer",
+                        "format": "default"
+                    },
+                    {
+                        "name": "symbol",
+                        "type": "string",
+                        "format": "default"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "format": "default"
+                    },
+                    {
+                        "name": "atomic mass",
+                        "type": "number",
+                        "format": "default"
+                    },
+                    {
+                        "name": "metal or nonmetal?",
+                        "type": "string",
+                        "format": "default"
+                    }
+                ],
+                "missingValues": [
+                    ""
+                ]
+            }
+        }
+    ]
+}
