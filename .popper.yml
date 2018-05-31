@@ -1,0 +1,11 @@
+metadata: {}
+pipelines:
+  blis:
+    envs:
+    - host
+    path: pipelines/blis
+    stages:
+    - run
+    - analyze
+popperized:
+- github/popperized
