@@ -6,5 +6,12 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
+    - analyze
+  envvar-param:
+    envs:
+    - host
+    path: pipelines/envvar-param
+    stages:
+    - run
 popperized:
 - github/popperized
