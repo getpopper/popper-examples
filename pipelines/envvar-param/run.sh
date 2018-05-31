@@ -2,7 +2,7 @@
 # [wf] execute run.sh stage
 
 if [ -z "$N_REPETITIONS" ]; then
-  echo "N_REPETITIONS environment variable needs to be set"
+  echo "N_REPETITIONS environment variable needs to be set" >&2
   exit 1
 fi
 
