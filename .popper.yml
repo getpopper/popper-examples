@@ -6,7 +6,6 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
-    - analyze
   envvar-param:
     envs:
     - host
