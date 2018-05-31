@@ -1,12 +1,5 @@
 metadata: {}
 pipelines:
-  ? ''
-  : envs:
-    - host
-    path: pipelines/datapackage/
-    stages:
-    - run
-    - update-datapackage
   blis:
     envs:
     - host
