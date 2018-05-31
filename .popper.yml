@@ -6,6 +6,5 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
-    - analyze
 popperized:
 - github/popperized
