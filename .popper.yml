@@ -12,5 +12,20 @@ pipelines:
     path: pipelines/envvar-param
     stages:
     - run
+  docker-data-science:
+    envs:
+    - host
+    path: pipelines/docker-data-science
+    stages:
+    - setup
+    - analyze
+    - generate-figures
+  datapackage:
+    envs:
+    - host
+    path: pipelines/datapackage
+    stages:
+    - run
+    - update-datapackage
 popperized:
 - github/popperized
