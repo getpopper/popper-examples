@@ -14,5 +14,12 @@ pipelines:
     - setup
     - analyze
     - generate-figures
+  datapackage:
+    envs:
+    - host
+    path: pipelines/datapackage
+    stages:
+    - run
+    - update-datapackage
 popperized:
 - github/popperized
