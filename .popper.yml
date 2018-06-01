@@ -6,6 +6,14 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
+  docker-data-science:
+    envs:
+    - host
+    path: pipelines/docker-data-science
+    stages:
+    - setup
+    - analyze
+    - generate-figures
   datapackage:
     envs:
     - host
