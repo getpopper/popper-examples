@@ -6,6 +6,12 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
+  envvar-param:
+    envs:
+    - host
+    path: pipelines/envvar-param
+    stages:
+    - run
   docker-data-science:
     envs:
     - host
