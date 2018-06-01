@@ -6,5 +6,12 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
+  datapackage:
+    envs:
+    - host
+    path: pipelines/datapackage
+    stages:
+    - run
+    - update-datapackage
 popperized:
 - github/popperized
