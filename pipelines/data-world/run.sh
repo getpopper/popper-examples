@@ -6,4 +6,3 @@ mkdir data
 
 # [wf] running script generate-data
 python scripts/generate-data.py
-
