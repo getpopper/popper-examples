@@ -8,4 +8,4 @@ install:
 - export PATH=$PATH:/tmp/popper/cli/bin
 script: popper run
 env:
-  - N_REPETITIONS: 5
+  - N_REPETITIONS=5 DATA_WORLD_ACCOUNT=https://data.world/fran1307/2018-datadotworldbballstats DATA_WORLD_CSV=DataDotWorldBBallStats.csv

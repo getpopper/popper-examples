@@ -6,12 +6,20 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
-  envvar-param:
+  data-world:
     envs:
     - host
-    path: pipelines/envvar-param
+    path: pipelines/data-world
     stages:
     - run
+    - update-data-world-repo
+  datapackage:
+    envs:
+    - host
+    path: pipelines/datapackage
+    stages:
+    - run
+    - update-datapackage
   docker-data-science:
     envs:
     - host
@@ -20,12 +28,11 @@ pipelines:
     - setup
     - analyze
     - generate-figures
-  datapackage:
+  envvar-param:
     envs:
     - host
-    path: pipelines/datapackage
+    path: pipelines/envvar-param
     stages:
     - run
-    - update-datapackage
 popperized:
 - github/popperized
