@@ -16,7 +16,12 @@ with dw.open_remote_file(
 
     reader = csv.reader(r)
     output_file = open("data/DataDotWorldBBallStats.csv", "wb")
-    writer = csv.writer(output_file, delimiter=",", quotechar='"', quoting=csv.QUOTE_ALL)
+    writer = csv.writer(
+        output_file,
+        delimiter=",",
+        quotechar='"',
+        quoting=csv.QUOTE_ALL
+    )
 
     for row in reader:
         writer.writerow(row)
