@@ -34,5 +34,12 @@ pipelines:
     path: pipelines/envvar-param
     stages:
     - run
+  validator:
+    envs:
+    - host
+    path: pipelines/validator
+    stages:
+    - generate-data.sh
+    - validate.sh
 popperized:
 - github/popperized
