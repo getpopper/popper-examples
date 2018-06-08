@@ -1,9 +1,9 @@
 import datapackage
 
 """
-    Script for uploading your local changes to data.world
-    NOTE: You must have a data.world account.
+    Script for updating our datapackage.
 """
+
 
 package = datapackage.Package()
 

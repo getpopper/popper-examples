@@ -18,8 +18,8 @@ pipelines:
     - host
     path: pipelines/datapackage
     stages:
-    - run
-    - update-datapackage
+    - run.sh
+    - update-datapackage.sh
   docker-data-science:
     envs:
     - host
