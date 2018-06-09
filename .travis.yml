@@ -7,7 +7,7 @@ services: docker
 before_install:
 - sudo apt-get update
 - sudo apt-get install python3
-- sudo apt-get install pip3
+- sudo apt-get install python3-pip
 install:
 - git clone --recursive https://github.com/systemslab/popper /tmp/popper
 - export PATH=$PATH:/tmp/popper/cli/bin
