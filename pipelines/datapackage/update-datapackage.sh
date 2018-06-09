@@ -6,7 +6,7 @@ if python3 -c "import datapackage" &> /dev/null; then
     echo 'requirements already installed.'
 else
     echo 'Installing dependencies'
-    pip3 install datapackage
+    sudo pip3 install datapackage
 fi
 
 # [wf] running scripts
