@@ -8,6 +8,7 @@ if python -c "import statsmodels.stats.api" &> /dev/null; then
 else
     echo 'Installing dependencies'
     pip install statsmodels
+    pip install scipy
 fi
 
 # [wf] Data folder
