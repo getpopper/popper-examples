@@ -5,6 +5,7 @@ python:
 - 2.7
 services: docker
 before_install:
+- sudo add-apt-repository ppa:deadsnakes/ppa
 - sudo apt-get update
 - sudo apt-get install python3.6
 - sudo apt-get install python3-pip
