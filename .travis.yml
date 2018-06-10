@@ -6,7 +6,7 @@ python:
 services: docker
 before_install:
 - sudo apt-get update
-- sudo apt-get install python3.5
+- sudo apt-get install python3.4
 - sudo apt-get install python3-pip
 install:
 - git clone --recursive https://github.com/systemslab/popper /tmp/popper
