@@ -1,8 +1,12 @@
 # validator
 A template showing how to use Popper with validations.
-In this case, Popper helps ensure that validations are enable by returning a gold when running the command: popper run.
+In this case, [Popper](https://github.com/systemslab/popper/) helps ensure that validations are enable by returning **GOLD** as the status of a pipeline after executing popper run.
 
-A gold status is returned when all validations were true at the validate.sh stage. A validation is true if it has the next format:
-> [true] Text about your validation.
+Popper implements the convention of treating every line written to stdout by the **validate.sh** as a validation result.
 
-false otherwise.
+This script should print to standard output one line per validation, denoting whether a validation passed or not. In general, the form for validation results is [true|false] <statement> (see examples below).
+
+> [true]  algorithm A outperforms B
+
+> [false] network throughput is 2x the IO bandwidth
+
