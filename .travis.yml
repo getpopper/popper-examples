@@ -5,9 +5,8 @@ python:
 - 2.7
 services: docker
 before_install:
-- sudo add-apt-repository ppa:jonathonf/python-3.6
 - sudo apt-get update
-- sudo apt-get install python3.6
+- sudo apt-get install python3.5
 - sudo apt-get install python3-pip
 install:
 - git clone --recursive https://github.com/systemslab/popper /tmp/popper

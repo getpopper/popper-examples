@@ -2,7 +2,7 @@
 # [wf] execute update-datapackage.sh stage
 
 # [wf] Installing dependencies
-if python3 -c "import datapackage" &> /dev/null; then
+if python3.5 -c "import datapackage" &> /dev/null; then
     echo 'requirements already installed.'
 else
     echo 'Installing dependencies'
@@ -10,4 +10,4 @@ else
 fi
 
 # [wf] running scripts
-python3 scripts/update-datapackage.py
+python3.5 scripts/update-datapackage.py
