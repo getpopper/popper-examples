@@ -39,6 +39,7 @@ pipelines:
     - host
     path: pipelines/validator
     stages:
+    - virtual-environment-checker.sh
     - generate-data.sh
     - validate.sh
 popperized:
