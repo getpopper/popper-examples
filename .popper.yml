@@ -18,8 +18,8 @@ pipelines:
     - host
     path: pipelines/datapackage
     stages:
-    - run
-    - update-datapackage
+    - run.sh
+    - update-datapackage.sh
   docker-data-science:
     envs:
     - host
@@ -34,5 +34,13 @@ pipelines:
     path: pipelines/envvar-param
     stages:
     - run
+  validator:
+    envs:
+    - host
+    path: pipelines/validator
+    stages:
+    - virtual-environment-checker.sh
+    - generate-data.sh
+    - validate.sh
 popperized:
 - github/popperized
