@@ -14,4 +14,5 @@ install:
 - export PYTHONUNBUFFERED=1
 script: popper run
 env:
-  - N_REPETITIONS: 5
+  - N_REPETITIONS=5
+  - TERM=dumb
