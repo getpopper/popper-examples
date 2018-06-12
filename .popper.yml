@@ -42,5 +42,14 @@ pipelines:
     - virtual-environment-checker.sh
     - generate-data.sh
     - validate.sh
+  pgbench:
+    envs:
+    - host
+    path: pipelines/pgbench
+    stages:
+    - setup
+    - run
+    - cleanup
+    - analyze
 popperized:
 - github/popperized
