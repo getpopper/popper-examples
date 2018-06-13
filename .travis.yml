@@ -11,7 +11,6 @@ before_install:
 install:
 - git clone --recursive https://github.com/systemslab/popper /tmp/popper
 - export PATH=$PATH:/tmp/popper/cli/bin
-script: popper run
+script: popper run > /dev/null
 env:
   - N_REPETITIONS=5
-  - TERM=dumb
