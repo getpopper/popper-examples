@@ -8,7 +8,6 @@ cd bwa*
 bwa="`pwd`/bwa"
 cd ..
 
-
 # Index the reference genome
 
 # Our first step is to index the reference genome for use by BWA.
@@ -118,4 +117,3 @@ bcftools view results/bcf/SRR097977_variants.bcf \ | bcft*/misc/vcfutils.pl varF
 # In order for us to look at the alignment files in a
 # genome browser, we will need to index the BAM file using samtools:
 samtools index results/bam/SRR097977.aligned.sorted.bam
-

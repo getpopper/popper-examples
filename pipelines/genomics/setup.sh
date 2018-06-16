@@ -38,7 +38,7 @@ tar -xvjf tsamtools.tar.bz2
 cd samtools*
 ./configure
 make
-make install
+sudo make install
 cd ..
 
 curl -o tbcftools.tar.bz2 -0L https://github.com/samtools/bcftools/releases/download/1.8/bcftools-1.8.tar.bz2
