@@ -12,6 +12,6 @@ install:
 - git clone --recursive https://github.com/systemslab/popper /tmp/popper
 - export PATH=$PATH:/tmp/popper/cli/bin
 script:
-- travis_wait 35 popper run
+- travis_wait popper run
 env:
   - N_REPETITIONS: 5
