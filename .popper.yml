@@ -39,9 +39,8 @@ pipelines:
     - host
     path: pipelines/genomics
     stages:
-    - setup
-    - run
-    - post-run
+    - docker-setup
+    - validate
   validator:
     envs:
     - host
