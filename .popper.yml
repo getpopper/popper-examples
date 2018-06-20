@@ -51,5 +51,15 @@ pipelines:
     - run
     - cleanup
     - analyze
+  vagrant-linux:
+    envs:
+    - host
+    path: pipelines/vagrant-linux
+    stages:
+    - init
+    - build-kernel
+    - deploy-kernel
+    - run
+    - visualize
 popperized:
 - github/popperized
