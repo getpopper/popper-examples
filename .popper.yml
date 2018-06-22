@@ -53,5 +53,24 @@ pipelines:
     - virtual-environment-checker.sh
     - generate-data.sh
     - validate.sh
+  pgbench:
+    envs:
+    - host
+    path: pipelines/pgbench
+    stages:
+    - setup
+    - run
+    - cleanup
+    - analyze
+  vagrant-linux:
+    envs:
+    - host
+    path: pipelines/vagrant-linux
+    stages:
+    - init
+    - build-kernel
+    - deploy-kernel
+    - run
+    - visualize
 popperized:
 - github/popperized
