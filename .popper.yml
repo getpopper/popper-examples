@@ -5,6 +5,7 @@ pipelines:
     - host
     path: pipelines/blis
     stages:
+    - build-docker-image
     - run
   cloudlab-benchmarking:
     envs:
