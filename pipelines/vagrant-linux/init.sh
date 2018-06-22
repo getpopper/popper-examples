@@ -6,6 +6,6 @@ if ! type "docker" > /dev/null; then
 fi
 
 if ! type "vagrant" > /dev/null; then
-  echo Docker not detected
+  echo Vagrant not detected
   exit 1
 fi

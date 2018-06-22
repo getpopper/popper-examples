@@ -49,12 +49,6 @@ export SRC_DIR="/linux"
 
 mkdir -p $SRC_DIR
 
-if [ ! -d $SRC_DIR ] ; then
-  # by convention, a /linux folder is bind-mounted
-  echo "couldn't find $SRC_DIR"
-  exit 1
-fi
-
 mkdir -p kpatch
 
 
@@ -62,9 +56,18 @@ mkdir -p kpatch
 cd $SRC_DIR
 
 cp /sources/* .
+if [ -f linux-$KERNEL_VERSION-build.tar ];
+then
+  echo Resuming from previous build state
 
-tar -xJf linux-"$KERNEL_VERSION".tar.xz
-cd linux-"$KERNEL_VERSION"
+  tar -xf linux-$KERNEL_VERSION-build.tar
+  cd linux-$KERNEL_VERSION-build
+else
+  echo Unpacking source tarball
+  tar -xJf linux-"$KERNEL_VERSION".tar.xz
+  cd linux-"$KERNEL_VERSION"
+fi
+
 
 # --------------CONFIG------------------
 
@@ -98,7 +101,7 @@ fi
 echo "Now building the kernel, this will take a while..."
 #time fakeroot make-kpkg --jobs "$(getconf _NPROCESSORS_ONLN)" --append-to-version "$VERSION_POSTFIX" --initrd kernel_image
 #time fakeroot make-kpkg --jobs "$(getconf _NPROCESSORS_ONLN)" --append-to-version "$VERSION_POSTFIX" --initrd kernel_headers
-make deb-pkg
+make bindeb-pkg
 
 
 PACKAGE_NAME="$(ls -m1 ../linux-image*.deb)"
@@ -106,5 +109,7 @@ HEADERS_PACKAGE_NAME="$(ls -m1 ../linux-headers*.deb)"
 HEADERS_PACKAGE_NAME="$(ls -m1 ../linux-libc-dev*.deb)"
 echo "Congratulations! You just build a linux kernel."
 echo "Use the following command to install it: dpkg -i $PACKAGE_NAME $HEADERS_PACKAGE_NAME"
+
+tar -cf /linux/linux-$KERNEL_VERSION-build.tar .
 
 mv ../*.deb /sources/

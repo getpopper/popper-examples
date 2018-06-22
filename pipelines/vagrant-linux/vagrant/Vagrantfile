@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "docker"
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt install libelf-dev
-    sudo dpkg -i /vagrant/*.deb
+    sudo dpkg -i /vagrant/debs/*.deb
   SHELL
 
 

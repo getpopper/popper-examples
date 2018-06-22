@@ -17,4 +17,5 @@ popd
 rm -f vagrant/debs/*
 docker build -t kernel-ci docker/
 docker run --rm -e KERNEL_VERSION=$KERNEL_VERSION -ti -v `pwd`/linux:/sources kernel-ci
+mkdir -p vagrant/debs/
 mv linux/*.deb vagrant/debs/
