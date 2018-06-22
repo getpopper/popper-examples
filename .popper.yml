@@ -34,6 +34,17 @@ pipelines:
     path: pipelines/envvar-param
     stages:
     - run
+  genomics:
+    envs:
+    - host
+    path: pipelines/genomics
+    stages:
+    - setup.sh
+    - run.sh
+    - post-run.sh
+    - concordance.sh
+    - validate.sh
+    - teardown.sh
   validator:
     envs:
     - host
