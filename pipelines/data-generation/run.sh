@@ -9,7 +9,7 @@ if [ -z $SSHKEY ]; then
     exit 1
   fi
   echo "Found! Configuring everything for you"
-  export SSHKEY=$(readlink "travis-secrets/id_rsa")
+  export SSHKEY="`pwd`/travis-secrets/id_rsa"
 fi
 
 # delete previous results

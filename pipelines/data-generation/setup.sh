@@ -26,7 +26,7 @@ if [ -z $CLOUDLAB_PUBKEY_PATH ]; then
     exit 1
   fi
   echo "Found! Configuring everything for you"
-  export CLOUDLAB_PUBKEY_PATH=$(readlink "travis-secrets/id_rsa.pub")
+  export CLOUDLAB_PUBKEY_PATH="`pwd`/travis-secrets/id_rsa.pub"
 fi
 
 if [ -z $CLOUDLAB_CERT_PATH ]; then
@@ -37,7 +37,7 @@ if [ -z $CLOUDLAB_CERT_PATH ]; then
     exit 1
   fi
   echo "Found! Configuring everything for you"
-  export CLOUDLAB_CERT_PATH=$(readlink "travis-secrets/cloudlab.pem")
+  export CLOUDLAB_CERT_PATH="`pwd`/travis-secrets/cloudlab.pem"
 fi
 
 docker run --rm --name=geni-lib \
