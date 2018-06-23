@@ -21,7 +21,7 @@ fi
 if [ -z $CLOUDLAB_PUBKEY_PATH ]; then
   echo "Expecting CLOUDLAB_PUBKEY_PATH variable"
   echo "Looking in the travis secret folder"
-  if [ -d "travis-secrets/id_rsa.pub" ]; then
+  if [ ! -f "travis-secrets/id_rsa.pub" ]; then
     echo "Couldn't find id_rsa.pub"
     exit 1
   fi
@@ -32,7 +32,7 @@ fi
 if [ -z $CLOUDLAB_CERT_PATH ]; then
   echo "Expecting CLOUDLAB_CERT_PATH variable"
   echo "Looking in the travis secret folder"
-  if [ -d "travis-secrets/cloudlab.pem" ]; then
+  if [ ! -f "travis-secrets/cloudlab.pem" ]; then
     echo "Couldn't find cloudlab.pem"
     exit 1
   fi
