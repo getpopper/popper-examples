@@ -6,10 +6,12 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_4096e639581d_key -iv $encrypted_4096e639581d_iv
   -in pipelines/data-generation/travis-secrets/secrets.zip.enc -out pipelines/data-generation/travis-secrets/secrets.zip -d
 - unzip pipelines/data-generation/travis-secrets/secrets.zip
-- ls -lap pipelines/data-generation/travis-secrets/
 - sudo apt-get update
 - sudo apt-get install python3.4
 - sudo apt-get install python3-pip
+- ls -lap pipelines/data-generation/
+- ls -lap pipelines/data-generation/travis-secrets/
+- ls -lap
 install:
 - git clone --recursive https://github.com/systemslab/popper /tmp/popper
 - export PATH=$PATH:/tmp/popper/cli/bin
