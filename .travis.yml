@@ -5,7 +5,9 @@ services: docker
 before_install:
 - openssl aes-256-cbc -K $encrypted_4096e639581d_key -iv $encrypted_4096e639581d_iv
   -in pipelines/data-generation/travis-secrets/secrets.tar.enc -out pipelines/data-generation/travis-secrets/secrets.tar -d
-- tar xf pipelines/data-generation/travis-secrets/secrets.tar
+- tar xvf pipelines/data-generation/travis-secrets/secrets.tar
+- rm -R -- pipelines/data-generation/travis-secrets/*/
+- ls -la pipelines/data-generation/travis-secrets/
 - sudo apt-get update
 - sudo apt-get install python3.4
 - sudo apt-get install python3-pip
