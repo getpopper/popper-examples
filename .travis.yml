@@ -1,10 +1,10 @@
-
----
 language: python
 python:
 - 2.7
 services: docker
 before_install:
+- openssl aes-256-cbc -K $encrypted_4096e639581d_key -iv $encrypted_4096e639581d_iv
+  -in secrets.tar.enc -out secrets.tar -d
 - sudo apt-get update
 - sudo apt-get install python3.4
 - sudo apt-get install python3-pip
@@ -14,4 +14,4 @@ install:
 - export PYTHONUNBUFFERED=1
 script: popper run --skip=vagrant-linux
 env:
-  - N_REPETITIONS: 5
+- N_REPETITIONS: 5
