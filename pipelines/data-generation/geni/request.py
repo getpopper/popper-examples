@@ -24,9 +24,10 @@ def create_request(_site, hw_type, num_nodes):
 create_request('cl-clemson', 'c6320', 1)
 
 print("Executing cloudlab request")
-manifests = cl.request(experiment_name=('clapp-'+os.environ['CLOUDLAB_USER']),
-                       requests=requests, timeout=30, expiration=1200,
-                       ignore_failed_slivers=True)
+manifests = cl.request(
+    experiment_name=('clapp-' + os.environ['CLOUDLAB_USER']),
+    requests=requests, timeout=30, expiration=1200,
+    ignore_failed_slivers=True)
 
 print("Writing /output/machines file")
 with open('/output/machines', 'w') as f:
