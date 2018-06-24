@@ -20,29 +20,7 @@ def create_request(_site, hw_type, num_nodes):
             requests[_site] = rspec.Request()
         requests[_site].addResource(node)
 
-create_request('apt', 'r320', 1)
-create_request('apt', 'r720', 1)
-create_request('apt', 'c6220', 1)
-
 create_request('cl-clemson', 'c6320', 1)
-create_request('cl-clemson', 'c6420', 1)
-create_request('cl-clemson', 'c8220', 1)
-create_request('cl-clemson', 'dss7500', 1)
-
-# create_request('cl-utah', 'm400') # ARM machine
-create_request('cl-utah', 'm510', 1)
-# create_request('cl-utah', 'xl170')
-
-create_request('cl-wisconsin', 'c220g1', 1)
-create_request('cl-wisconsin', 'c220g2', 1)
-create_request('cl-wisconsin', 'c240g1', 1)
-create_request('cl-wisconsin', 'c240g2', 1)
-
-create_request('ig-utahddc', 'dl360', 1)
-
-create_request('pg-utah', 'd430', 1)
-create_request('pg-utah', 'd710', 1)
-create_request('pg-utah', 'd820', 1)
 
 print("Executing cloudlab request")
 manifests = cl.request(

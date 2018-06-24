@@ -2,10 +2,11 @@
 repetitions: 1
 benchmarks:
 
-- name: comd
-  image: ivotron/comd:v1.1
-  command: --xproc 2 --yproc 2 --zproc 1 --nx 64 --ny 64 --nz 64 --printRate 50 --nSteps 40
-  environment:
-    SINGLE_NODE: 1
-    MPIRUN_FLAGS: -np 4
+- name: pybench
+  image: ivotron/pybench:20090814
+  cgroup_parent: /
+
+- name: ssca
+  image: ivotron/ssca2:v1.0
+  command: 4 20
   cgroup_parent: /
