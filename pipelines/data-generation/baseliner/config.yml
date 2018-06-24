@@ -1,12 +1,11 @@
 ---
-repetitions: 10
+repetitions: 1
 benchmarks:
 
-- name: pybench
-  image: ivotron/pybench:20090814
+- name: comd
+  image: ivotron/comd:v1.1
+  command: --xproc 2 --yproc 2 --zproc 1 --nx 64 --ny 64 --nz 64 --printRate 50 --nSteps 40
+  environment:
+    SINGLE_NODE: 1
+    MPIRUN_FLAGS: -np 4
   cgroup_parent: /
-
-- name: scikit-learn
-  image: ivotron/scikit-learn-bench:0.18.1
-  cgroup_parent: /
-

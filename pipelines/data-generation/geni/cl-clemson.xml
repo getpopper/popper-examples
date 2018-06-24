@@ -1,13 +1,13 @@
-<rspec xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd" type="manifest" expires="2018-06-23T22:03:30Z">
-  <node client_id="node0" exclusive="true" component_id="urn:publicid:IDN+clemson.cloudlab.us+node+clnode178" component_manager_id="urn:publicid:IDN+clemson.cloudlab.us+authority+cm" sliver_id="urn:publicid:IDN+clemson.cloudlab.us+sliver+148134">
+<rspec xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.geni.net/resources/rspec/3" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/manifest.xsd" type="manifest" expires="2018-06-24T17:56:53Z">
+  <node client_id="node0" exclusive="true" component_id="urn:publicid:IDN+clemson.cloudlab.us+node+clnode118" component_manager_id="urn:publicid:IDN+clemson.cloudlab.us+authority+cm" sliver_id="urn:publicid:IDN+clemson.cloudlab.us+sliver+148431">
     <sliver_type name="raw-pc">
       <disk_image name="urn:publicid:IDN+apt.emulab.net+image+schedock-PG0:docker-ubuntu16:0"/>
     </sliver_type>
     <hardware_type name="c6320"/>
-    <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="clnode178" hardware_type="c6320"/>
-    <host name="node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us" ipv4="130.127.133.187"/>
+    <rs:vnode xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" name="clnode118" hardware_type="c6320"/>
+    <host name="node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us" ipv4="130.127.133.127"/>
     <services>
-      <login authentication="ssh-keys" hostname="clnode178.clemson.cloudlab.us" port="22" username="fran1307"/>
+      <login authentication="ssh-keys" hostname="clnode118.clemson.cloudlab.us" port="22" username="fran1307"/>
       <rs:console xmlns:rs="http://www.protogeni.net/resources/rspec/ext/emulab/1" server="boss.clemson.cloudlab.us"/>
     </services>
   </node>

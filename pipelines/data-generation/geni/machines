@@ -1,4 +1,7 @@
-node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us ansible_user=fran1307 ansible_become=true
+dwill.soe.ucsc.edu ansible_user=ivo
+scruffy.soe.ucsc.edu ansible_user=issdm
+issdm-41 ansible_user=issdm
+rackform2 ansible_user=issdm
 dwill.soe.ucsc.edu ansible_user=ivo
 scruffy.soe.ucsc.edu ansible_user=issdm
 issdm-41 ansible_user=issdm

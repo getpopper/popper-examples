@@ -4,7 +4,7 @@ set -ex
 if [ -z $SSHKEY ]; then
   echo "Expecting SSHKEY variable"
   echo "Looking in the travis secret folder"
-  if [ -d "travis-secrets/id_rsa" ]; then
+  if [ ! -f "travis-secrets/id_rsa" ]; then
     echo "Couldn't find id_rsa"
     exit 1
   fi
