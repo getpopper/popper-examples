@@ -51,7 +51,3 @@ docker run --rm --name=geni-lib \
   -v `pwd`/geni/:/output \
   --entrypoint=python \
   ivotron/geni-lib:v0.9.7.8 -u /output/request.py
-
-if [ -f geni/localmachines ]; then
-  cat geni/localmachines >> geni/machines
-fi
