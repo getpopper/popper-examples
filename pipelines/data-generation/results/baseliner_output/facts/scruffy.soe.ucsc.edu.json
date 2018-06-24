@@ -1,0 +1,50 @@
+{
+    "ansible_check_mode": false, 
+    "ansible_playbook_python": "/usr/bin/python2", 
+    "ansible_user": "issdm", 
+    "ansible_version": {
+        "full": "2.4.1.0", 
+        "major": 2, 
+        "minor": 4, 
+        "revision": 1, 
+        "string": "2.4.1.0"
+    }, 
+    "baseliner_execution_mode": "single-node", 
+    "benchmarks": [
+        {
+            "cgroup_parent": "/", 
+            "image": "ivotron/pybench:20090814", 
+            "name": "pybench"
+        }
+    ], 
+    "failfast": "false", 
+    "group_names": [
+        "ungrouped"
+    ], 
+    "groups": {
+        "all": [
+            "node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us", 
+            "dwill.soe.ucsc.edu", 
+            "scruffy.soe.ucsc.edu", 
+            "issdm-41", 
+            "rackform2"
+        ], 
+        "ungrouped": [
+            "node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us", 
+            "dwill.soe.ucsc.edu", 
+            "scruffy.soe.ucsc.edu", 
+            "issdm-41", 
+            "rackform2"
+        ]
+    }, 
+    "inventory_dir": "/experiment/geni", 
+    "inventory_file": "/experiment/geni/machines", 
+    "inventory_hostname": "scruffy.soe.ucsc.edu", 
+    "inventory_hostname_short": "scruffy", 
+    "local_results_path": "/experiment/results/baseliner_output", 
+    "omit": "__omit_place_holder__041d40fef8cac3582925eb589605f0f36c33e370", 
+    "playbook_dir": "/experiment", 
+    "repetitions": 1, 
+    "stop_all": "true", 
+    "test_wait_delay": "60"
+}

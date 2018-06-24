@@ -1,0 +1,114 @@
+
+2018-06-24 18:46:14,292 p=8 u=root |  PLAY [all] *********************************************************************
+2018-06-24 18:46:14,320 p=8 u=root |  TASK [Gathering Facts] *********************************************************
+2018-06-24 18:46:14,322 p=8 u=root |  Sunday 24 June 2018  18:46:14 +0000 (0:00:00.115)       0:00:00.115 *********** 
+2018-06-24 18:46:15,096 p=8 u=root |  fatal: [rackform2]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname rackform2: Name does not resolve\r\n", "unreachable": true}
+2018-06-24 18:46:15,102 p=8 u=root |  fatal: [issdm-41]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname issdm-41: Name does not resolve\r\n", "unreachable": true}
+2018-06-24 18:46:15,604 p=8 u=root |  fatal: [scruffy.soe.ucsc.edu]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added 'scruffy.soe.ucsc.edu,128.114.53.124' (ECDSA) to the list of known hosts.\r\nPermission denied (publickey,password).\r\n", "unreachable": true}
+2018-06-24 18:46:15,703 p=8 u=root |  fatal: [dwill.soe.ucsc.edu]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: Warning: Permanently added 'dwill.soe.ucsc.edu,128.114.53.161' (ECDSA) to the list of known hosts.\r\nPermission denied (publickey,password).\r\n", "unreachable": true}
+2018-06-24 18:46:20,549 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]
+2018-06-24 18:46:20,590 p=8 u=root |  TASK [baseliner : include_tasks] ***********************************************
+2018-06-24 18:46:20,592 p=8 u=root |  Sunday 24 June 2018  18:46:20 +0000 (0:00:06.269)       0:00:06.385 *********** 
+2018-06-24 18:46:20,703 p=8 u=root |  included: /etc/ansible/roles/baseliner/tasks/check_preconditions.yml for node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us
+2018-06-24 18:46:20,742 p=8 u=root |  TASK [baseliner : ensure expected variables are defined] ***********************
+2018-06-24 18:46:20,745 p=8 u=root |  Sunday 24 June 2018  18:46:20 +0000 (0:00:00.152)       0:00:06.537 *********** 
+2018-06-24 18:46:20,900 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us] => {
+    "changed": false, 
+    "failed": false, 
+    "msg": "All assertions passed"
+}
+2018-06-24 18:46:20,936 p=8 u=root |  TASK [baseliner : set remote results path if not defined] **********************
+2018-06-24 18:46:20,937 p=8 u=root |  Sunday 24 June 2018  18:46:20 +0000 (0:00:00.192)       0:00:06.730 *********** 
+2018-06-24 18:46:21,058 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]
+2018-06-24 18:46:21,108 p=8 u=root |  TASK [baseliner : ensure results folder exists] ********************************
+2018-06-24 18:46:21,109 p=8 u=root |  Sunday 24 June 2018  18:46:21 +0000 (0:00:00.171)       0:00:06.902 *********** 
+2018-06-24 18:46:21,614 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us -> localhost]
+2018-06-24 18:46:21,663 p=8 u=root |  TASK [baseliner : check that pre-tasks file exists] ****************************
+2018-06-24 18:46:21,664 p=8 u=root |  Sunday 24 June 2018  18:46:21 +0000 (0:00:00.555)       0:00:07.457 *********** 
+2018-06-24 18:46:21,752 p=8 u=root |  TASK [baseliner : check that post-tasks file exists] ***************************
+2018-06-24 18:46:21,754 p=8 u=root |  Sunday 24 June 2018  18:46:21 +0000 (0:00:00.089)       0:00:07.546 *********** 
+2018-06-24 18:46:21,807 p=8 u=root |  TASK [baseliner : ensure docker-engine is installed] ***************************
+2018-06-24 18:46:21,808 p=8 u=root |  Sunday 24 June 2018  18:46:21 +0000 (0:00:00.054)       0:00:07.601 *********** 
+2018-06-24 18:46:21,872 p=8 u=root |  TASK [baseliner : install statically linked docker] ****************************
+2018-06-24 18:46:21,874 p=8 u=root |  Sunday 24 June 2018  18:46:21 +0000 (0:00:00.065)       0:00:07.666 *********** 
+2018-06-24 18:46:21,933 p=8 u=root |  TASK [baseliner : ensure the docker daemon is running] *************************
+2018-06-24 18:46:21,934 p=8 u=root |  Sunday 24 June 2018  18:46:21 +0000 (0:00:00.060)       0:00:07.727 *********** 
+2018-06-24 18:46:21,990 p=8 u=root |  TASK [baseliner : stop any running container] **********************************
+2018-06-24 18:46:21,992 p=8 u=root |  Sunday 24 June 2018  18:46:21 +0000 (0:00:00.057)       0:00:07.784 *********** 
+2018-06-24 18:46:23,832 p=8 u=root |  fatal: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]: FAILED! => {"changed": true, "cmd": "docker stop `docker ps -q`", "delta": "0:00:00.041503", "end": "2018-06-24 14:46:11.842293", "failed": true, "msg": "non-zero return code", "rc": 1, "start": "2018-06-24 14:46:11.800790", "stderr": "\"docker stop\" requires at least 1 argument.\nSee 'docker stop --help'.\n\nUsage:  docker stop [OPTIONS] CONTAINER [CONTAINER...] [flags]\n\nStop one or more running containers", "stderr_lines": ["\"docker stop\" requires at least 1 argument.", "See 'docker stop --help'.", "", "Usage:  docker stop [OPTIONS] CONTAINER [CONTAINER...] [flags]", "", "Stop one or more running containers"], "stdout": "", "stdout_lines": []}
+2018-06-24 18:46:23,833 p=8 u=root |  ...ignoring
+2018-06-24 18:46:23,867 p=8 u=root |  TASK [baseliner : remove containers to avoid name clashes] *********************
+2018-06-24 18:46:23,869 p=8 u=root |  Sunday 24 June 2018  18:46:23 +0000 (0:00:01.876)       0:00:09.661 *********** 
+2018-06-24 18:46:25,489 p=8 u=root |  fatal: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]: FAILED! => {"changed": true, "cmd": "docker rm `docker ps -qa`", "delta": "0:00:00.040792", "end": "2018-06-24 14:46:13.499202", "failed": true, "msg": "non-zero return code", "rc": 1, "start": "2018-06-24 14:46:13.458410", "stderr": "\"docker rm\" requires at least 1 argument.\nSee 'docker rm --help'.\n\nUsage:  docker rm [OPTIONS] CONTAINER [CONTAINER...] [flags]\n\nRemove one or more containers", "stderr_lines": ["\"docker rm\" requires at least 1 argument.", "See 'docker rm --help'.", "", "Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...] [flags]", "", "Remove one or more containers"], "stdout": "", "stdout_lines": []}
+2018-06-24 18:46:25,490 p=8 u=root |  ...ignoring
+2018-06-24 18:46:25,520 p=8 u=root |  TASK [baseliner : store facts] *************************************************
+2018-06-24 18:46:25,521 p=8 u=root |  Sunday 24 June 2018  18:46:25 +0000 (0:00:01.652)       0:00:11.314 *********** 
+2018-06-24 18:46:25,600 p=8 u=root |  included: /etc/ansible/roles/baseliner/tasks/store-facts.yml for node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us
+2018-06-24 18:46:25,644 p=8 u=root |  TASK [baseliner : install facter] **********************************************
+2018-06-24 18:46:25,645 p=8 u=root |  Sunday 24 June 2018  18:46:25 +0000 (0:00:00.124)       0:00:11.438 *********** 
+2018-06-24 18:46:28,436 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]
+2018-06-24 18:46:28,484 p=8 u=root |  TASK [baseliner : create facts folder if it doesn't exist] *********************
+2018-06-24 18:46:28,485 p=8 u=root |  Sunday 24 June 2018  18:46:28 +0000 (0:00:02.839)       0:00:14.277 *********** 
+2018-06-24 18:46:28,715 p=8 u=root |  changed: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us -> localhost]
+2018-06-24 18:46:28,760 p=8 u=root |  TASK [baseliner : store facts about remotes] ***********************************
+2018-06-24 18:46:28,762 p=8 u=root |  Sunday 24 June 2018  18:46:28 +0000 (0:00:00.277)       0:00:14.555 *********** 
+2018-06-24 18:46:29,594 p=8 u=root |  changed: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us -> localhost] => (item=node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us)
+2018-06-24 18:46:30,057 p=8 u=root |  changed: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us -> localhost] => (item=dwill.soe.ucsc.edu)
+2018-06-24 18:46:30,501 p=8 u=root |  changed: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us -> localhost] => (item=scruffy.soe.ucsc.edu)
+2018-06-24 18:46:30,994 p=8 u=root |  changed: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us -> localhost] => (item=issdm-41)
+2018-06-24 18:46:31,480 p=8 u=root |  changed: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us -> localhost] => (item=rackform2)
+2018-06-24 18:46:31,535 p=8 u=root |  TASK [baseliner : start monitoring] ********************************************
+2018-06-24 18:46:31,536 p=8 u=root |  Sunday 24 June 2018  18:46:31 +0000 (0:00:02.773)       0:00:17.329 *********** 
+2018-06-24 18:46:31,591 p=8 u=root |  TASK [baseliner : include_tasks] ***********************************************
+2018-06-24 18:46:31,592 p=8 u=root |  Sunday 24 June 2018  18:46:31 +0000 (0:00:00.055)       0:00:17.385 *********** 
+2018-06-24 18:46:31,651 p=8 u=root |  TASK [baseliner : get number of repetitions] ***********************************
+2018-06-24 18:46:31,653 p=8 u=root |  Sunday 24 June 2018  18:46:31 +0000 (0:00:00.060)       0:00:17.446 *********** 
+2018-06-24 18:46:31,835 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us] => (item=1)
+2018-06-24 18:46:31,874 p=8 u=root |  TASK [baseliner : execute each benchmark] **************************************
+2018-06-24 18:46:31,876 p=8 u=root |  Sunday 24 June 2018  18:46:31 +0000 (0:00:00.222)       0:00:17.669 *********** 
+2018-06-24 18:46:31,969 p=8 u=root |  included: /etc/ansible/roles/baseliner/tasks/run-bench.yml for node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us
+2018-06-24 18:46:32,013 p=8 u=root |  TASK [baseliner : upload files] ************************************************
+2018-06-24 18:46:32,015 p=8 u=root |  Sunday 24 June 2018  18:46:32 +0000 (0:00:00.137)       0:00:17.807 *********** 
+2018-06-24 18:46:32,065 p=8 u=root |  TASK [baseliner : initialize parameters and add number of repetitions] *********
+2018-06-24 18:46:32,066 p=8 u=root |  Sunday 24 June 2018  18:46:32 +0000 (0:00:00.051)       0:00:17.858 *********** 
+2018-06-24 18:46:32,178 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]
+2018-06-24 18:46:32,206 p=8 u=root |  TASK [baseliner : unnest parameters when parameters for benchmark were passed] ***
+2018-06-24 18:46:32,207 p=8 u=root |  Sunday 24 June 2018  18:46:32 +0000 (0:00:00.141)       0:00:18.000 *********** 
+2018-06-24 18:46:32,265 p=8 u=root |  TASK [baseliner : parametrized execution] **************************************
+2018-06-24 18:46:32,266 p=8 u=root |  Sunday 24 June 2018  18:46:32 +0000 (0:00:00.059)       0:00:18.059 *********** 
+2018-06-24 18:46:32,411 p=8 u=root |  included: /etc/ansible/roles/baseliner/tasks/run-bench-parametrized.yml for node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us
+2018-06-24 18:46:32,443 p=8 u=root |  TASK [baseliner : remove remote results folder] ********************************
+2018-06-24 18:46:32,445 p=8 u=root |  Sunday 24 June 2018  18:46:32 +0000 (0:00:00.178)       0:00:18.238 *********** 
+2018-06-24 18:46:34,272 p=8 u=root |  ok: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]
+2018-06-24 18:46:34,296 p=8 u=root |  TASK [baseliner : create remote results folder] ********************************
+2018-06-24 18:46:34,303 p=8 u=root |  Sunday 24 June 2018  18:46:34 +0000 (0:00:01.852)       0:00:20.091 *********** 
+2018-06-24 18:46:36,223 p=8 u=root |  fatal: [node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: mux_client_request_session: read from master failed: Broken pipe\r\nssh: connect to host node0.clapp-fran1307.schedock-pg0.clemson.cloudlab.us port 22: Connection refused\r\n", "unreachable": true}
+2018-06-24 18:46:36,228 p=8 u=root |  PLAY RECAP *********************************************************************
+2018-06-24 18:46:36,230 p=8 u=root |  dwill.soe.ucsc.edu         : ok=0    changed=0    unreachable=1    failed=0   
+2018-06-24 18:46:36,231 p=8 u=root |  issdm-41                   : ok=0    changed=0    unreachable=1    failed=0   
+2018-06-24 18:46:36,232 p=8 u=root |  node0.clapp-fran1307.schedock-PG0.clemson.cloudlab.us : ok=16   changed=4    unreachable=1    failed=0   
+2018-06-24 18:46:36,234 p=8 u=root |  rackform2                  : ok=0    changed=0    unreachable=1    failed=0   
+2018-06-24 18:46:36,235 p=8 u=root |  scruffy.soe.ucsc.edu       : ok=0    changed=0    unreachable=1    failed=0   
+2018-06-24 18:46:36,237 p=8 u=root |  Sunday 24 June 2018  18:46:36 +0000 (0:00:01.938)       0:00:22.029 *********** 
+2018-06-24 18:46:36,238 p=8 u=root |  =============================================================================== 
+2018-06-24 18:46:36,240 p=8 u=root |  Gathering Facts --------------------------------------------------------- 6.27s
+2018-06-24 18:46:36,241 p=8 u=root |  baseliner : install facter ---------------------------------------------- 2.84s
+2018-06-24 18:46:36,243 p=8 u=root |  baseliner : store facts about remotes ----------------------------------- 2.77s
+2018-06-24 18:46:36,244 p=8 u=root |  baseliner : create remote results folder -------------------------------- 1.93s
+2018-06-24 18:46:36,246 p=8 u=root |  baseliner : stop any running container ---------------------------------- 1.88s
+2018-06-24 18:46:36,249 p=8 u=root |  baseliner : remove remote results folder -------------------------------- 1.86s
+2018-06-24 18:46:36,250 p=8 u=root |  baseliner : remove containers to avoid name clashes --------------------- 1.65s
+2018-06-24 18:46:36,252 p=8 u=root |  baseliner : ensure results folder exists -------------------------------- 0.56s
+2018-06-24 18:46:36,253 p=8 u=root |  baseliner : create facts folder if it doesn't exist --------------------- 0.28s
+2018-06-24 18:46:36,255 p=8 u=root |  baseliner : get number of repetitions ----------------------------------- 0.22s
+2018-06-24 18:46:36,256 p=8 u=root |  baseliner : ensure expected variables are defined ----------------------- 0.19s
+2018-06-24 18:46:36,258 p=8 u=root |  baseliner : parametrized execution -------------------------------------- 0.18s
+2018-06-24 18:46:36,259 p=8 u=root |  baseliner : set remote results path if not defined ---------------------- 0.17s
+2018-06-24 18:46:36,261 p=8 u=root |  baseliner : include_tasks ----------------------------------------------- 0.15s
+2018-06-24 18:46:36,262 p=8 u=root |  baseliner : initialize parameters and add number of repetitions --------- 0.14s
+2018-06-24 18:46:36,264 p=8 u=root |  baseliner : execute each benchmark -------------------------------------- 0.14s
+2018-06-24 18:46:36,265 p=8 u=root |  baseliner : store facts ------------------------------------------------- 0.12s
+2018-06-24 18:46:36,267 p=8 u=root |  baseliner : check that pre-tasks file exists ---------------------------- 0.09s
+2018-06-24 18:46:36,269 p=8 u=root |  baseliner : ensure docker-engine is installed --------------------------- 0.07s
+2018-06-24 18:46:36,271 p=8 u=root |  baseliner : include_tasks ----------------------------------------------- 0.06s
+2018-06-24 18:46:36,273 p=8 u=root |  Playbook run took 0 days, 0 hours, 0 minutes, 22 seconds
