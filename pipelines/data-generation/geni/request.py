@@ -20,6 +20,7 @@ def create_request(_site, hw_type, num_nodes):
             requests[_site] = rspec.Request()
         requests[_site].addResource(node)
 
+
 create_request('cl-clemson', 'c6320', 1)
 
 print("Executing cloudlab request")
