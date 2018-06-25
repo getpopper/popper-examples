@@ -25,7 +25,7 @@ create_request('cl-clemson', 'c6320', 1)
 
 print("Executing cloudlab request")
 manifests = cl.request(
-    experiment_name=('cloudlab-benchmarking-' + os.environ['CLOUDLAB_USER']),
+    experiment_name=('clb-' + os.environ['CLOUDLAB_USER']),
     requests=requests, timeout=30, expiration=1200,
     ignore_failed_slivers=True)
 
