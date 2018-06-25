@@ -9,13 +9,10 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install python3.4
 - sudo apt-get install python3-pip
-- ls -lap pipelines/data-generation/
-- ls -lap pipelines/data-generation/travis-secrets/
-- ls -lap
 install:
 - git clone --recursive https://github.com/systemslab/popper /tmp/popper
 - export PATH=$PATH:/tmp/popper/cli/bin
 - export PYTHONUNBUFFERED=1
-script: popper run
+script: popper run --skip=vagrant-linux
 env:
 - N_REPETITIONS: 5
