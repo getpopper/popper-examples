@@ -6,7 +6,7 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
-  benchmarking-on-cloudlab:
+  cloudlab-benchmarking:
     envs:
     - host
     path: pipelines/cloudlab-benchmarking
