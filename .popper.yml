@@ -6,10 +6,10 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
-  data-generation:
+  benchmarking-on-cloudlab:
     envs:
     - host
-    path: pipelines/data-generation
+    path: pipelines/cloudlab-benchmarking
     stages:
     - setup.sh
     - run.sh

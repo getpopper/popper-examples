@@ -4,12 +4,12 @@ set -ex
 if [ -z $SSHKEY ]; then
   echo "Expecting SSHKEY variable"
   echo "Looking in the travis secret folder"
-  if [ ! -f "travis-secrets/id_rsa" ]; then
+  if [ ! -f "geni/id_rsa" ]; then
     echo "Couldn't find id_rsa"
     exit 1
   fi
   echo "Found! Configuring everything for you"
-  export SSHKEY="`pwd`/travis-secrets/id_rsa"
+  export SSHKEY="`pwd`/geni/id_rsa"
 fi
 
 # delete previous results

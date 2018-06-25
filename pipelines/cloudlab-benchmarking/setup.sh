@@ -21,23 +21,23 @@ fi
 if [ -z $CLOUDLAB_PUBKEY_PATH ]; then
   echo "Expecting CLOUDLAB_PUBKEY_PATH variable"
   echo "Looking in the travis secret folder"
-  if [ ! -f "travis-secrets/id_rsa.pub" ]; then
+  if [ ! -f "geni/id_rsa.pub" ]; then
     echo "Couldn't find id_rsa.pub"
     exit 1
   fi
   echo "Found! Configuring everything for you"
-  export CLOUDLAB_PUBKEY_PATH=`pwd`/travis-secrets/id_rsa.pub
+  export CLOUDLAB_PUBKEY_PATH=`pwd`/geni/id_rsa.pub
 fi
 
 if [ -z $CLOUDLAB_CERT_PATH ]; then
   echo "Expecting CLOUDLAB_CERT_PATH variable"
   echo "Looking in the travis secret folder"
-  if [ ! -f "travis-secrets/cloudlab.pem" ]; then
+  if [ ! -f "geni/cloudlab.pem" ]; then
     echo "Couldn't find cloudlab.pem"
     exit 1
   fi
   echo "Found! Configuring everything for you"
-  export CLOUDLAB_CERT_PATH=`pwd`/travis-secrets/cloudlab.pem
+  export CLOUDLAB_CERT_PATH=`pwd`/geni/cloudlab.pem
 fi
 
 docker run --rm --name=geni-lib \
