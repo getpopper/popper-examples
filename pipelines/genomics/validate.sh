@@ -2,4 +2,4 @@
 
 # [wf] executes validate stage
 
-docker exec genomic_container ./docker-validate.sh
+docker exec -it genomic_container ./docker-validate.sh

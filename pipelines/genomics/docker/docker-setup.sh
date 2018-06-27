@@ -24,6 +24,8 @@ mkdir docs
 curl -o data/ref_genome/ecoli_rel606.fasta -0L https://osf.io/vua9t/download
 curl -o data/trimmed_fastq/SRR097977.fastq_trim.fastq -0L https://osf.io/w7gp2/download
 
+echo "- ------------------------------------------------------------------------1"
+
 # Gathering all the required tools.
 curl -o tsamtools.tar.bz2 -0L https://github.com/samtools/samtools/releases/download/1.8/samtools-1.8.tar.bz2
 tar -xvjf tsamtools.tar.bz2
@@ -33,6 +35,8 @@ make
 sudo make install
 cd ..
 
+echo "- ------------------------------------------------------------------------2"
+
 curl -o tbcftools.tar.bz2 -0L https://github.com/samtools/bcftools/releases/download/1.8/bcftools-1.8.tar.bz2
 tar -xvjf tbcftools.tar.bz2
 cd bcftools*
@@ -41,11 +45,14 @@ make
 sudo make install
 cd ..
 
+echo "- ------------------------------------------------------------------------3"
 mkdir snp
 cd snp
 wget http://sourceforge.net/projects/snpeff/files/snpEff_latest_core.zip
 unzip snpEff_latest_core.zip
 cd ..
+
+echo "- ------------------------------------------------------------------------4"
 
 curl -o tbwa.tar.bz2 -0L https://sourceforge.net/projects/bio-bwa/files/latest/download
 tar -xvjf tbwa.tar.bz2
@@ -54,3 +61,5 @@ cd bwa*
 make
 make install
 cd ..
+
+echo "- ------------------------------------------------------------------------DONE"
