@@ -10,10 +10,34 @@ clusters of machines to execute experiments in many domains such as
 networking, computer systems, cloud systems, etc. You can check the 
 CloudLab Manual [here](http://docs.cloudlab.us).
 
-The following is an example of a **CloudLab ready** pipeline,
-i.e. a pipeline that can be executed on CloudLab with minimal effort. 
+This pipeline is an example of a [![`CloudLab 
+ready`](https://img.shields.io/badge/CloudLab-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking) 
+pipeline, i.e. a pipeline that can be executed on CloudLab with 
+minimal effort.
 
-To execute this pipeline:
+The pipeline consists of 3 stages:
+
+  * [`setup`](./setup.sh). This stage automates the allocation of 
+    nodes on CloudLab using the 
+    [`geni-lib`](https://bitbucket.org/barnstorm/geni-lib) library 
+    (specifically [this docker 
+    image](https://github.com/ivotron/docker-geni-lib)). The stage 
+    requests as many nodes as the ones specified in the [request 
+    file](./geni/request.py#L24). At the end of this stage, a list of 
+    available nodes is written to `geni/machines`.
+  * [`run`](./run.sh). Invokes 
+    [Baseliner](https://github.com/ivotron/baselienr) in order to 
+    execute the containerized benchmarks specified in 
+    [`baseliner/config.yml`](./baseliner/config.yml) on each of the 
+    machines from the `geni/machines` file. At the end of the 
+    execution, the folder `results/baseliner_output` holds the output 
+    of the containers, sorted by benchmark and machine.
+  * [`teardown.sh`]. Releases all the nodes that were allocated on the 
+    `setup` stage.
+
+## Manual execution
+
+To manually execute this pipeline:
 
  1) Get the pipeline by executing the following command:
 
@@ -31,10 +55,15 @@ To execute this pipeline:
     * `CLOUDLAB_PASSWORD`. Your password for CloudLab.
     * `CLOUDLAB_PROJECT`. The name of the project your account belongs to on CloudLab.
     * `CLOUDLAB_PUBKEY_PATH`. The path to your SSH key registered with CloudLab.
+    * `CLOUDLAB_CERT_PATH`. The path to the cloudlab.pem file 
+      downloaded in step 2.
     * `SSHKEY`. The path to your private SSH key registered with CloudLab.
-    * `CLOUDLAB_CERT_PATH`. The path to the cloudlab.pem file downloaded in step 2.
 
-4) Execute the command: `popper run benchmarking-on-cloudlab`
+ 4) Execute the command:
+
+    ```bash
+    popper run benchmarking-on-cloudlab
+    ```
 
 ## Automated execution (CI)
 
