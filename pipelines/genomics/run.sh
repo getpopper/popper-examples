@@ -2,4 +2,4 @@
 # [wf] execute run stage
 
 # execute container
-docker exec genomic_container ./docker-run.sh
+docker exec -it genomic_container ./docker-run.sh

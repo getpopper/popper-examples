@@ -1,0 +1,12 @@
+---
+repetitions: 1
+benchmarks:
+
+- name: pybench
+  image: ivotron/pybench:20090814
+  cgroup_parent: /
+
+- name: ssca
+  image: ivotron/ssca2:v1.0
+  command: 4 20
+  cgroup_parent: /

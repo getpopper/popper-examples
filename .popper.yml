@@ -6,6 +6,14 @@ pipelines:
     path: pipelines/blis
     stages:
     - run
+  cloudlab-benchmarking:
+    envs:
+    - host
+    path: pipelines/cloudlab-benchmarking
+    stages:
+    - setup.sh
+    - run.sh
+    - teardown.sh
   data-world:
     envs:
     - host
@@ -45,14 +53,6 @@ pipelines:
     - concordance.sh
     - validate.sh
     - teardown.sh
-  validator:
-    envs:
-    - host
-    path: pipelines/validator
-    stages:
-    - virtual-environment-checker.sh
-    - generate-data.sh
-    - validate.sh
   pgbench:
     envs:
     - host
@@ -72,5 +72,13 @@ pipelines:
     - deploy-kernel
     - run
     - visualize
+  validator:
+    envs:
+    - host
+    path: pipelines/validator
+    stages:
+    - virtual-environment-checker.sh
+    - generate-data.sh
+    - validate.sh
 popperized:
 - github/popperized
