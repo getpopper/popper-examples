@@ -1,3 +1,3 @@
 # Popper examples
 
-Examples used in <http://popper.readthedocs.io>.
+Examples used in <http://popper.rtfd.io/en/latest/sections/examples.html>
