@@ -1,7 +1,7 @@
 # `CloudLab ready` pipeline
 
-![[`CloudLab 
-ready`](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)](https://img.shields.io/badge/CloudLab-ready-blue.svg)
+[![`CloudLab 
+ready`](https://img.shields.io/badge/CloudLab-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)
 
 [CloudLab](https://www.cloudlab.us/) is a flexible, scientific 
 infrastructure for research on the future of cloud computing. It gives 
