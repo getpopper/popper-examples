@@ -5,6 +5,6 @@ cd secret
 tar cvf ../pipelines/secret.tar .
 cd -
 
-cd pipelines
-travis encrypt-file secret.tar --add
+travis encrypt-file pipelines/secret.tar -w pipelines/secret.tar --add
+
 
