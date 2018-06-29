@@ -43,6 +43,14 @@ pipelines:
     path: pipelines/envvar-param
     stages:
     - run
+  gce-benchmarking:
+    envs:
+    - host
+    path: pipelines/gce-benchmarking
+    stages:
+    - setup.sh
+    - run.sh
+    - teardown.sh
   genomics:
     envs:
     - host
