@@ -5,7 +5,6 @@ pipelines:
     - host
     path: pipelines/blis
     stages:
-    - build-docker-image
     - run
   cloudlab-benchmarking:
     envs:
@@ -63,6 +62,14 @@ pipelines:
     - run
     - cleanup
     - analyze
+  sea-surface-mapping-r:
+    envs:
+    - host
+    path: pipelines/sea-surface-mapping-r
+    stages:
+    - setup
+    - run
+    vars: []
   vagrant-linux:
     envs:
     - host
