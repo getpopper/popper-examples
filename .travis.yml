@@ -13,7 +13,7 @@ before_install:
 - sudo apt remove libgdal-dev
 - sudo apt remove libproj-dev
 - sudo apt remove gdal-bin
-- sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+- sudo add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
 - sudo apt-get update
 - sudo apt-cache policy libgdal-dev
 - sudo apt get libgdal-dev
