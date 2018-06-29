@@ -8,10 +8,6 @@ variable "gce_region" {
   default = "us-east1-b"
 }
 resource "random_id" "server" {
-  keepers = {
-    vm_id = "${var.vm_id}"
-  }
-
   byte_length = 8
 }
 
