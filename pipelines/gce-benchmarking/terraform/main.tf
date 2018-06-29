@@ -7,6 +7,13 @@ variable "gce_service_account" {}
 variable "gce_region" {
   default = "us-east1-b"
 }
+resource "random_id" "server" {
+  keepers = {
+    vm_id = "${var.vm_id}"
+  }
+
+  byte_length = 8
+}
 
 provider "google" {
   credentials = "${file(var.gce_service_account)}"
@@ -16,8 +23,8 @@ provider "google" {
 
 resource "google_compute_instance" "baseliner_vm" {
   count        = 1
-  name         = "baseliner${count.index + 1}"
-  machine_type = "f1-micro"
+  name         = "baseliner-${random_id.server.hex}"
+  machine_type = "g1-small"
   zone         = "${var.gce_region}"
 
   boot_disk {
