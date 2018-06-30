@@ -12,6 +12,8 @@ result = tryCatch({
     install.packages("units", repos = "http://cran.us.r-project.org")
     install.packages("rgdal", repos = "http://cran.us.r-project.org")
     install.packages("packrat", repos = "http://cran.us.r-project.org")
+    install.packages("plotly", repos = "http://cran.us.r-project.org")
+    install.packages("ggplot2", repos = "http://cran.us.r-project.org")
     devtools::install_github("ropensci/plotly")
     devtools::install_github("hadley/ggplot2")
     install.packages("maps", repos = "http://cran.us.r-project.org")
