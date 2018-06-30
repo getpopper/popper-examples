@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.io import netcdf
 
-f_path = 'air-temp.nc'  # your file from the NCEP reanalysis plotter
+f_path = 'scripts/air-temp.nc'  # your file from the NCEP reanalysis plotter
 
 # Retrieve data from NetCDF file
 with netcdf.netcdf_file(f_path, 'r') as f:
