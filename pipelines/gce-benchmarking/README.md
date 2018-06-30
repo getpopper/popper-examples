@@ -1,6 +1,6 @@
 # Google Compute Engine ready pipeline example
 
-[![Google Cloud Engine ready pipeline](https://img.shields.io/badge/GCE-ready-blue.svg)](https://popper.readthedocs.io/en/docs-reorg/sections/examples.html#on-ec2-gce-using-terraform)
+[![Google Cloud Engine ready pipeline](https://img.shields.io/badge/GCE-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/gce-benchmarking)
 
 
 [Google Compute Engine (GCE)](https://cloud.google.com/compute/) is a service
