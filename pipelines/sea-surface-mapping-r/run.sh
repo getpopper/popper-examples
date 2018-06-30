@@ -13,8 +13,7 @@ virtualenv --python=python2.7 virtual-environment-python-27/
 source virtual-environment-python-27/bin/activate
 
 pip install scipy
-pip uninstall numpy
-pip install numpy
+pip install -U numpy
 
 # [wf] Check if PLOTY_USERNAME environment variable is set
 if [ -z "$PLOTY_USERNAME" ]; then
