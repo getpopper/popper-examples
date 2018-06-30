@@ -68,7 +68,6 @@ pipelines:
     path: pipelines/sea-surface-mapping-r
     stages:
     - setup.sh
-    - virtual-environmnet-checker.sh
     - run.sh
     - teardown.sh
   vagrant-linux:
