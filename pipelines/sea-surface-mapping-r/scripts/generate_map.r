@@ -2,7 +2,7 @@ library(plotly)
 
 # use scipy to read from netcdf file since R's ncdf4
 # doesn't seem to know how to read it...
-dat <- reticulate::py_run_file("air-temp-read.py")
+dat <- reticulate::py_run_file("scripts/air-temp-read.py")
 
 # generate a 2-way color gradient
 breaks <- seq(0, 1, length.out = 14)
