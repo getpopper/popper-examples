@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+pip install scipy
+pip install -U numpy
+
 # [wf] Check if PLOTY_USERNAME environment variable is set
 if [ -z "$PLOTY_USERNAME" ]; then
   echo "ERROR: PLOTY_USERNAME environment variable needs to be set"
