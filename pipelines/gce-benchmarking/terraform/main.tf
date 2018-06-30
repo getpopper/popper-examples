@@ -7,6 +7,11 @@ variable "gce_service_account" {}
 variable "gce_region" {
   default = "us-east1-b"
 }
+
+variable "gce_machine_type" {
+  default = "g1-small"
+}
+
 resource "random_id" "server" {
   byte_length = 8
 }
