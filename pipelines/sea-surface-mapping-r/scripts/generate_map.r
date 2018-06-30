@@ -1,4 +1,5 @@
-library(plotly)
+library("plotly")
+library("devtools")
 
 # use scipy to read from netcdf file since R's ncdf4
 # doesn't seem to know how to read it...
