@@ -67,7 +67,6 @@ pipelines:
     - host
     path: pipelines/sea-surface-mapping-r
     stages:
-    - setup.sh
     - run.sh
     - teardown.sh
   vagrant-linux:
