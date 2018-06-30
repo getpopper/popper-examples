@@ -17,7 +17,9 @@ result = tryCatch({
     install.packages("maps", repos = "http://cran.us.r-project.org")
     install.packages("reticulate", repos = "http://cran.us.r-project.org")
     install.packages("sf", repos = "http://cran.us.r-project.org")
-
+    install.packages("devtools", repos = "http://cran.us.r-project.org")
+    install.packages("curl", repos = "http://cran.us.r-project.org")
+    
     packrat::init()
 
     # Checks if a virtual environment is active.
