@@ -19,7 +19,6 @@ result = tryCatch({
 
     packrat::init()
 
-
 })
 
 

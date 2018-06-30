@@ -71,7 +71,6 @@ pipelines:
     - virtual-environmnet-checker.sh
     - run.sh
     - teardown.sh
-    vars: []
   vagrant-linux:
     envs:
     - host
