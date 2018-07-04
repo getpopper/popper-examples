@@ -1,38 +1,18 @@
-#!/usr/bin/env Rscript
-# [wf] check if packrat is running
+#!/usr/bin/env bash
 
-result = tryCatch({
-    packrat::status()
-}, warning = function(warning_condition) {
-    message(warning_condition)
-}, error = function(error_condition) {
-    message(error_condition)
-    message("for you")
-    install.packages("rgdal", repos="http://cran.us.r-project.org")
-    install.packages("units", repos = "http://cran.us.r-project.org")
-    install.packages("rgdal", repos = "http://cran.us.r-project.org")
-    install.packages("packrat", repos = "http://cran.us.r-project.org")
-    install.packages("plotly", repos = "http://cran.us.r-project.org")
-    install.packages("ggplot2", repos = "http://cran.us.r-project.org")
-    devtools::install_github("ropensci/plotly")
-    devtools::install_github("hadley/ggplot2")
-    install.packages("maps", repos = "http://cran.us.r-project.org")
-    install.packages("reticulate", repos = "http://cran.us.r-project.org")
-    install.packages("sf", repos = "http://cran.us.r-project.org")
-    install.packages("devtools", repos = "http://cran.us.r-project.org")
-    install.packages("curl", repos = "http://cran.us.r-project.org")
+cd docker
 
-    packrat::init()
+# Makes sure
+docker stop mapping_container
+docker rm mapping_container
 
-    # Checks if a virtual environment is active.
-
-})
+docker rmi mapping
 
 
+docker build -t mapping .
 
+docker create -it --name=mapping_container mapping
 
+docker start mapping_container
 
-
-
-
-
+docker exec  -it mapping_container ./docker-setup.sh

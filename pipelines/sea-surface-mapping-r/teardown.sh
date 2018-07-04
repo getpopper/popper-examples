@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
-deactivate
+# Makes sure
+docker stop genomic_container
+docker rm genomic_container
 
