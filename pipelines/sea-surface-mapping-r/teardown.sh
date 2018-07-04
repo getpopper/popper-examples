@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 # Makes sure
-docker stop genomic_container
-docker rm genomic_container
+mkdir output
+
+docker cp mapping_container:/app/ output/
+
+docker stop mapping_container
+docker rm mapping_container
 
