@@ -1,5 +1,5 @@
 
-# start with the official R project base image
+# start with the official ubuntu project base image
 FROM ubuntu:16.04
 
 # copy this github repo into the Docker image and set as the working directory
