@@ -11,11 +11,11 @@ RUN apt-get update
 
 RUN apt-get install -y software-properties-common \
     && add-apt-repository -y ppa:marutter/rrutter \
-    && add-apt-repository -y ppa:ubuntugis/ppa \
+    && add-apt-repository -y ppa:ubuntugis/ppa
 
 RUN apt update && apt upgrade -y && apt full-upgrade -y  \
     && gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 \
-    && gpg -a --export E084DAB9 | apt-key add - \
+    && gpg -a --export E084DAB9 | apt-key add -
 
 RUN apt-get update
 
