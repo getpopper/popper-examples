@@ -5,6 +5,8 @@ python --version
 pip install -U scipy
 pip install -U numpy
 
-Rscript scripts/install_libraries.R
+Rscript scripts/packrat_requirements.R
+
+Rscript scripts/required_libraries.R
 
 Rscript scripts/generate_map.r
