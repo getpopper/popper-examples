@@ -7,6 +7,4 @@ pip install -U numpy
 
 Rscript scripts/packrat_requirements.R
 
-# Rscript scripts/required_libraries.R
-
 Rscript scripts/generate_map.r
