@@ -1,0 +1,11 @@
+---
+repetitions: 1
+benchmarks:
+
+- name: pybench
+  image: ivotron/pybench:20090814
+  cgroup_parent: /
+
+- name: scikit-learn
+  image: ivotron/scikit-learn-bench:0.18.1
+  cgroup_parent: /
