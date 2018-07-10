@@ -1,12 +1,12 @@
 library("plotly")
 
-# use scipy to read from netcdf file since R's ncdf4
-# doesn't seem to know how to read it...
-# dat <- reticulate::py_run_file("scripts/air-temp-read.py")
-
 library(ncdf4)
-nco <- nc_open("scripts/air-temp.nc")
-dat <- ncvar_get(nco)
+dat <- nc_open("scripts/air-temp.nc")
+
+air <- ncvar_get(dat, "air")
+lon <- ncvar_get(dat, "lon")
+lat <- ncvar_get(dat, "lat")
+
 # generate a 2-way color gradient
 breaks <- seq(0, 1, length.out = 14)
 colors <- scales::colour_ramp(c('#543005', 'white', '#003c30'))(breaks)
@@ -18,9 +18,9 @@ plot_ly() %>%
     color = I("black"), fillcolor = "transparent", hoverinfo = "none", size = I(1)
   ) %>%
   add_contour(
-    z = dat$air,
-    x = dat$lon,
-    y = dat$lat,
+    z = air,
+    x = lon,
+    y = lat,
     name = "precipitation",
     zauto = FALSE,
     # this censors extreme values -- I would have gone with a a log scale myself ;)
