@@ -9,6 +9,5 @@
 
 # Rscript scripts/generate_map.r
 
-Rscript scripts/init_packrat.R
 
 Rscript scripts/generate_map.r
