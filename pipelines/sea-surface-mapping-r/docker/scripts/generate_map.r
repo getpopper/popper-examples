@@ -5,7 +5,7 @@ library("plotly")
 # dat <- reticulate::py_run_file("scripts/air-temp-read.py")
 
 library(ncdf4)
-dat <- nc_open("./air-temp.nc")
+dat <- nc_open("scripts/air-temp.nc")
 
 # generate a 2-way color gradient
 breaks <- seq(0, 1, length.out = 14)
