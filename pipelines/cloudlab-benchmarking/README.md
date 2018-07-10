@@ -60,7 +60,7 @@ To manually execute this pipeline:
  4) Execute the command:
 
     ```bash
-    popper run benchmarking-on-cloudlab
+    popper run cloudlab-benchmarking
     ```
 
 ## Automated execution (CI)
