@@ -20,4 +20,4 @@ docker build -t mapping .
 
 # docker exec -it mapping_container ./docker-setup.sh
 
-Rscript scripts/init_packrat.R
+docker run mapping ./docker-setup.sh
