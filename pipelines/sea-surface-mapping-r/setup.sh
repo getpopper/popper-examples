@@ -6,7 +6,7 @@ cd docker
 
 mkdir scripts/data
 
-curl -o scripts/data/gimms3g_ndvi_1982-2012.nc4 -0L https://daac.ornl.gov/daacdata/global_vegetation/GIMMS3g_NDVI_Trends/data/gimms3g_ndvi_1982-2012.nc4
+wget -P scripts/data/ "https://www.dropbox.com/s/c9n47ttqalwadfd/gimms3g_ndvi_1982-2012.nc4?dl=0"
 
 
 # Makes sure
