@@ -78,7 +78,6 @@ pipelines:
     stages:
     - setup.sh
     - run.sh
-    - teardown.sh
   vagrant-linux:
     envs:
     - host
