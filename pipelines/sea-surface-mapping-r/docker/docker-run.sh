@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
-# python --version
-
-# pip install -U scipy
-# pip install -U numpy
-
+# Required libraries for your script. (These libraries will be installed inside of a packrat folder.)
 Rscript scripts/install_libraries.R
 
-# Rscript scripts/generate_map.r
-
-
+# Executes your script.
 Rscript scripts/generate_map.r

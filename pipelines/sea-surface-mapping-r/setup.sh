@@ -1,28 +1,18 @@
 #!/usr/bin/env bash
 
+# [wf] execute setup stage
+
 set -e
 
 cd docker
 
 mkdir scripts/data
 
+# Gets the data
 wget -O scripts/data/gimms3g_ndvi_1982-2012.nc4 "https://www.dropbox.com/s/c9n47ttqalwadfd/gimms3g_ndvi_1982-2012.nc4?dl=0"
 
-
-# Makes sure
-# docker stop mapping_container
-# docker rm mapping_container
-
-# docker rmi mapping
-
-# docker build -t mapping .
-
+# build the container
 docker build -t mapping .
 
-# docker create -it --name=mapping_container mapping
-
-# docker start mapping_container
-
-# docker exec -it mapping_container ./docker-setup.sh
-
+# Start the container
 docker run mapping ./docker-setup.sh

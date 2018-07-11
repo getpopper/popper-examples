@@ -1,9 +1,8 @@
 #!/bin/bash
 
+# [wf] Executes run stage
+
 set -e
-# docker exec -it mapping_container ./docker-run.sh
 
-# docker run -it mapping
-
-
+# Execute the container
 docker run mapping ./docker-run.sh
