@@ -35,4 +35,3 @@ leases = [lease for lease in bclient.lease.list()
 lease = leases[0] if len(leases) > 0 else None
 if lease is not None:
     bclient.lease.delete(lease['id'])
-

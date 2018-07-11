@@ -2,12 +2,6 @@ from enoslib.api import generate_inventory
 from enoslib.infra.enos_chameleonbaremetal.provider import \
      Chameleonbaremetal as Cc
 
-import logging
-import os
-
-logging.basicConfig(level=logging.INFO)
-
-
 provider_conf = {
     'key_name': 'popper-key',
     'lease_name': 'popper-lease',
