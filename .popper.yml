@@ -7,6 +7,14 @@ pipelines:
     stages:
     - build-docker-image
     - run
+  chameleon-benchmarking:
+    envs:
+    - host
+    path: pipelines/chameleon-benchmarking
+    stages:
+    - setup.sh
+    - run.sh
+    - teardown.sh
   cloudlab-benchmarking:
     envs:
     - host
