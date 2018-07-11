@@ -1,6 +1,8 @@
 #!/bin/bash
 set -ex
 
+INVENTORY_DIR=$PWD/baseliner
+
 docker run --rm -it \
   -e OS_AUTH_URL=$OS_AUTH_URL\
   -e OS_TENANT_ID=$OS_TENANT_ID \

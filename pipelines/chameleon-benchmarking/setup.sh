@@ -20,6 +20,6 @@ docker run --rm -it \
   --entrypoint=python \
   trufas/enoslib request.py
 
-sleep 10s
+sleep 5m
 
 exit 0
