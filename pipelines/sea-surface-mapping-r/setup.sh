@@ -6,7 +6,7 @@ cd docker
 
 mkdir scripts/data
 
-wget -P scripts/data/ "https://www.dropbox.com/s/c9n47ttqalwadfd/gimms3g_ndvi_1982-2012.nc4?dl=0"
+wget -O scripts/data/gimms3g_ndvi_1982-2012.nc4 "https://www.dropbox.com/s/c9n47ttqalwadfd/gimms3g_ndvi_1982-2012.nc4?dl=0"
 
 
 # Makes sure
