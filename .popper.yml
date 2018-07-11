@@ -5,7 +5,6 @@ pipelines:
     - host
     path: pipelines/blis
     stages:
-    - build-docker-image
     - run
   cloudlab-benchmarking:
     envs:
@@ -43,17 +42,9 @@ pipelines:
     path: pipelines/envvar-param
     stages:
     - run
-  gce-benchmarking:
-    envs:
-    - host
-    path: pipelines/gce-benchmarking
-    stages:
-    - setup.sh
-    - run.sh
-    - teardown.sh
   genomics:
     envs:
-    - host
+    - laweaboluda
     path: pipelines/genomics
     stages:
     - setup.sh
@@ -71,6 +62,14 @@ pipelines:
     - run
     - cleanup
     - analyze
+  sea-surface-mapping-r:
+    envs:
+    - host
+    path: pipelines/sea-surface-mapping-r
+    stages:
+    - setup.sh
+    - run.sh
+    - teardown.sh
   vagrant-linux:
     envs:
     - host
@@ -83,7 +82,7 @@ pipelines:
     - visualize
   validator:
     envs:
-    - host
+    - ubuntu-xenial
     path: pipelines/validator
     stages:
     - virtual-environment-checker.sh
