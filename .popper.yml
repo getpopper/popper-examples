@@ -5,6 +5,7 @@ pipelines:
     - host
     path: pipelines/blis
     stages:
+    - build-docker-image
     - run
   cloudlab-benchmarking:
     envs:
@@ -42,9 +43,17 @@ pipelines:
     path: pipelines/envvar-param
     stages:
     - run
+  gce-benchmarking:
+    envs:
+    - host
+    path: pipelines/gce-benchmarking
+    stages:
+    - setup.sh
+    - run.sh
+    - teardown.sh
   genomics:
     envs:
-    - laweaboluda
+    - host
     path: pipelines/genomics
     stages:
     - setup.sh
@@ -82,7 +91,7 @@ pipelines:
     - visualize
   validator:
     envs:
-    - ubuntu-xenial
+    - host
     path: pipelines/validator
     stages:
     - virtual-environment-checker.sh

@@ -39,4 +39,3 @@ r <- flip(r, direction='y')
 plot(r)
 
 writeRaster(r, "GIMMS3g_1982.tif", "GTiff", overwrite=TRUE)
-

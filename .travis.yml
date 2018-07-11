@@ -3,9 +3,9 @@ python:
 - 2.7
 services: docker
 before_install:
-- openssl aes-256-cbc -K $encrypted_1c8c5e59c746_key -iv $encrypted_1c8c5e59c746_iv
-  -in pipelines/cloudlab-benchmarking/geni/cloudlab_credentials.zip.enc -out pipelines/cloudlab-benchmarking/geni/cloudlab_credentials.zip -d
-- unzip pipelines/cloudlab-benchmarking/geni/cloudlab_credentials.zip -d pipelines/cloudlab-benchmarking/geni/
+- openssl aes-256-cbc -K $encrypted_392ff9d60602_key -iv $encrypted_392ff9d60602_iv
+  -in secret.tar.enc -out pipelines/secret.tar -d
+- tar xvf pipelines/secret.tar -C pipelines
 - sudo apt-get update
 - sudo apt-get install python3.4
 - sudo apt-get install python3-pip

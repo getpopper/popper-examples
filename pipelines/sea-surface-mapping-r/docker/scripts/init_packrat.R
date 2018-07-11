@@ -24,6 +24,3 @@ result = tryCatch({
     # is located in the packrat/ folder and push these files to the repo if necessary
 
 })
-
-
-
