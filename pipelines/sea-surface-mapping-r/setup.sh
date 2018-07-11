@@ -4,7 +4,7 @@ set -e
 
 cd docker
 
-mkdir docker/scripts/data
+mkdir scripts/data
 
 wget -P scripts/data/ "https://daac.ornl.gov/daacdata/global_vegetation/GIMMS3g_NDVI_Trends/data/gimms3g_ndvi_1982-2012.nc4"
 
