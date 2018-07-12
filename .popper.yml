@@ -71,6 +71,13 @@ pipelines:
     - run
     - cleanup
     - analyze
+  sea-surface-mapping-r:
+    envs:
+    - host
+    path: pipelines/sea-surface-mapping-r
+    stages:
+    - setup.sh
+    - run.sh
   vagrant-linux:
     envs:
     - host
