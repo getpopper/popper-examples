@@ -33,10 +33,12 @@ Follow these steps to run this pipeline using your computer as host
 
 1. Make sure docker is installed and running. You can find instructions on
    installing docker [here](https://docs.docker.com/v17.12/install/).
-2. Source your Chameleon Openstack config. The [Chameleon
+2. Save the ssh key you are using inside the credentials directory under the
+   name popper-key.pem.
+3. Source your Chameleon Openstack config. The [Chameleon
    docs](https://chameleoncloud.readthedocs.io/en/latest/technical/cli.html#the-openstack-rc-script)
    has a section on this.
-3. Run the pipeline with `popper run`.
+4. Run the pipeline with `popper run`.
 
 # Automated execution
 
@@ -57,4 +59,26 @@ are set in your continious integration environment.
 
 You can find most of these inside the Chameleon configuration file downloaded
 in the previous section.
+
+For running on CI, you also need to make sure your ssh key is present inside
+the credential directory upon execution. Make sure **not** to check in your
+private ssh keys on git, ever. You can instead use the services provided by
+your CI service to encrypt sensitive files.
+
+## Travis CI
+
+Specifically, if you want to run this pipeline on travis, you have to first
+follow these extra steps
+
+1. Initialize the repository for CI by running `popper ci --service travis`.
+2. Set up the aforementioned environment variables. [The travis
+   docs](https://docs.travis-ci.com/user/environment-variables/) has a section
+   on adding environment variables during runtime on Travis. Make sure you
+   conceal sensitive data, such as passwords.
+3. Add the secret private keyfile as `credentials/popper-key.pem`. [This
+   section](https://docs.travis-ci.com/user/encrypting-files/) of the travis
+   docs shows you how.
+
+Once you've completed these steps, you can simply push a commit to github to
+trigger a travis build job.
 
