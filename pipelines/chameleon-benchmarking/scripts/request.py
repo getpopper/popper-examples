@@ -1,12 +1,16 @@
 from enoslib.api import generate_inventory
 from enoslib.infra.enos_chameleonbaremetal.provider import \
      Chameleonbaremetal as Cc
+import os
+
+timestamp = os.environ['EXPERIMENT_TIMESTAMP']
 
 provider_conf = {
     'key_name': 'popper-key',
-    'lease_name': 'popper-lease',
+    'lease_name': 'popper-lease-{}'.format(timestamp),
     'subnet': {'name': 'sharednet1-subnet'},
     'image': 'CC-Ubuntu14.04-Docker',
+    'prefix': timestamp,
 
     'resources': {
         'machines': [{

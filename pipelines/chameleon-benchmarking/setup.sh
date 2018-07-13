@@ -3,6 +3,9 @@ set -ex
 
 mkdir -p inventory
 
+EXPERIMENT_TIMESTAMP=`date +%s`
+echo $EXPERIMENT_TIMESTAMP > /tmp/chameleon-exp-ts
+
 INVENTORY_DIR=$PWD/baseliner
 
 docker run --rm -it \
@@ -14,6 +17,7 @@ docker run --rm -it \
   -e OS_REGION_NAME=$OS_REGION_NAME \
   -e OS_ENDPOINT_TYPE=$OS_ENDPOINT_TYPE \
   -e OS_IDENTITY_API_VERSION=2 \
+  -e EXPERIMENT_TIMESTAMP=$EXPERIMENT_TIMESTAMP \
   -v $PWD/scripts:/scripts \
   -v $INVENTORY_DIR:/enos \
   --workdir=/scripts \
