@@ -3,7 +3,7 @@ set -ex
 
 INVENTORY_DIR=$PWD/baseliner
 
-EXPERIMENT_TIMESTAMP=`cat /tmp/popper-exp-ts`
+EXPERIMENT_TIMESTAMP=`cat /tmp/chameleon-exp-ts`
 
 docker run --rm -it \
   -e OS_AUTH_URL=$OS_AUTH_URL\
