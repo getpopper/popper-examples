@@ -27,10 +27,34 @@ This pipeline consists of three stages:
    couple of benchmarks using [Baseliner](https://github.com/ivotron/baseliner)
 3. The teardown stage deletes the lease used to allocate resources, destroying them.
 
-Before running this pipeline, make sure you have [loaded your Chameleon
-configuration](https://chameleoncloud.readthedocs.io/en/latest/technical/cli.html#the-openstack-rc-script)
+## Running manually
 
-In order to get this pipeline running on continious integration, you simply
-need to add the necessary openstack configuration environment variables to your
-continous integration service.
+Follow these steps to run this pipeline using your computer as host
+
+1. Make sure docker is installed and running. You can find instructions on
+   installing docker [here](https://docs.docker.com/v17.12/install/).
+2. Source your Chameleon Openstack config. The [Chameleon
+   docs](https://chameleoncloud.readthedocs.io/en/latest/technical/cli.html#the-openstack-rc-script)
+   has a section on this.
+3. Run the pipeline with `popper run`.
+
+# Automated execution
+
+You can set this pipeline up to run on your prefered continous integration
+service by using the [popper
+cli](http://popper.readthedocs.io/en/latest/ci/popperci.html). In addition to
+following the instructions in that link, make sure these environment variables
+are set in your continious integration environment.
+
+- OS_AUTH_URL
+- OS_ENDPOINT_TYPE
+- OS_IDENTITY_API_VERSION
+- OS_REGION_NAME
+- OS_TENANT_ID
+- OS_TENANT_NAME
+- OS_USERNAME
+- OS_PASSWORD
+
+You can find most of these inside the Chameleon configuration file downloaded
+in the previous section.
 
