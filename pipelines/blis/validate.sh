@@ -196,3 +196,4 @@ if [ -f results/trsm_blis.m ]; then
 else
   echo "[false] The file doesn't exists"
 fi
+
