@@ -5,7 +5,7 @@ Popper pipeline that guides you through [this](https://jasonjwilliamsny.github.i
 In this case Popper makes sure that the required files 
 and the required tools are downloaded, then it executes 
 all the indicated steps in the tutorial and copies the 
-output files to a output folder in your local machine.
+output files to an output folder in your local machine.
 
 The pipeline consists of 5 stages: 
 
