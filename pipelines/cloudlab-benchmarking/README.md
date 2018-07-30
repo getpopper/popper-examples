@@ -1,14 +1,14 @@
 # `CloudLab ready` pipeline
 
 
-The ![[`CloudLab 
-ready`](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)](https://img.shields.io/badge/CloudLab-ready-blue.svg)
+The [![`CloudLab 
+ready`](https://img.shields.io/badge/CloudLab-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)
  badge is included in a repository hosting a [Popper pipeline](https://github.com/systemslab/popper) that is ready to 
  be executed on [CloudLab](https://www.cloudlab.us/). If you see it in a repository, it means that the authors have made it easier for others to run on CloudLab by following the Popper convention.
  
  In this repository, we present an example of a pipeline that can be used 
- as the starting point to implement a ![[`CloudLab 
-ready`](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)] pipeline. To add it to your repository using `popper`, you can do:
+ as the starting point to implement a [![`CloudLab 
+ready`](https://img.shields.io/badge/CloudLab-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking) pipeline. To add it to your repository using `popper`, you can do:
 
 ```bash
 popper add popperized/popper-readthedocs-examples/cloudlab-benchmarking
