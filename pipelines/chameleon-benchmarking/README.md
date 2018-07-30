@@ -1,11 +1,24 @@
 # Chameleon ready pipeline
 
-[![ Chameleon ready pipeline](https://img.shields.io/badge/Chameleon-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/chameleon-benchmarking)
+The [![ Chameleon ready pipeline](https://img.shields.io/badge/Chameleon-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/chameleon-benchmarking)
+ badge is included in a repository hosting a [Popper pipeline](https://github.com/systemslab/popper) that is ready to 
+ be executed on [ChameleonCloud](https://www.chameleoncloud.org). If you see it in a repository, it means that the authors have made it easier for others to run on Chameleon by following the Popper convention.
+ 
+ In this repository, we present an example of a pipeline that can be used 
+ as the starting point to implement a [![ Chameleon ready pipeline](https://img.shields.io/badge/Chameleon-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/chameleon-benchmarking) pipeline. To add it to your repository using `popper`, you can do:
+
+```bash
+popper add popperized/popper-readthedocs-examples/chameleon-benchmarking
+```
+
+If you add this pipeline to your repo (or if you follow the Popper convention to implement experiments on Chameleon), we invite you to add the badge to your `README` file.
+
+--------------
 
 [Chameleon](https://www.chameleoncloud.org/) is an NSF funded cloud service
 that aims to give researchers access to large scale infrastructure for cloud
 research. Provisioning and running cloud experiments of any size with Chameleon
-is fast and simple. We can introduce popper into our Chameleon expermients in
+is fast and simple. We can follow the Popper convention when implementing experimentation pipelins on Chameleon in
 order to make their reproducibility much more effortless. This pipeline
 provides an example and template for an experiment that automatically runs on
 Chameleon.
@@ -14,7 +27,7 @@ You can get started on your own Chameleon ready pipeline by adding this
 pipeline to your own repository by running:
 
 ```
-popper add github/popper-readthedocs-examples/chameleon-benchmarking
+popper add popperized/popper-readthedocs-examples/chameleon-benchmarking
 ```
 
 This pipeline consists of three stages:
