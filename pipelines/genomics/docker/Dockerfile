@@ -1,4 +1,4 @@
-# Use an official Python runtime as a parent image
+# Use an official ubuntu runtime as a parent image
 FROM ubuntu:16.04
 
 # Set the working directory to /app
