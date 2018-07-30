@@ -13,7 +13,7 @@ The pipeline consists of 5 stages:
     This stage builds a docker container 
     using the `docker` folder, which includes:
      
-    * a `files` folder containing
+    * a folder `files` containing
     the file `SRR097977_final_variant_output_mac.vcf` of a previous run
     executed using Mac. This file is here to analyze and compare results between
     different operating systems. 
