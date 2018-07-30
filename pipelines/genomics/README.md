@@ -78,3 +78,4 @@ The pipeline consists of 5 stages:
     This stage copies all the content of the folder `results` to an output folder in your local machine.
     Here, you can find all the used files, the `visualize` folder and the concordance between the VCF files.
     Then it stops and deletes the docker container created in the first stage.
+    
