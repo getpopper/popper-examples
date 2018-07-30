@@ -1,7 +1,22 @@
 # `CloudLab ready` pipeline
 
-[![`CloudLab 
-ready`](https://img.shields.io/badge/CloudLab-ready-blue.svg)](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)
+
+The ![[`CloudLab 
+ready`](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)](https://img.shields.io/badge/CloudLab-ready-blue.svg)
+ badge is included in a repository hosting a [Popper pipeline](https://github.com/systemslab/popper) that is ready to 
+ be executed on [CloudLab](https://www.cloudlab.us/). If you see it in a repository, it means that the authors have made it easier for others to run on CloudLab by following the Popper convention.
+ 
+ In this repository, we present an example of a pipeline that can be used 
+ as the starting point to implement a ![[`CloudLab 
+ready`](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)] pipeline. To add it to your repository using `popper`, you can do:
+
+```bash
+popper add popperized/popper-readthedocs-examples/cloudlab-benchmarking
+```
+
+If you add this pipeline to your repo (or if you follow the Popper convention to implement experiments on CloudLab), we invite you to add the badge to your `README` file.
+
+--------------
 
 [CloudLab](https://www.cloudlab.us/) is a flexible, scientific 
 infrastructure for research on the future of cloud computing. It gives 
@@ -40,7 +55,7 @@ To manually execute this pipeline:
  1) Get the pipeline by executing the following command:
 
     ```bash
-    popper add github/popper-readthedocs-examples/cloudlab-benchmarking
+    popper add popperized/popper-readthedocs-examples/cloudlab-benchmarking
     ```
 
  2) Obtain credentials ([see 
@@ -144,11 +159,3 @@ ready` pipeline.
 > repository and **NOT** the `clouadlab_credentials.zip` file to your 
 > git repository, otherwise all your credentials will be available on 
 > github to anyone with access to your repo.
->
-## `CloudLab ready` badge
-
-The ![[`CloudLab 
-ready`](https://github.com/popperized/popper-readthedocs-examples/tree/master/pipelines/cloudlab-benchmarking)](https://img.shields.io/badge/CloudLab-ready-blue.svg)
- badge denotes Popper pipelines or popperized repos that are ready to 
- be executed on CloudLab. If you implement a pipeline based on the one 
- presented here, we invite you to add the badge to your `README` file.
