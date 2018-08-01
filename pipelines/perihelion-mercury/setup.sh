@@ -12,5 +12,5 @@ fi
 
 source virtual-environment-python-36/bin/activate
 
-pip3 install --upgrade pip
-pip3 install vpython
+# pip3 install --upgrade pip
+# pip3 install vpython
