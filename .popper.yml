@@ -72,6 +72,16 @@ pipelines:
     - concordance.sh
     - validate.sh
     - teardown.sh
+  perihelion-mercury:
+    envs:
+    - host
+    path: pipelines/perihelion-mercury
+    requirements: {}
+    stages:
+    - setup
+    - run
+    - teardown
+    vars: []
   pgbench:
     envs:
     - host
