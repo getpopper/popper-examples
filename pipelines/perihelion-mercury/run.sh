@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # [wf] execute run stage
 
-echo "a1"
+echo "activating virtual environment"
 
 source virtual-environment-python-36/bin/activate
 
-echo "a2"
+echo "executing python script base_solution..."
 
 python py-scripts/base_solution.py
 
-echo "a3"
+echo "done"

@@ -7,19 +7,19 @@ if [ "$VIRTUAL_ENV" != "" ]; then
     deactivate
 fi
 
-echo "4"
+echo "Starting setup"
 
 # Create virtual environment using python 2.7
 # virtualenv --python=python3.6 virtual-environment-python-36/
 
-echo "3"
+echo "activating virtual environment"
 
 source virtual-environment-python-36/bin/activate
 
 pip3 install --upgrade pip
 
-echo "2"
+echo "installing dependencies with pip"
 
 pip3 install vpython
 
-echo "1"
+echo "done"
