@@ -1,6 +1,5 @@
 """
 The solution to the base problem.
-
 This code simulates the movement of Mercury and displays its position and
 trajectory at regular intervals.
 The additional term ~ alpha/r**3 and ~ beta/r**4 are included in the force.
@@ -37,7 +36,8 @@ M.velocity = vec_vM0
 S.velocity = vector(0, 0, 0)
 
 # Add a visible trajectory to Mercury
-M.trajectory = curve(color=color.black, radius=0.005)
+# M.trajectory = curve(color=color.black, radius=0.005)
+
 
 def evolve_mercury(vec_rM_old, vec_vM_old, alpha, beta):
     """
@@ -77,10 +77,9 @@ while time < max_time:
     # Set the frame rate: shows four earth days at once
     rate(100)
     # Update the drawn trajectory with the current position
-    M.trajectory.append(pos=M.pos)
+    # M.trajectory.append(pos=M.pos)
     # Update the velocity and position
     M.pos, M.velocity = evolve_mercury(M.pos, M.velocity, alpha, beta)
     time += 1
 
-print("I'm out")
-os._exit()
+exit()
