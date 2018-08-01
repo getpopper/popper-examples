@@ -113,6 +113,5 @@ print("--------------------------------")
 print("Average perihelion growth in arc sec per century: delta Theta={avg:1.2f}".format(
     avg=sum_angle/(len(list_perih)-1) * 3. / beta * 3600 * 4.15 * 100
 ))
-print('Exiting...')
-print('With 0....')
-sys.exit()
+
+exit()
