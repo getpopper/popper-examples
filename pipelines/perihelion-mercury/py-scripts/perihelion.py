@@ -107,13 +107,15 @@ while turns < max_turns:
             ))
             # Note that list_perih[-2] accesses the second last and
             #  list_perih[-1] the last element in the list
-            sum_angle = sum_angle + angle_between(list_perih[-2], list_perih[-1])
+            sum_angle = sum_angle + angle_between(list_perih[-2],
+                                                  list_perih[-1])
 
 # Display the average perihelion growth
 
 print("--------------------------------")
-print("Average perihelion growth in arc sec per century: delta Theta={avg:1.2f}".format(
-    avg=sum_angle / (len(list_perih) - 1) * 3. / beta * 3600 * 4.15 * 100
+print("Average perihelion growth in arc sec "
+      "per century: delta Theta={avg:1.2f}".format(
+       avg=sum_angle / (len(list_perih) - 1) * 3. / beta * 3600 * 4.15 * 100
 ))
 
 exit()
