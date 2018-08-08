@@ -3,7 +3,7 @@
 
 echo "activating virtual environment"
 
-source virtual-environment-python-36/bin/activate
+source virtual-environment-python-34/bin/activate
 
 echo "executing python script base_solution..."
 

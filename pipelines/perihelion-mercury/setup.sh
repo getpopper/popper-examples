@@ -9,12 +9,12 @@ fi
 
 echo "Starting setup"
 
-# Create virtual environment using python 2.7
-# virtualenv --python=python3.6 virtual-environment-python-36/
+# Create virtual environment using python 3.4
+virtualenv --python=python3.4 virtual-environment-python-34/
 
 echo "activating virtual environment"
 
-source virtual-environment-python-36/bin/activate
+source virtual-environment-python-34/bin/activate
 
 pip3 install --upgrade pip
 
