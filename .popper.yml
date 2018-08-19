@@ -90,6 +90,24 @@ pipelines:
     - run
     - cleanup
     - analyze
+  pypet-brian2:
+    envs:
+      host:
+        args: []
+    path: pipelines/pypet-brian2
+    requirements:
+      bin:
+      - virtualenv
+      - python
+      - pip
+      vars: []
+    stages:
+    - setup
+    - run
+    - post-run
+    - validate
+    - teardown
+    vars: []
   sea-surface-mapping-r:
     envs:
     - host
