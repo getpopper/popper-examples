@@ -1,8 +1,14 @@
-metadata: {}
+badge-server-url: http://badges.falsifiable.us
+metadata:
+  access_right: open
+    license: CC-BY-4.0
+      publication_type: article
+        upload_type: publication
 pipelines:
   blis:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/blis
     stages:
     - build-docker-image
@@ -19,7 +25,8 @@ pipelines:
     - teardown.sh
   cloudlab-benchmarking:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/cloudlab-benchmarking
     stages:
     - setup.sh
@@ -27,21 +34,24 @@ pipelines:
     - teardown.sh
   data-world:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/data-world
     stages:
     - run
     - update-data-world-repo
   datapackage:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/datapackage
     stages:
     - run.sh
     - update-datapackage.sh
   docker-data-science:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/docker-data-science
     stages:
     - setup
@@ -49,7 +59,8 @@ pipelines:
     - generate-figures
   envvar-param:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/envvar-param
     stages:
     - run
@@ -63,7 +74,8 @@ pipelines:
     - teardown.sh
   genomics:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/genomics
     stages:
     - setup.sh
@@ -83,7 +95,8 @@ pipelines:
     vars: []
   pgbench:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/pgbench
     stages:
     - setup
@@ -99,7 +112,8 @@ pipelines:
     - run.sh
   vagrant-linux:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/vagrant-linux
     stages:
     - init
@@ -109,11 +123,13 @@ pipelines:
     - visualize
   validator:
     envs:
-    - host
+      host:
+        args: []
     path: pipelines/validator
     stages:
     - virtual-environment-checker.sh
     - generate-data.sh
     - validate.sh
-popperized:
-- github/popperized
+search_sources:
+- popperized
+version: 1
