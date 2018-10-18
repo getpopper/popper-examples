@@ -1,9 +1,9 @@
 badge-server-url: http://badges.falsifiable.us
 metadata:
   access_right: open
-    license: CC-BY-4.0
-      publication_type: article
-        upload_type: publication
+  license: CC-BY-4.0
+  publication_type: article
+  upload_type: publication
 pipelines:
   blis:
     envs:
