@@ -1,4 +1,5 @@
+*.DS_Store
 *.sw?
-popper_logs
+popper/
 popper_status
 machines

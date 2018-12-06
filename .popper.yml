@@ -95,18 +95,10 @@ pipelines:
       host:
         args: []
     path: pipelines/pypet-brian2
-    requirements:
-      bin:
-      - virtualenv
-      - python
-      - pip
-      vars: []
     stages:
     - setup
-    - run
-    - post-run
-    - validate
-    - teardown
+    - simulate
+    - visualize
     vars: []
   sea-surface-mapping-r:
     envs:

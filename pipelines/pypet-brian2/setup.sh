@@ -1,18 +1,24 @@
 #!/usr/bin/env bash
-# [wf] execute setup stage
+# [wf] create container
+set -e
 
-# Checks if a virtual environment is active.
-if [ "$VIRTUAL_ENV" != "" ]; then
-    source "$VIRTUAL_ENV"/bin/activate
-    echo "It looks like you have an active virtual environment. I'll deactivate it in order to execute this pipeline."
-    deactivate
+# [wf] read parameters of pipeline
+source scripts/yaml.sh
+read_yaml parameters.yml
+
+set -x
+
+# [wf] build the container
+docker build -t local/pypet-brian2 docker
+
+if [ "$use_singularity" != "true" ]; then
+  # no singularity requested; we're done
+  exit 0
 fi
 
-# Create virtual environment using python 2.7
-virtualenv --python=python3.4 virtual-environment-python-36/
-
-source virtual-environment-python-36/bin/activate
-
-pip install pypet
-pip install configparser
-pip install brian2
+# [wf] build singularity image
+docker run -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /tmp/test:/output \
+  --privileged -t --rm \
+  singularityware/docker2singularity:v2.5 \
+    local/pypet-brian2
