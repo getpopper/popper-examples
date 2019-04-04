@@ -1,0 +1,10 @@
+transaction type: <builtin: TPC-B (sort of)>
+scaling factor: 1
+query mode: simple
+number of clients: 1
+number of threads: 1
+number of transactions per client: 32
+number of transactions actually processed: 32/32
+latency average = 3.534 ms
+tps = 283.003016 (including connections establishing)
+tps = 288.259722 (excluding connections establishing)
