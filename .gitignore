@@ -3,3 +3,4 @@ popper_logs
 popper_status
 machines
 .idea/
+pipelines/*/results_

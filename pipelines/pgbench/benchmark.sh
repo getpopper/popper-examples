@@ -1,9 +1,9 @@
-#!/usr/bin/env sh
-echo "ran"
-PG_IMAGES=${PG_IMAGES:-9.6,9.3}
-MAX_ATTEMPS=4
-rm $PWD/pipelines/pgbench/results_/*
-sleep 5
+#!/usr/bin/env bash
+
+PG_IMAGES=${PG_IMAGES:-$PG_VERSIONS}
+echo $PG_IMAGES
+rm $GITHUB_WORKSPACE/pipelines/pgbench/results_/*
+
 
 mkdir -p $PWD/pipelines/pgbench/results_
 

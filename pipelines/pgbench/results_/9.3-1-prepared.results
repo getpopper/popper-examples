@@ -1,9 +1,0 @@
-transaction type: TPC-B (sort of)
-scaling factor: 1
-query mode: prepared
-number of clients: 1
-number of threads: 1
-number of transactions per client: 1
-number of transactions actually processed: 1/1
-tps = 122.040517 (including connections establishing)
-tps = 235.515780 (excluding connections establishing)
