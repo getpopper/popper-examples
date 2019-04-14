@@ -5,7 +5,7 @@ workflow "get code" {
 
 action "Docker build image" {
   uses = "actions/docker/cli@master"
-  args = "build -t arshul/spark-hibench ."
+  args = "build https://github.com/popperized/popper-examples:pipelines/hibench/docker"
 }
 
 action "Docker Login" {
@@ -15,7 +15,7 @@ action "Docker Login" {
 }
 
 action "Docker push" {
-  uses = "actions/docker/cli@76ff57a"
+  uses = "actions/docker/cli@master"
   needs = ["Docker Login"]
   args = "push arshul/spark-hibench"
 }
