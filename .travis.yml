@@ -10,8 +10,8 @@ before_install:
 - sudo apt-get install python3.4
 - sudo apt-get install python3-pip
 install:
-- git clone --recursive https://github.com/systemslab/popper /tmp/popper
-- export PATH=$PATH:/tmp/popper/cli/bin
+- git clone https://github.com/systemslab/popper /tmp/popper
+- pip install /tmp/popper
 - export PYTHONUNBUFFERED=1
 script: popper run --recursive
 env:
