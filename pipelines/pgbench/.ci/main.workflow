@@ -8,7 +8,7 @@ action "lint" {
 action "benchmark" {
   needs= "lint"
   uses = "actions/docker/cli@master"
-  runs = ["./pipelines/pgbench/analyze.sh"]
+  runs = ["./pipelines/pgbench/benchmark.sh"]
   env = {
     PG_IMAGES = "pg9.6,pg9.3"
   }
@@ -16,5 +16,5 @@ action "benchmark" {
 action "analyse" {
   needs = "benchmark"
   uses = "actions/docker/cli@master"
-  runs = [./pipelines/pgbench/analyze.sh"]
+  runs = ["./pipelines/pgbench/analyze.sh"]
 }
