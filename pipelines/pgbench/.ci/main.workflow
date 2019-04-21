@@ -6,7 +6,7 @@ action "lint" {
   args = "-x ./pipelines/pgbench/benchmark.sh ./pipelines/pgbench/analyze.sh"
 }
 action "benchmark" {
-  needs= "lint"
+  needs = "lint"
   uses = "actions/docker/cli@master"
   runs = ["./pipelines/pgbench/benchmark.sh"]
   env = {
