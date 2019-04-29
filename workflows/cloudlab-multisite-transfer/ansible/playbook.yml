@@ -1,0 +1,38 @@
+- hosts: server
+  tasks:
+  - name: stop all containers
+    shell: docker stop $(docker ps -q) && docker rm net-server
+    ignore_errors: true
+  - name: run iperf3 server
+    command: >
+      docker run --rm --name=net-server --net=host networkstatic/iperf3 --server
+    async: 120
+    poll: 0
+
+- hosts: client
+  tasks:
+  - name: stop all containers
+    shell: docker stop $(docker ps -q) && docker rm net-client
+    ignore_errors: true
+
+  - name: run iperf3 client for 1 minute
+    shell: |
+      docker run --rm --name=net-client --net=host networkstatic/iperf3 \
+        --json \
+        --time 120 \
+        --interval 10 \
+        --omit 10 \
+        --zerocopy \
+        --client '{{ hostvars["server"]["ansible_default_ipv4"]["address"] }}' > /tmp/results.json
+
+  - name: create results folder
+    local_action:
+      module: file
+      path: ../results/
+      state: directory
+
+  - name: fetch result to local host
+    fetch:
+      src: /tmp/results.json
+      dest: ../results/
+      flat: yes
