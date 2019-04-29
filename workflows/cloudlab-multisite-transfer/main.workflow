@@ -42,6 +42,6 @@ action "teardown" {
 
 action "plot results" {
   needs = "teardown"
-  uses = "docker://ivotron/gnuplot:5.2"
-  runs = "$GITHUB_WORKSPACE/workflows/cloudlab-multisite-transfer/scripts/plot.sh"
+  uses = "docker://ivotron/gnuplot:5.0"
+  runs = ["sh", "-c", "$GITHUB_WORKSPACE/workflows/cloudlab-multisite-transfer/scripts/plot.sh"]
 }
