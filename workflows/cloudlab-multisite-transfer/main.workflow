@@ -1,5 +1,5 @@
 workflow "run http transfer test" {
-  resolves = "run test"
+  resolves = "plot results"
 }
 
 action "build cloudlab context" {
@@ -36,6 +36,12 @@ action "run test" {
 action "teardown" {
   needs = "run test"
   uses = "popperized/geni/exec@master"
-  args = "cloudlab-multisite-transfer/geni/release.py"
+  args = "workflows/cloudlab-multisite-transfer/geni/release.py"
   secrets = ["GENI_KEY_PASSPHRASE"]
+}
+
+action "plot results" {
+  needs = "teardown"
+  uses = "docker://ivotron/gnuplot:5.2"
+  runs = "$GITHUB_WORKSPACE/workflows/cloudlab-multisite-transfer/scripts/plot.sh"
 }
