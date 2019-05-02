@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 set -ex
-wf_dir=${GITHUB_WORKSPACE}/workflows/cloudlab-multisite-transfer
+wf_dir=${GITHUB_WORKSPACE}/workflows/cloudlab-iperf
 
 cat "$wf_dir/results/iperf.out" | grep KBytes | awk '{ print $3"\t"$5"\t"$7"\t"$9 }' > $wf_dir/results/iperf.dat
 

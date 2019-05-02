@@ -1,8 +1,9 @@
 workflow "run http transfer test" {
+  on = "push"
   resolves = "plot results"
 }
 
-action "build cloudlab context" {
+action "build context" {
   uses = "popperized/geni/build-context@master"
   env = {
     GENI_FRAMEWORK = "cloudlab"
@@ -16,17 +17,20 @@ action "build cloudlab context" {
   ]
 }
 
-action "request cloudlab resources" {
-  needs = "build cloudlab context"
+action "request resources" {
+  needs = "build context"
   uses = "popperized/geni/exec@master"
-  args = "workflows/cloudlab-multisite-transfer/geni/request.py"
+  args = "workflows/cloudlab-iperf/geni/request.py"
   secrets = ["GENI_KEY_PASSPHRASE"]
 }
 
 action "run test" {
-  needs = "request cloudlab resources"
+  needs = "request resources"
   uses = "popperized/ansible@master"
-  args = "-i workflows/cloudlab-multisite-transfer/geni/hosts workflows/cloudlab-multisite-transfer/ansible/playbook.yml"
+  args = [
+    "-i", "workflows/cloudlab-iperf/geni/hosts",
+    "workflows/cloudlab-iperf/ansible/playbook.yml"
+  ]
   env = {
     ANSIBLE_HOST_KEY_CHECKING = "False"
   }
@@ -36,12 +40,12 @@ action "run test" {
 action "teardown" {
   needs = "run test"
   uses = "popperized/geni/exec@master"
-  args = "workflows/cloudlab-multisite-transfer/geni/release.py"
+  args = "workflows/cloudlab-iperf/geni/release.py"
   secrets = ["GENI_KEY_PASSPHRASE"]
 }
 
 action "plot results" {
   needs = "teardown"
   uses = "docker://ivotron/gnuplot:5.0"
-  runs = ["sh", "-c", "$GITHUB_WORKSPACE/workflows/cloudlab-multisite-transfer/scripts/plot.sh"]
+  runs = "workflows/cloudlab-iperf/scripts/plot.sh"
 }
