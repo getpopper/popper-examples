@@ -5,7 +5,7 @@ workflow that showcases how to run an experiment on
 [CloudLab](https://cloudlab.us). To import to your project:
 
 ```bash
-popper add https://github.com/popperized/popper-examples/workflows/cloudlab-iperf
+popper add popperized/popper-examples/workflows/cloudlab-iperf
 ```
 
 The workflow looks like this:
