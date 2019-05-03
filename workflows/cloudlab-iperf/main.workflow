@@ -47,5 +47,5 @@ action "teardown" {
 action "plot results" {
   needs = "teardown"
   uses = "docker://ivotron/gnuplot:5.0"
-  runs = "workflows/cloudlab-iperf/scripts/plot.sh"
+  runs = "workflows/cloudlab-iperf/gnuplot/plot.sh"
 }

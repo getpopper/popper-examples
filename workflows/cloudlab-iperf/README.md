@@ -4,8 +4,9 @@ This folder contains an example [Github
 Actions](https://github.com/features/actions) workflow that showcases how to run 
 an experiment on [CloudLab](https://cloudlab.us). To execute this workflow 
 locally on your computer, you can install 
-[Popper](https://github.com/systemslab/popper). Once installed, you can import 
-the workflow into your project by doing:
+[Popper](https://github.com/systemslab/popper) and 
+[Docker](https://docs.docker.com/install/). Once installed, you can import the 
+workflow into your project by doing:
 
 ```bash
 cd myproject/

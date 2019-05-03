@@ -6,4 +6,4 @@ cat "$wf_dir/results/iperf.out" | grep KBytes | awk '{ print $3"\t"$5"\t"$7"\t"$
 
 gnuplot \
   -e "input_file='$wf_dir/results/iperf.dat'; output_path='$wf_dir/results'" \
-  -p "${wf_dir}/scripts/graph-tcp-data.p"
+  -p "${wf_dir}/gnuplot/graph-tcp-data.p"
