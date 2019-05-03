@@ -28,13 +28,9 @@ util.createSlice(ctx, experiment_name, renew_if_exists=True)
 # create sliver on clemson
 manifest = util.createSliver(ctx, cloudlab.Clemson, experiment_name, request)
 
-manifest = cloudlab.Clemson.listresources(ctx, experiment_name)
-
-# output files
+# output files: ansible inventory and GENI manifest
 # {
-
-# write to folder that holds this script
 outdir = os.path.dirname(os.path.realpath(__file__))
 util.toAnsibleInventory(manifest, hostsfile=outdir+'/hosts')
-manifest.writeXML('{}/manifest.xml'.format(outdir))
+manifest.writeXML(outdir+'/manifest.xml')
 # }
