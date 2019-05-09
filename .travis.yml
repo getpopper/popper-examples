@@ -1,18 +1,10 @@
+---
+dist: xenial
 language: python
-python:
-- 2.7
+python: 3.7
 services: docker
-before_install:
-- openssl aes-256-cbc -K $encrypted_392ff9d60602_key -iv $encrypted_392ff9d60602_iv
-  -in secret.tar.enc -out pipelines/secret.tar -d
-- tar xvf pipelines/secret.tar -C pipelines
-- sudo apt-get update
-- sudo apt-get install python3.4
-- sudo apt-get install python3-pip
 install:
 - git clone https://github.com/systemslab/popper /tmp/popper
-- pip install /tmp/popper/cli
 - export PYTHONUNBUFFERED=1
+- pip install /tmp/popper/cli
 script: popper run --recursive
-env:
-- N_REPETITIONS: 5
