@@ -18,8 +18,13 @@ do
     for n_threads in 1 2 4 8 16 32
     do
       echo "Running pgbench for image $image with $n_threads threads and $query_mode query mode."
-      echo pgbench | docker run -i --rm --link "$(echo "$image" | sed  -e "s/://g")":postgres "$image" pgbench -i -h postgres -U postgres
-      echo pgbench | docker run -i --rm --link "$(echo "$image" | sed  -e "s/://g")":postgres "$image" pgbench -h postgres -U postgres -M "$query_mode" -t "$n_threads" > "$GITHUB_WORKSPACE"/workflows/pgbench/results/"$image"-"$n_threads"-"$query_mode".results
+      echo pgbench | docker run -i --rm \
+                    --link "$(echo "$image" | sed  -e "s/://g")":postgres "$image" \
+                    pgbench -i -h postgres -U postgres
+      echo pgbench | docker run -i --rm \
+                    --link "$(echo "$image" | sed  -e "s/://g")":postgres "$image" \
+                    pgbench -h postgres -U postgres -M "$query_mode" \
+                    -t "$n_threads" > "$GITHUB_WORKSPACE"/workflows/pgbench/results/"$image"-"$n_threads"-"$query_mode".results
     done
   done
 done
