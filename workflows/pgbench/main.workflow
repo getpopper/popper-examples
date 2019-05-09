@@ -10,7 +10,7 @@ action "benchmark" {
   uses = "actions/docker/cli@master"
   runs = ["./workflows/pgbench/benchmark.sh"]
   env = {
-    PG_IMAGES = "pg9.6,pg9.3"
+    PG_IMAGES = "postgres:9.6,postgres:9.3"
   }
 }
 action "analyse" {
