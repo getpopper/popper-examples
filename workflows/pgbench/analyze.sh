@@ -8,4 +8,3 @@ docker run --rm -p 8888:8888 -v "$GITHUB_WORKSPACE":/experiment \
        jupyter/scipy-notebook \
        nbconvert --execute workflows/pgbench/analyze.ipynb \
        --ExecutePreprocessor.timeout=-1 --inplace
-
