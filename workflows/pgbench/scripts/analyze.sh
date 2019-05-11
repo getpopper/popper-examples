@@ -9,6 +9,6 @@ docker run --rm \
   --user=root \
   --entrypoint=jupyter \
   jupyter/scipy-notebook:4d7dd95017ed nbconvert \
-    --execute analyze.ipynb \
+    --execute notebook/analyze.ipynb \
     --ExecutePreprocessor.timeout=-1 \
     --inplace
