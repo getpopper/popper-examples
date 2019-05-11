@@ -1,20 +1,24 @@
-workflow "Run PGBenchmarks" {
-  resolves = "analyse"
+workflow "run and plot pgbench performance" {
+  resolves = "analyze"
+  on = "push"
 }
+
 action "lint" {
   uses = "actions/bin/shellcheck@master"
-  args = "-x ./workflows/pgbench/benchmark.sh ./workflows/pgbench/analyze.sh"
+  args = "-x ./workflows/pgbench/*.sh"
 }
-action "benchmark" {
+
+action "run benchmark" {
   needs = "lint"
   uses = "actions/docker/cli@master"
-  runs = ["./workflows/pgbench/benchmark.sh"]
+  runs = "./workflows/pgbench/benchmark.sh"
   env = {
-    PG_IMAGES = "postgres:9.6,postgres:9.3"
+    PG_IMAGES = "postgres:9.4,postgres:11.3"
   }
 }
-action "analyse" {
-  needs = "benchmark"
+
+action "analyze" {
+  needs = "run benchmark"
   uses = "actions/docker/cli@master"
   runs = ["./workflows/pgbench/analyze.sh"]
 }
