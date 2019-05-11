@@ -19,17 +19,25 @@ mkdir -p "$outdir"
 images=$(echo "$PG_IMAGES" | sed 's/ //g' | sed 's/,/ /g')
 
 for image in $images; do
-  # generate a random name
+  # get container name
   cid="pgbench-$(echo "$image" | sed 's/:/-/')"
+
+  # stop (if previous was running)
+  docker stop "$cid"
 
   # create container
   docker run --rm --name "$cid" -e POSTGRES_PASSWORD=pgbench -d "$image"
 
   # give docker some time to instantiate the container
-  sleep 5
+  sleep 10
 
   # wait for server to boot
   docker exec "$cid" pg_isready -t 20
+
+  # initialize test database
+  echo pgbench | docker run -i --rm \
+    --link "$cid":postgres "$image" \
+      pgbench -i -s "$PG_SCALE_FACTOR" -h postgres -U postgres
 
   for mode in simple extended prepared; do
     for threads in 1 2 4 8; do
@@ -37,11 +45,6 @@ for image in $images; do
       outfile="$outdir/$image-$threads-$mode.results"
 
       echo "Running $image with $threads threads and $mode query mode."
-
-      # initialized DB
-      echo pgbench | docker run -i --rm \
-        --link "$cid":postgres "$image" \
-          pgbench -i -s "$PG_SCALE_FACTOR" -h postgres -U postgres
 
       # run benchmark
       echo pgbench | docker run -i --rm \

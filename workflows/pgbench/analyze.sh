@@ -4,11 +4,11 @@ set -ex
 mkdir -p "$GITHUB_WORKSPACE/workflows/pgbench/figures"
 
 docker run --rm \
-  --volume "$GITHUB_WORKSPACE":/experiment \
-  --workdir=/experiment \
+  --volume "$GITHUB_WORKSPACE/workflows/pgbench":/pgbench \
+  --workdir=/pgbench \
   --user=root \
   --entrypoint=jupyter \
-  jupyter/scipy-notebook nbconvert \
-    --execute workflows/pgbench/analyze.ipynb \
+  jupyter/scipy-notebook:4d7dd95017ed nbconvert \
+    --execute analyze.ipynb \
     --ExecutePreprocessor.timeout=-1 \
     --inplace
