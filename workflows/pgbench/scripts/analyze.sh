@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -ex
 
-mkdir -p "$GITHUB_WORKSPACE/workflows/pgbench/figures"
+mkdir -p "$GITHUB_WORKSPACE/workflows/pgbench/notebook/figures"
 
 docker run --rm \
   --volume "$GITHUB_WORKSPACE/workflows/pgbench":/pgbench \
