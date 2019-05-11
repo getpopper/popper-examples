@@ -5,18 +5,22 @@ if [ -z "$PG_IMAGES" ]; then
   echo "Expecting PG_IMAGES variable"
   exit 1
 fi
+if [ -z "$PG_SCALE_FACTOR" ]; then
+  echo "Expecting PG_SCALE_FACTOR variable"
+  exit 1
+fi
 
-outdir="$GITHUB_WORKSPACE"/workflows/pgbench/results""
+outdir="$GITHUB_WORKSPACE/workflows/pgbench/results"
 
 rm -rf "$outdir"
 mkdir -p "$outdir"
 
 # get the list of images to test
-images="$(echo '$PG_IMAGES' | sed 's/,/ /g' | sed 's/ //g')"
+images=$(echo "$PG_IMAGES" | sed 's/ //g' | sed 's/,/ /g')
 
 for image in $images; do
   # generate a random name
-  cid="pgbench-$(echo $image | sed 's/:/-/' ")"
+  cid="pgbench-$(echo "$image" | sed 's/:/-/')"
 
   # create container
   docker run --rm --name "$cid" -e POSTGRES_PASSWORD=pgbench -d "$image"
@@ -32,14 +36,17 @@ for image in $images; do
 
       outfile="$outdir/$image-$threads-$mode.results"
 
-      echo "Running $image with $threads threads and $query_mode query mode."
+      echo "Running $image with $threads threads and $mode query mode."
 
-      echo pgbench | docker run -i --rm --link "$cid":postgres "$image" \
-        pgbench -i -h postgres -U postgres
+      # initialized DB
+      echo pgbench | docker run -i --rm \
+        --link "$cid":postgres "$image" \
+          pgbench -i -s "$PG_SCALE_FACTOR" -h postgres -U postgres
 
-      echo pgbench | docker run -i --rm --link "$cid":postgres "$image" \
-        pgbench -h postgres -U postgres \
-          -M "$query_mode" -t "$threads" > "$outfile"
+      # run benchmark
+      echo pgbench | docker run -i --rm \
+        --link "$cid":postgres "$image" \
+          pgbench -h postgres -U postgres -M "$mode" -t "$threads" > "$outfile"
     done
   done
 
