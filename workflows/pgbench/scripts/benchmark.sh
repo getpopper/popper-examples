@@ -23,7 +23,7 @@ for image in $images; do
   cid="pgbench-$(echo "$image" | sed 's/:/-/')"
 
   # stop (if previous was running)
-  docker stop "$cid"
+  docker stop "$cid" || true
 
   # create container
   docker run --rm --name "$cid" -e POSTGRES_PASSWORD=pgbench -d "$image"
