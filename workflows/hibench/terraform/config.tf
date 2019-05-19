@@ -1,5 +1,5 @@
 provider "packet" {
-  auth_token = "{var.PACKET_API_KEY}"
+  auth_token = "${var.PACKET_API_KEY}"
 }
 locals {
   project_id = "ead345e7-4525-4d09-bf49-c8b2b6e0f9cf"
