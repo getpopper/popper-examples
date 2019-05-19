@@ -1,3 +1,5 @@
 # Popper examples
 
-Examples used in <http://popper.rtfd.io/en/latest/sections/examples.html>
+A list of Popper workflows that can be used as a starting point for creating 
+experimentation workflows. Each folder in the `workflows/` contains its respective
+README file. For more, visit <https://github.com/systemslab/popper>.
