@@ -27,7 +27,7 @@ action "terraform init" {
     TF_ACTION_WORKING_DIR = "./workflows/hibench/terraform"
     TF_ACTION_COMMENT = "false"
   }
-  secrets = ["PACKET_API_KEY"]
+  secrets = ["TF_VAR_PACKET_API_KEY"]
 }
 action "terraform plan" {
   uses = "hashicorp/terraform-github-actions/plan@v0.2.0"

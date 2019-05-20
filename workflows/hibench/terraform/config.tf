@@ -1,3 +1,4 @@
+variable "PACKET_API_KEY" {}
 provider "packet" {
   auth_token = "${var.PACKET_API_KEY}"
 }
