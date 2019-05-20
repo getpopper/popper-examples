@@ -5,7 +5,7 @@ workflow "Hibench" {
 
 action "Docker build image" {
   uses = "actions/docker/cli@master"
-  args = "build -t hibench/spark https://github.com/popperized/popper-examples.git#popper-issue-590:workflows/hibench/docker"
+  args = "build -t popperized/hibench ./workflows/hibench/docker"
 }
 
 action "Docker Login" {
@@ -17,7 +17,7 @@ action "Docker Login" {
 action "Docker push" {
   uses = "actions/docker/cli@master"
   needs = ["Docker Login"]
-  args = "push hibench/spark"
+  args = "push popperized/hibench"
 }
 
 action "terraform init" {
