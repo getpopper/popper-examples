@@ -36,4 +36,5 @@ action "terraform plan" {
     TF_ACTION_WORKING_DIR = "./workflows/hibench/terraform"
     TF_ACTION_COMMENT = "false"
   }
+  secrets = ["TF_VAR_PACKET_API_KEY"]
 }
