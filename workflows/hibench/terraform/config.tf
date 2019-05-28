@@ -12,4 +12,12 @@ resource "packet_device" "hibench" {
   plan = "t1.small.x86"
   billing_cycle    = "hourly"
   facilities = ["ewr1"]
+
+  provisioner "local-exec" {
+    command = "echo ${packet_device.hibench.access_public_ipv4} > ../ansible/hosts.ini"
+  }
+
+}
+output "ip" {
+  value = packet_device.hibench.access_public_ipv4
 }
