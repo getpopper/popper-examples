@@ -40,14 +40,14 @@ action "terraform plan" {
   secrets = ["TF_VAR_PACKET_API_KEY"]
 }
 
-action "terraform apply" {
-  needs = ["terraform plan"]
-  uses = "hashicorp/terraform-github-actions/apply@v0.3.0"
-  secrets = ["TF_VAR_PACKET_API_KEY"]
-  args=["tfplan"]
-  env = {
-    TF_ACTION_WORKING_DIR = "./workflows/hibench/terraform"
-    TF_ACTION_WORKSPACE = "default"
-    TF_ACTION_COMMENT = "false"
-  }
-}
+#action "terraform apply" {
+#  needs = ["terraform plan"]
+#  uses = "hashicorp/terraform-github-actions/apply@v0.3.0"
+#  secrets = ["TF_VAR_PACKET_API_KEY"]
+#  args=["tfplan"]
+#  env = {
+#    TF_ACTION_WORKING_DIR = "./workflows/hibench/terraform"
+#    TF_ACTION_WORKSPACE = "default"
+#    TF_ACTION_COMMENT = "false"
+#  }
+#}
