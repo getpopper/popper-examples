@@ -1,8 +1,9 @@
-- hosts: all
+- hosts: master
   tasks:
   - name: run spark master
     shell: |
-      docker run --name spark-master -h spark-master -e ENABLE_INIT_DAEMON=false -d bde2020/spark-master:2.4.1-hadoop2.7
+      docker run --name spark-master -h spark-master -e ENABLE_INIT_DAEMON=false -d popperized/hibench
+- hosts: workers
   - name: run spark worker
     shell: |
-      docker run --name spark-worker-1 --link spark-master:spark-master -e ENABLE_INIT_DAEMON=false -d bde2020/spark-worker:2.4.1-hadoop2.7
+      docker run --name spark-worker --link spark-master:spark-master -e ENABLE_INIT_DAEMON=false -d bde2020/spark-worker:2.4.1-hadoop2.7
