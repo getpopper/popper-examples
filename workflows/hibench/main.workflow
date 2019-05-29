@@ -1,28 +1,40 @@
-workflow "Hibench" {
+workflow "Spark-bench" {
   on = "push"
   resolves = ["terraform apply"]
 }
 
-#action "Docker build image" {
-#  uses = "actions/docker/cli@master"
-#  args = "build -t popperized/hibench ./workflows/hibench/docker"
-#}
+action "docker build master" {
+  uses = "actions/docker/cli@master"
+  args = "build -t popperized/spark-master ./workflows/hibench/docker/master"
+}
 
-#action "Docker Login" {
-#  uses = "actions/docker/login@master"
-#  secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
-#  needs = ["Docker build image"]
-#}
+action "docker build worker" {
+  uses = "actions/docker/cli@master"
+  args = "build -t popperized/spark-worker ./workflows/hibench/docker/worker"
+}
 
-#action "Docker push" {
-#  uses = "actions/docker/cli@master"
-#  needs = ["Docker Login"]
-#  args = "push popperized/hibench"
-#}
+action "docker login" {
+  needs = ["docker build master", "docker build worker"]
+  uses = "actions/docker/login@master"
+  secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
+
+}
+
+action "docker push master" {
+  uses = "actions/docker/cli@master"
+  needs = ["docker login"]
+  args = "push popperized/spark-master"
+}
+
+action "docker push worker" {
+  uses = "actions/docker/cli@master"
+  needs = ["docker login"]
+  args = "push popperized/spark-worker"
+}
 
 action "terraform init" {
   uses = "hashicorp/terraform-github-actions/init@v0.3.0"
-  #needs = ["Docker push"]
+   needs = ["docker push master","docker push worker"]
   env = {
     TF_ACTION_WORKING_DIR = "./workflows/hibench/terraform"
     TF_ACTION_COMMENT = "false"
