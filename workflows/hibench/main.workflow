@@ -1,6 +1,6 @@
 workflow "Spark-bench" {
   on = "push"
-  resolves = ["terraform apply"]
+  resolves = ["terraform plan"]
 }
 
 action "docker build master" {
