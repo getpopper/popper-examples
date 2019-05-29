@@ -1,0 +1,33 @@
+- hosts: master
+  tasks:
+  - name: run spark master
+    shell: |
+      docker run --name spark-master
+      --net=host
+      -h spark-master
+      -e ENABLE_INIT_DAEMON=false
+      -d
+      popperized/spark-master
+
+- hosts: workers
+  tasks:
+  - name: run spark worker
+    shell: |
+      docker run --name spark-worker
+      --net=host
+      --link spark-master:spark-master
+      -e ENABLE_INIT_DAEMON=false
+      -e SPARK_MASTER='spark://{{ hostvars["master"]["ansible_default_ipv4"]["address"] }}:7077'
+      -d
+      popperized/spark-worker
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+  - name: run benchmark
+    shell: >
+      docker run --rm
+        -e SPARK_HOME='/spark'
+        -e SPARK_MASTER_HOST='{{ hostvars["master"]["ansible_default_ipv4"]["address"] }}'
+        -v $PWD:$PWD
+       --entrypoint=/spark-bench/bin/spark-bench.sh
+       popperized/spark-master $PWD/spark-bench/minimal.conf
