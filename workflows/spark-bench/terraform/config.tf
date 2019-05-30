@@ -12,12 +12,13 @@ locals {
 resource "packet_device" "spark_master" {
   hostname="spark.master"
   project_id       = "${local.project_id}"
-  operating_system = "rancher"
+  operating_system = "ubuntu_16_04"
   plan = "t1.small.x86"
   billing_cycle    = "hourly"
   facilities = ["ewr1"]
   provisioner "local-exec" {
-    command = "cat <<EOF > ../ansible/hosts.ini\n[master]\n${self.access_public_ipv4}\n[workers]\nEOF"
+    command = "cat <<EOF > ../ansible/hosts.ini\n[master]\n${self.access_public_ipv4} ansible_user=root ansible_become=True\n[workers]\nEOF"
+
   }
 
 }
@@ -25,13 +26,12 @@ resource "packet_device" "spark_worker" {
   count = "${var.WORKERS_COUNT}"
   hostname="spark.worker.${count.index}"
   project_id       = "${local.project_id}"
-  operating_system = "rancher"
+  operating_system = "ubuntu_16_04"
   plan = "t1.small.x86"
   billing_cycle    = "hourly"
   facilities = ["ewr1"]
-
   provisioner "local-exec" {
-    command = "echo '${self.access_public_ipv4}' >> ../ansible/hosts.ini"
+    command = "echo '${self.access_public_ipv4} ansible_user=root ansible_become=True' >> ../ansible/hosts.ini"
   }
   depends_on = [
     packet_device.spark_master,
@@ -41,5 +41,5 @@ output "master_ip" {
   value = packet_device.spark_master.access_public_ipv4
 }
 output "worker_ips" {
-  value = ["$packet_device.spark_worker.access_public_ipv4"]
+  value = "${packet_device.spark_worker.*.access_public_ipv4}"
 }

@@ -71,6 +71,7 @@ action "run benchmark" {
     "workflows/spark-bench/ansible/playbook.yml"
   ]
   env = {
+    ANSIBLE_GALAXY_FILE = "workflows/spark-bench/ansible/requirements.yml"
     ANSIBLE_HOST_KEY_CHECKING = "False"
   }
   secrets = ["ANSIBLE_SSH_KEY_DATA"]

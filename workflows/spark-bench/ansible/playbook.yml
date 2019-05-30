@@ -1,3 +1,6 @@
+- hosts: all
+  roles:
+  - { role: geerlingguy.docker }
 - hosts: master
   tasks:
   - name: run spark master
