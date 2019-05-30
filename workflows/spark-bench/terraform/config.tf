@@ -17,7 +17,7 @@ resource "packet_device" "spark_master" {
   billing_cycle    = "hourly"
   facilities = ["ewr1"]
   provisioner "local-exec" {
-    command = "cat <<EOF > ../ansible/hosts.ini\n[master]\n${self.access_public_ipv4} ansible_connection=ssh ansible_user=root ansible_become=True\n[workers]\nEOF"
+    command = "cat <<EOF > ../ansible/hosts.ini\n[master]\n${self.access_public_ipv4} ansible_become=True\n[workers]\nEOF"
 
   }
 
@@ -31,7 +31,7 @@ resource "packet_device" "spark_worker" {
   billing_cycle    = "hourly"
   facilities = ["ewr1"]
   provisioner "local-exec" {
-    command = "echo '${self.access_public_ipv4} ansible_connection=ssh ansible_user=root ansible_become=True' >> ../ansible/hosts.ini"
+    command = "echo '${self.access_public_ipv4} ansible_become=True' >> ../ansible/hosts.ini"
   }
   depends_on = [
     packet_device.spark_master,
