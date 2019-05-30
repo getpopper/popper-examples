@@ -4,7 +4,7 @@
 - hosts: master
   tasks:
   - name: run spark master
-    shell: |
+    shell: >
       docker run --name spark-master
       --net=host
       -h spark-master
@@ -15,7 +15,7 @@
 - hosts: workers
   tasks:
   - name: run spark worker
-    shell: |
+    shell: >
       docker run --name spark-worker
       --net=host
       --link spark-master:spark-master
