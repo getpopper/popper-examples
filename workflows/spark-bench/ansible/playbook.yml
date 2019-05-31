@@ -28,7 +28,6 @@
     shell: >
       docker run --rm
       --net=host
-      -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
       -v $PWD:$PWD
       --entrypoint=/spark-bench/bin/spark-bench.sh
       popperized/spark-master /spark-bench/minimal.conf
