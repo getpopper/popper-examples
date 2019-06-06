@@ -1,6 +1,6 @@
 workflow "Spark-bench" {
   on = "push"
-  resolves = ["run benchmark"]
+  resolves = ["destroy"]
 }
 
 action "docker build master" {
@@ -32,8 +32,9 @@ action "docker push worker" {
 }
 
 action "terraform init" {
-  uses = "hashicorp/terraform-github-actions/init@v0.3.0"
+  uses = "innovationnorway/github-action-terraform@master"
   needs = ["docker push master","docker push worker"]
+  args=["init", "./workflows/spark-bench/terraform"]
   env = {
     TF_ACTION_WORKING_DIR = "./workflows/spark-bench/terraform"
     TF_ACTION_COMMENT = "false"
@@ -41,9 +42,10 @@ action "terraform init" {
   secrets = ["TF_VAR_PACKET_API_KEY"]
 }
 action "terraform plan" {
-  uses = "hashicorp/terraform-github-actions/plan@v0.3.0"
+  uses = "innovationnorway/github-action-terraform@master"
   needs = ["terraform init"]
-  args = ["-out=tfplan"]
+  #args = ["-out=tfplan"]
+  args=["plan","-out=tfplan","./workflows/spark-bench/terraform"]
   env = {
     TF_ACTION_WORKING_DIR = "./workflows/spark-bench/terraform"
     TF_ACTION_COMMENT = "false"
@@ -53,9 +55,10 @@ action "terraform plan" {
 
 action "terraform apply" {
   needs = ["terraform plan"]
-  uses = "hashicorp/terraform-github-actions/apply@v0.3.0"
+  #uses = "hashicorp/terraform-github-actions/apply@v0.3.0"
+  uses = "innovationnorway/github-action-terraform@master"
   secrets = ["TF_VAR_PACKET_API_KEY"]
-  args=["tfplan"]
+  args=["apply", "-auto-approve", "./tfplan"]
   env = {
     TF_ACTION_WORKING_DIR = "./workflows/spark-bench/terraform"
     TF_ACTION_WORKSPACE = "default"
@@ -68,11 +71,22 @@ action "run benchmark" {
   uses = "popperized/ansible@master"
   args = [
     "-i", "workflows/spark-bench/ansible/hosts.ini",
-    "workflows/spark-bench/ansible/playbook.yml","-v"
+    "workflows/spark-bench/ansible/playbook.yml"
   ]
   env = {
     ANSIBLE_GALAXY_FILE = "workflows/spark-bench/ansible/requirements.yml"
     ANSIBLE_HOST_KEY_CHECKING = "False"
   }
   secrets = ["ANSIBLE_SSH_KEY_DATA"]
+}
+
+action "destroy" {
+  needs = ["run benchmark"]
+  uses = "innovationnorway/github-action-terraform@master"
+  args = ["destroy",
+            "-target=packet_device.spark_master",
+            "-target=packet_device.spark_worker",
+            "-auto-approve",
+            "./workflows/spark-bench/terraform"]
+  secrets = ["TF_VAR_PACKET_API_KEY"]
 }

@@ -17,7 +17,7 @@ resource "packet_device" "spark_master" {
   billing_cycle    = "hourly"
   facilities = ["ewr1"]
   provisioner "local-exec" {
-    command = "cat <<EOF > ../ansible/hosts.ini\n[master]\n${self.access_public_ipv4} ansible_user=root ansible_become=True\n[workers]\nEOF"
+    command = "cat <<EOF > ./workflows/spark-bench/ansible/hosts.ini\n[master]\n${self.access_public_ipv4} ansible_user=root ansible_become=True\n[workers]\nEOF"
 
   }
 
@@ -31,14 +31,12 @@ resource "packet_device" "spark_worker" {
   billing_cycle    = "hourly"
   facilities = ["ewr1"]
   provisioner "local-exec" {
-    command = "echo '${self.access_public_ipv4} ansible_user=root ansible_become=True' >> ../ansible/hosts.ini"
+    command = "cat <<EOF >>./workflows/spark-bench/ansible/hosts.ini\n${self.access_public_ipv4} ansible_user=root ansible_become=TrueEOF"
   }
-  depends_on = [
-    packet_device.spark_master,
-  ]
+  depends_on = ["packet_device.spark_master"]
 }
 output "master_ip" {
-  value = packet_device.spark_master.access_public_ipv4
+  value = "${packet_device.spark_master.access_public_ipv4}"
 }
 output "worker_ips" {
   value = "${packet_device.spark_worker.*.access_public_ipv4}"
