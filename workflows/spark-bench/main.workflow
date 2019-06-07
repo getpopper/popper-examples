@@ -71,7 +71,7 @@ action "run benchmark" {
   uses = "popperized/ansible@master"
   args = [
     "-i", "workflows/spark-bench/ansible/hosts.ini",
-    "workflows/spark-bench/ansible/playbook.yml"
+    "workflows/spark-bench/ansible/playbook.yml","-v"
   ]
   env = {
     ANSIBLE_GALAXY_FILE = "workflows/spark-bench/ansible/requirements.yml"

@@ -25,6 +25,16 @@
   tasks:
   - name: run benchmark
     shell: >
-      docker run --name spark-submit
+      docker run --rm --name spark-submit
       --entrypoint=/spark-bench/bin/spark-bench.sh
       popperized/spark-master /spark-bench/minimal.conf
+  - name: run benchmark config A
+    shell: >
+      docker run --rm --name spark-configA
+      --entrypoint=/spark-bench/bin/spark-bench.sh
+      popperized/spark-master /spark-bench/classicA.conf
+  - name: run benchmark config B
+    shell: >
+      docker run --rm --name spark-configB
+      --entrypoint=/spark-bench/bin/spark-bench.sh
+      popperized/spark-master /spark-bench/classicB.conf
