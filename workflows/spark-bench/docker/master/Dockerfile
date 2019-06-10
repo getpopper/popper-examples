@@ -14,6 +14,3 @@ RUN apk add --no-cache wget libc6-compat && \
     ln -s "${SCALA_HOME}/bin/"* "/usr/bin/"; \
     apk del .build-dependencies;\
     rm -rf "/tmp/"*;
-ADD spark_confs/minimal.conf /spark-bench
-ADD spark_confs/classicA.conf /spark-bench
-ADD spark_confs/classicB.conf /spark-bench

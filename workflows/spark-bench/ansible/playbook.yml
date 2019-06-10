@@ -23,18 +23,41 @@
       popperized/spark-worker
 - hosts: master
   tasks:
+  - name: copy config files
+    copy:
+      src: ../spark_confs
+      dest: /tmp
   - name: run benchmark
     shell: >
       docker run --rm --name spark-submit
+      -v /tmp/spark_confs:/tmp/spark_confs
       --entrypoint=/spark-bench/bin/spark-bench.sh
-      popperized/spark-master /spark-bench/minimal.conf
+      popperized/spark-master /tmp/spark_confs/minimal.conf
   - name: run benchmark config A
     shell: >
-      docker run --rm --name spark-configA
+      docker run --name spark-configA
+      -v /tmp/spark_confs:/tmp/spark_confs
       --entrypoint=/spark-bench/bin/spark-bench.sh
-      popperized/spark-master /spark-bench/classicA.conf
+      popperized/spark-master /tmp/spark_confs/classicA.conf
+  - name:
+    shell: >
+      cat /tmp/spark_confs/outA.csv/* > /tmp/outA.csv
+  - name: Retreive result A
+    fetch:
+      src: /tmp/outA.csv
+      dest: results/
+      flat: yes
   - name: run benchmark config B
     shell: >
-      docker run --rm --name spark-configB
+      docker run --name spark-configB
+      -v /tmp/spark_confs:/tmp/spark_confs
       --entrypoint=/spark-bench/bin/spark-bench.sh
-      popperized/spark-master /spark-bench/classicB.conf
+      popperized/spark-master /tmp/spark_confs/classicB.conf
+  - name: copy from docker B
+    shell: >
+      cat /tmp/spark_confs/outB.csv/* > /tmp/outB.csv
+  - name: Retreive result B
+    fetch:
+      src: /tmp/outB.csv
+      dest: results/
+      flat: yes

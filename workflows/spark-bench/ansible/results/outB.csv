@@ -1,0 +1,2 @@
+name,timestamp,load,train,test,save,total_runtime,seed,maxIterations,saveMode,output,k,input,run,spark.driver.host,spark.driver.port,spark.jars,spark.app.name,spark.executor.id,spark.submit.deployMode,spark.master,spark.app.id,description
+kmeans,1560196273113,422504203,17693300800,940054962,0,19055859965,127,2,error,"",2,/tmp/spark-bench-test/kmeans-data.parquet,0,c8df99df3385,37458,file:/spark-bench/lib/spark-bench-2.3.0_0.4.0-RELEASE.jar,com.ibm.sparktc.sparkbench.cli.CLIKickoff,driver,client,local,local-1560196245858,Classic benchmarking B

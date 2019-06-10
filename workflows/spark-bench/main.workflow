@@ -55,7 +55,6 @@ action "terraform plan" {
 
 action "terraform apply" {
   needs = ["terraform plan"]
-  #uses = "hashicorp/terraform-github-actions/apply@v0.3.0"
   uses = "innovationnorway/github-action-terraform@master"
   secrets = ["TF_VAR_PACKET_API_KEY"]
   args=["apply", "-auto-approve", "./tfplan"]

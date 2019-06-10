@@ -14,4 +14,3 @@ RUN apk add --no-cache wget && \
     ln -s "${SCALA_HOME}/bin/"* "/usr/bin/"; \
     apk del .build-dependencies;\
     rm -rf "/tmp/"*;
-ADD minimal.conf /spark-bench
