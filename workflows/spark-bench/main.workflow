@@ -83,8 +83,6 @@ action "destroy" {
   needs = ["run benchmark"]
   uses = "innovationnorway/github-action-terraform@master"
   args = ["destroy",
-            "-target=packet_device.spark_master",
-            "-target=packet_device.spark_worker",
             "-auto-approve",
             "./workflows/spark-bench/terraform"]
   secrets = ["TF_VAR_PACKET_API_KEY"]
