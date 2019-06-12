@@ -79,8 +79,14 @@ action "run benchmark" {
   secrets = ["ANSIBLE_SSH_KEY_DATA"]
 }
 
-action "destroy" {
+action "plot results" {
   needs = ["run benchmark"]
+  uses = "./workflows/spark-bench/docker/scipy"
+  args = "./workflows/spark-bench/plot.py"
+}
+
+action "destroy" {
+  needs = ["plot results"]
   uses = "innovationnorway/github-action-terraform@master"
   args = ["destroy",
             "-auto-approve",
