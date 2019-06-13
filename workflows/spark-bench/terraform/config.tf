@@ -1,5 +1,5 @@
 variable "PACKET_API_KEY" {}
-variable "WORKERS_COUNT" { default = 2 }
+variable "WORKERS_COUNT" { default = 1 }
 
 provider "packet" {
   auth_token = "${var.PACKET_API_KEY}"
