@@ -50,7 +50,7 @@
   tasks:
   - name: Wait until the spark job-A is finished and result is generated
     wait_for:
-      path: /tmp/spark_confs/outA.csv
+      path: /tmp/spark_confs/outA.csv/_SUCCESS
   - name: copy from random file A
     shell: >
       cat /tmp/spark_confs/outA.csv/* > /tmp/outA.csv
@@ -61,7 +61,7 @@
       flat: yes
   - name: Wait until the spark job-B is finished and result is generated
     wait_for:
-      path: /tmp/spark_confs/outB.csv
+      path: /tmp/spark_confs/outB.csv/_SUCCESS
   - name: copy from random file B
     shell: >
       cat /tmp/spark_confs/outB.csv/* > /tmp/outB.csv
