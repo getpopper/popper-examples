@@ -5,9 +5,10 @@
   tasks:
   - name: run spark master
     shell: >
+      hostname "{{ hostvars[inventory_hostname]["ansible_default_ipv4"]["address"] }}" &&
       docker run --name spark-master
-      -p 7077:7077 -p 8080:8080
-      -e SPARK_LOCAL_IP=0.0.0.0
+      --net=host
+      -e SPARK_LOCAL_IP="{{ hostvars[inventory_hostname]["ansible_default_ipv4"]["address"] }}"
       -e SPARK_MASTER_HOST=0.0.0.0
       -e ENABLE_INIT_DAEMON=false
       -d
@@ -18,9 +19,11 @@
   - name: run spark worker
     shell: >
       docker run --name spark-worker
-      -p 8081:8081
+      --net=host
       -e ENABLE_INIT_DAEMON=false
+      -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]['ansible_default_ipv4']['address']}}'
       -e SPARK_MASTER='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
+      -v /tmp/spark_confs:/tmp/spark_confs
       -d
       popperized/spark-worker
 - hosts: master
@@ -29,13 +32,6 @@
     copy:
       src: ../spark_confs
       dest: /tmp
-  - name: run benchmark
-    shell: >
-      docker run --rm --name spark-submit
-      -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-      -v /tmp/spark_confs:/tmp/spark_confs
-      --entrypoint=/spark-bench/bin/spark-bench.sh
-      popperized/spark-master /tmp/spark_confs/minimal.conf
   - name: run benchmark config A
     shell: >
       docker run --name spark-configA
@@ -43,6 +39,18 @@
       -v /tmp/spark_confs:/tmp/spark_confs
       --entrypoint=/spark-bench/bin/spark-bench.sh
       popperized/spark-master /tmp/spark_confs/classicA.conf
+  - name: run benchmark config B
+    shell: >
+      docker run --name spark-configB
+      -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
+      -v /tmp/spark_confs:/tmp/spark_confs
+      --entrypoint=/spark-bench/bin/spark-bench.sh
+      popperized/spark-master /tmp/spark_confs/classicB.conf
+- hosts: workers
+  tasks:
+  - name: Wait until the spark job-A is finished and result is generated
+    wait_for:
+      path: /tmp/spark_confs/outA.csv
   - name: copy from random file A
     shell: >
       cat /tmp/spark_confs/outA.csv/* > /tmp/outA.csv
@@ -51,13 +59,9 @@
       src: /tmp/outA.csv
       dest: ../results/
       flat: yes
-  - name: run benchmark config B
-    shell: >
-      docker run --name spark-configB
-      -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-      -v /tmp/spark_confs:/tmp/spark_confs
-      --entrypoint=/spark-bench/bin/spark-bench.sh
-      popperized/spark-master /tmp/spark_confs/classicB.conf
+  - name: Wait until the spark job-B is finished and result is generated
+    wait_for:
+      path: /tmp/spark_confs/outB.csv
   - name: copy from random file B
     shell: >
       cat /tmp/spark_confs/outB.csv/* > /tmp/outB.csv
