@@ -1,35 +1,37 @@
-workflow "SeisSol experiments" {
-  resolves = "validate"
+workflow "lulesh experiments" {
+  resolves = "run parameter sweep"
 }
 
 action "download-data" {
-  uses = "popperized/zenodo@master"
+  uses = "popperized/zenodo/download@master"
   env = {
-    ZENODO_RECORD_ID = "263717"
-    ZENODO_OUTPUT_PATH = "./data"
+    ZENODO_RECORD_ID = "263550"
+    ZENODO_OUTPUT_PATH = "./workflows/scc18/data"
+    ZENODO_USE_SANDBOX = "true"
   }
 }
 
-action "install" {
+action "install lulesh" {
   needs = "download-data"
   uses = "popperized/spack@master"
-  args = "install seisol@201703"
+  args = "install lulesh~mpi cppflags=-static cflags=-static"
 }
 
-action "execute" {
-  needs = "install"
-  uses = "popperized/slurmp@master"
-  args = "slurm/sweep.yml"
+action "create spack view" {
+  needs = "install lulesh"
+  uses = "popperized/spack@master"
+  args = "view -d yes hard -i ./workflows/scc18/install/ lulesh~mpi "
 }
 
-action "plot" {
-  needs = "execute"
-  uses = "popperized/jupyter@master"
-  args = "notebook/plot.ipynb"
+action "install sweepj2" {
+  needs = "create spack view"
+  uses = "jefftriplett/python-actions@master"
+  args = "pip install sweepj2"
 }
 
-action "validate" {
-  needs = "plot"
-  uses = "popperized/jupyter@master"
-  args = "notebook/validate.ipynb"
+action "run parameter sweep" {
+  needs = "install sweepj2"
+  uses = "jefftriplett/python-actions@master"
+  args = "sweepj2 --template ./workflows/scc18/sweep/script --space ./workflows/scc18/sweep/space.yml --output ./workflows/scc18/output"
 }
+
