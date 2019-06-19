@@ -1,6 +1,6 @@
 workflow "Spark-bench" {
   on = "push"
-  resolves = ["run benchmark"]
+  resolves = ["destroy"]
 }
 
 action "docker build master" {
