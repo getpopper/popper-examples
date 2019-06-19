@@ -85,7 +85,7 @@ action "validate" {
   args = "./workflows/spark-bench/validate.py"
 }
 action "destroy" {
-  needs = ["plot results"]
+  needs = ["validate"]
   uses = "innovationnorway/github-action-terraform@master"
   args = ["destroy",
             "-auto-approve",
