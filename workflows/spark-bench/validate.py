@@ -3,6 +3,7 @@ import math
 
 df = pd.read_csv('./workflows/spark-bench/results/outA.csv')
 df = df.assign(difference=abs(df['pi_approximate'] - math.pi))
+
 is_10 = (df['slices'] == 10)
 is_100 = (df['slices'] == 100)
 is_1000 = (df['slices'] == 1000)
