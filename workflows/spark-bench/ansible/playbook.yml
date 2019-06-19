@@ -11,6 +11,7 @@
       -e SPARK_LOCAL_IP="{{ hostvars[inventory_hostname]["ansible_default_ipv4"]["address"] }}"
       -e SPARK_MASTER_HOST=0.0.0.0
       -e ENABLE_INIT_DAEMON=false
+      -v /tmp/spark:/tmp/spark
       -d
       popperized/spark-master
 
@@ -23,45 +24,33 @@
       -e ENABLE_INIT_DAEMON=false
       -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]['ansible_default_ipv4']['address']}}'
       -e SPARK_MASTER='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-      -v /tmp/spark_confs:/tmp/spark_confs
+      -v /tmp/spark:/tmp/spark
       -d
       popperized/spark-worker
 - hosts: master
   tasks:
   - name: copy config files
     copy:
-      src: ../spark_confs
+      src: ../spark
       dest: /tmp
   - name: run example config
     shell: >
       docker run --name spark-submit
       -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-      -v /tmp/spark_confs:/tmp/spark_confs
+      -v /tmp/spark:/tmp/spark
       --entrypoint=/spark-bench/bin/spark-bench.sh
-      popperized/spark-master /tmp/spark_confs/example.conf
+      popperized/spark-master /tmp/spark/sparkpi.conf
 - hosts: workers
   tasks:
   - name: Wait until the spark job-A is finished and result is generated
     wait_for:
-      path: /tmp/spark_confs/outA.csv/_SUCCESS
-      timeout: 600
+      path: /tmp/spark/outA.csv/_SUCCESS
+      timeout: 3600
   - name: copy from random file A
     shell: >
-      cat /tmp/spark_confs/outA.csv/* > /tmp/outA.csv
+      cat /tmp/spark/outA.csv/* > /tmp/outA.csv
   - name: Retreive result A
     fetch:
       src: /tmp/outA.csv
-      dest: ../results/
-      flat: yes
-  - name: Wait until the spark job-B is finished and result is generated
-    wait_for:
-      path: /tmp/spark_confs/outB.csv/_SUCCESS
-      timeout: 600
-  - name: copy from random file B
-    shell: >
-      cat /tmp/spark_confs/outB.csv/* > /tmp/outB.csv
-  - name: Retreive result B
-    fetch:
-      src: /tmp/outB.csv
       dest: ../results/
       flat: yes

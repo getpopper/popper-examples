@@ -1,6 +1,6 @@
 workflow "Spark-bench" {
   on = "push"
-  resolves = ["destroy"]
+  resolves = ["run benchmark"]
 }
 
 action "docker build master" {
@@ -79,12 +79,11 @@ action "run benchmark" {
   secrets = ["ANSIBLE_SSH_KEY_DATA"]
 }
 
-action "plot results" {
+action "validate" {
   needs = ["run benchmark"]
   uses = "./workflows/spark-bench/docker/scipy"
-  args = "./workflows/spark-bench/plot.py"
+  args = "./workflows/spark-bench/validate.py"
 }
-
 action "destroy" {
   needs = ["plot results"]
   uses = "innovationnorway/github-action-terraform@master"
