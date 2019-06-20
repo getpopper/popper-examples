@@ -10,7 +10,7 @@ action "install lulesh" {
 action "create spack view" {
   needs = "install lulesh"
   uses = "popperized/spack@master"
-  args = "view -d yes hard -i ./workflows/scc18/install/ lulesh~mpi "
+  args = "view -d yes hard -i ./workflows/hpc-proxy-app/install/ lulesh~mpi "
 }
 
 action "install sweepj2" {
@@ -22,11 +22,11 @@ action "install sweepj2" {
 action "generate sweep" {
   needs = "install sweepj2"
   uses = "jefftriplett/python-actions@master"
-  args = "sweepj2 --template ./workflows/scc18/sweep/script --space ./workflows/scc18/sweep/space.yml --output ./workflows/scc18/output"
+  args = "sweepj2 --template ./workflows/hpc-proxy-app/sweep/script --space ./workflows/hpc-proxy-app/sweep/space.yml --output ./workflows/hpc-proxy-app/output"
 }
 
 action "run sweep" {
   needs = "generate sweep"
   uses = "docker://debian:buster-slim"
-  runs = ["sh", "-c", "chmod +x workflows/scc18/output/* && run-parts workflows/scc18/output"]
+  runs = ["sh", "-c", "chmod +x workflows/hpc-proxy-app/output/* && run-parts workflows/hpc-proxy-app/output"]
 }
