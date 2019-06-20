@@ -1,5 +1,6 @@
 import pandas as pd
 import math
+import seaborn as sns
 
 df = pd.read_csv('./workflows/spark-bench/results/outA.csv')
 df = df.assign(difference=abs(df['pi_approximate'] - math.pi))
@@ -20,3 +21,14 @@ print("Percent Error with 10 slices: {:.4f}%".format(perc_error_10))
 print("Percent Error with 100 slices: {:.4f}%".format(perc_error_100))
 print("Percent Error with 1000 slices: {:.4f}%".format(perc_error_1000))
 
+ax = sns.barplot(
+    x="name",
+    y="difference",
+    hue="slices",
+    data=df
+). \
+    get_figure(). \
+    savefig('./workflows/spark-bench/results/income_f_age.png')
+
+
+assert (perc_error_10 > perc_error_100) and (perc_error_100 > perc_error_1000)
