@@ -2,17 +2,7 @@ workflow "lulesh experiments" {
   resolves = "run sweep"
 }
 
-action "download-data" {
-  uses = "popperized/zenodo/download@master"
-  env = {
-    ZENODO_RECORD_ID = "263550"
-    ZENODO_OUTPUT_PATH = "./workflows/scc18/data"
-    ZENODO_USE_SANDBOX = "true"
-  }
-}
-
 action "install lulesh" {
-  needs = "download-data"
   uses = "popperized/spack@master"
   args = "install lulesh~mpi cppflags=-static cflags=-static"
 }
