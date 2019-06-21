@@ -3,11 +3,18 @@ workflow "run and plot pgbench performance" {
   on = "push"
 }
 
+action "install dependencies" {
+  uses = "jefftriplett/python-actions@master"
+  args = "pip install -r ./workflows/docker-data-science/requirements.txt"
+}
+
 action "generate data" {
-    uses = "./workflows/docker-data-science/docker"
+    needs = "install dependencies"
+    uses = "jefftriplett/python-actions@master"
+    args = "python ./workflows/docker-data-science/scripts/app.py"
 }
 action "generate figures" {
     needs = "generate data"
-    uses = "./workflows/docker-data-science/docker"
-    args = "python ./workflows/docker-data-science/docker/generate_figures.py"
+    uses = "jefftriplett/python-actions@master"
+    args = "python ./workflows/docker-data-science/scripts/generate_figures.py"
 }

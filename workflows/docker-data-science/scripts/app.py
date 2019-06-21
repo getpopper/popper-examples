@@ -1,10 +1,11 @@
+import numpy as np
+import pandas as pd
+import os
 from sklearn import datasets
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.model_selection import ShuffleSplit, learning_curve
-import numpy as np
-import pandas as pd
-import os
+
 # Load diabetes dataset
 diabetes = datasets.load_diabetes()
 
@@ -28,7 +29,9 @@ def generate_learning_curve(name, estimator, X, y):
                        'test_score_means': test_score_means})
     if not os.path.exists('./workflows/docker-data-science/results'):
         os.mkdir('./workflows/docker-data-science/results')
-    df.to_csv('./workflows/docker-data-science/results/{}_results.csv'.format(name))
+    df.to_csv(
+        './workflows/docker-data-science/results/{}_results.csv'.format(name)
+    )
 
 
 nb_estimator = GaussianNB()
