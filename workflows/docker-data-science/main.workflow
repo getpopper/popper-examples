@@ -11,7 +11,7 @@ action "install dependencies" {
 action "generate data" {
     needs = "install dependencies"
     uses = "jefftriplett/python-actions@master"
-    args = "python ./workflows/docker-data-science/scripts/app.py"
+    args = "python ./workflows/docker-data-science/scripts/generate_data.py"
 }
 action "generate figures" {
     needs = "generate data"
