@@ -7,8 +7,9 @@ from pypet.environment import Environment
 from pypet.brian2.parameter import Brian2Parameter, Brian2MonitorResult
 from pypet.utils.explore import cartesian_product
 # Don't do this at home:
-from brian2 import pF, nS, mV, ms, nA, NeuronGroup, SpikeMonitor, StateMonitor, linspace, \
-    Network
+from brian2 import pF, nS, mV, ms, nA, \
+    NeuronGroup, SpikeMonitor, StateMonitor, \
+    linspace, Network
 
 
 # We define a function to set all parameter
@@ -50,11 +51,13 @@ def run_net(traj):
     # Create a namespace dictionairy
     namespace = traj.Net.f_to_dict(short_names=True, fast_access=True)
     # Create the Neuron Group
-    neuron = NeuronGroup(traj.N, model=eqs, threshold=traj.Vcut, reset=traj.reset,
-                         namespace=namespace)
+    neuron = NeuronGroup(traj.N, model=eqs, threshold=traj.Vcut,
+                         reset=traj.reset, namespace=namespace)
     neuron.vm = traj.EL
     neuron.w = traj.a * (neuron.vm - traj.EL)
-    neuron.Vr = linspace(-48.3 * mV, -47.7 * mV, traj.N)  # bifurcation parameter
+    neuron.Vr = linspace(-48.3 * mV,
+                         -47.7 * mV,
+                         traj.N)  # bifurcation parameter
 
     # Run the network initially for 100 milliseconds
     print('Initial Run')
@@ -89,16 +92,21 @@ def main():
                       file_title='Example_23_Brian2',
                       comment='Go Brian2!',
                       overwrite_file=True,
-                      dynamically_imported_classes=[Brian2MonitorResult, Brian2Parameter])
-
+                      dynamically_imported_classes=[
+                          Brian2MonitorResult,
+                          Brian2Parameter
+                      ])
     traj = env.trajectory
 
     # 1st a) add the parameters
     add_params(traj)
 
-    # 1st b) prepare, we want to explore the different network sizes and different tauw time scales
-    traj.f_explore(cartesian_product({traj.f_get('N').v_full_name: [50, 60],
-                                      traj.f_get('tauw').v_full_name: [30 * ms, 40 * ms]}))
+    '''1st b) prepare, we want to explore the different network sizes
+    and different tauw time scales'''
+    traj.f_explore(cartesian_product({
+        traj.f_get('N').v_full_name: [50, 60],
+        traj.f_get('tauw').v_full_name: [30 * ms, 40 * ms]
+    }))
 
     # 2nd let's run our experiment
     env.run(run_net)
