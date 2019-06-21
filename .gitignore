@@ -4,3 +4,7 @@ popper_status
 machines
 .idea/
 pipelines/*/results_
+workflows/spark-bench/ansible/hosts.ini
+.terraform
+terraform.*
+tfplan
