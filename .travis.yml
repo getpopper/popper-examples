@@ -7,4 +7,5 @@ install:
 - git clone https://github.com/systemslab/popper /tmp/popper
 - export PYTHONUNBUFFERED=1
 - pip install /tmp/popper/cli
-script: popper run --wfile workflows/pgbench/main.workflow
+script: popper run
+
