@@ -4,28 +4,28 @@
 - hosts: master
   tasks:
   - name: start spark master
-    shell: >
-      hostname '{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}' &&
-      docker run --rm -d
-        --name spark-master
-        --net=host
-        -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}'
-        -e SPARK_MASTER_HOST=0.0.0.0
-        -e ENABLE_INIT_DAEMON=false
-        -v /tmp/spark:/tmp/spark
+    shell: |
+      hostname '{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}' && \
+      docker run --rm -d \
+        --name spark-master \
+        --net=host \
+        -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}' \
+        -e SPARK_MASTER_HOST=0.0.0.0 \
+        -e ENABLE_INIT_DAEMON=false \
+        -v /tmp/spark:/tmp/spark \
       popperized/spark-master
 
 - hosts: workers
   tasks:
   - name: start spark worker
-    shell: >
-      docker run --rm -d
-        --name spark-worker
-        --net=host
-        -e ENABLE_INIT_DAEMON=false
-        -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}'
-        -e SPARK_MASTER='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-        -v /tmp/spark:/tmp/spark
+    shell: |
+      docker run --rm -d \
+        --name spark-worker \
+        --net=host \
+        -e ENABLE_INIT_DAEMON=false \
+        -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}' \
+        -e SPARK_MASTER='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077' \
+        -v /tmp/spark:/tmp/spark \
         popperized/spark-worker
 
 - hosts: master
@@ -35,12 +35,12 @@
       src: ../spark
       dest: /tmp
   - name: run example config
-    shell: >
-      docker run --rm
-        --entrypoint=/spark-bench/bin/spark-bench.sh
-        --name spark-submit
-        -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-        -v /tmp/spark:/tmp/spark
+    shell: |
+      docker run --rm \
+        --entrypoint=/spark-bench/bin/spark-bench.sh \
+        --name spark-submit \
+        -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077' \
+        -v /tmp/spark:/tmp/spark \
         popperized/spark-master /tmp/spark/sparkpi.conf
 
 - hosts: workers
