@@ -4,29 +4,30 @@
 - hosts: master
   tasks:
   - name: start spark master
-    shell: >
-      hostname "{{ hostvars[inventory_hostname]["ansible_default_ipv4"]["address"] }}" &&
-      docker run --name spark-master
-      --net=host
-      -e SPARK_LOCAL_IP="{{ hostvars[inventory_hostname]["ansible_default_ipv4"]["address"] }}"
-      -e SPARK_MASTER_HOST=0.0.0.0
-      -e ENABLE_INIT_DAEMON=false
-      -v /tmp/spark:/tmp/spark
-      -d
+    shell: |
+      hostname '{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}' && \
+      docker run --rm -d \
+        --name spark-master \
+        --net=host \
+        -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}' \
+        -e SPARK_MASTER_HOST=0.0.0.0 \
+        -e ENABLE_INIT_DAEMON=false \
+        -v /tmp/spark:/tmp/spark \
       popperized/spark-master
 
 - hosts: workers
   tasks:
   - name: start spark worker
-    shell: >
-      docker run --name spark-worker
-      --net=host
-      -e ENABLE_INIT_DAEMON=false
-      -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]['ansible_default_ipv4']['address']}}'
-      -e SPARK_MASTER='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-      -v /tmp/spark:/tmp/spark
-      -d
-      popperized/spark-worker
+    shell: |
+      docker run --rm -d \
+        --name spark-worker \
+        --net=host \
+        -e ENABLE_INIT_DAEMON=false \
+        -e SPARK_LOCAL_IP='{{hostvars[inventory_hostname]["ansible_default_ipv4"]["address"]}}' \
+        -e SPARK_MASTER='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077' \
+        -v /tmp/spark:/tmp/spark \
+        popperized/spark-worker
+
 - hosts: master
   tasks:
   - name: copy config files
@@ -34,23 +35,24 @@
       src: ../spark
       dest: /tmp
   - name: run example config
-    shell: >
-      docker run --name spark-submit
-      -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077'
-      -v /tmp/spark:/tmp/spark
-      --entrypoint=/spark-bench/bin/spark-bench.sh
-      popperized/spark-master /tmp/spark/sparkpi.conf
+    shell: |
+      docker run --rm \
+        --entrypoint=/spark-bench/bin/spark-bench.sh \
+        --name spark-submit \
+        -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077' \
+        -v /tmp/spark:/tmp/spark \
+        popperized/spark-master /tmp/spark/sparkpi.conf
+
 - hosts: workers
   tasks:
-  - name: Wait until the spark job-A is finished and result is generated
+  - name: wait until the job is finished and result is generated
     wait_for:
-      path: /tmp/spark/outA.csv/_SUCCESS
+      path: /tmp/spark/results.csv/_SUCCESS
       timeout: 3600
-  - name: copy from random file A
-    shell: >
-      cat /tmp/spark/outA.csv/* > /tmp/outA.csv
-  - name: Retreive result A
+  - name: put all results in a single file
+    shell: cat /tmp/spark/results.csv/* > /tmp/results.csv
+  - name: retreive results
     fetch:
-      src: /tmp/outA.csv
+      src: /tmp/results.csv
       dest: ../results/
       flat: yes
