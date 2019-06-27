@@ -5,16 +5,16 @@ workflow "run and plot pgbench performance" {
 
 action "install dependencies" {
   uses = "jefftriplett/python-actions@master"
-  args = "pip install -r ./workflows/docker-data-science/requirements.txt"
+  args = "pip install -r ./workflows/scikit-learn/requirements.txt"
 }
 
 action "generate data" {
     needs = "install dependencies"
     uses = "jefftriplett/python-actions@master"
-    args = "python ./workflows/docker-data-science/scripts/generate_data.py"
+    args = "python ./workflows/scikit-learn/scripts/generate_data.py"
 }
 action "generate figures" {
     needs = "generate data"
     uses = "jefftriplett/python-actions@master"
-    args = "python ./workflows/docker-data-science/scripts/generate_figures.py"
+    args = "python ./workflows/scikit-learn/scripts/generate_figures.py"
 }
