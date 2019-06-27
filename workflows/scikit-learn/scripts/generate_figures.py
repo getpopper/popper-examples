@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 for classifier, title in (('naive_bayes', 'Naive Bayes'),
                           ('svm_estimator', 'SVM Classifier')):
-    df = pd.read_csv('./workflows/docker-data-science/results/{}_results.csv'.format(classifier))
+    df = pd.read_csv('./workflows/scikit-learn/results/{}_results.csv'.format(classifier))
 
     plt.figure()
     plt.title(title)
@@ -25,4 +25,4 @@ for classifier, title in (('naive_bayes', 'Naive Bayes'),
 
     plt.legend(loc="best")
 
-    plt.savefig('./workflows/docker-data-science/results/{}.png'.format(classifier))
+    plt.savefig('./workflows/scikit-learn/results/{}.png'.format(classifier))

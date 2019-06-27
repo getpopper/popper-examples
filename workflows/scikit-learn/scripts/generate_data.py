@@ -27,10 +27,10 @@ def generate_learning_curve(name, estimator, X, y):
     df = pd.DataFrame({'score_sizes': score_sizes,
                        'train_score_means': train_score_means,
                        'test_score_means': test_score_means})
-    if not os.path.exists('./workflows/docker-data-science/results'):
-        os.mkdir('./workflows/docker-data-science/results')
+    if not os.path.exists('./workflows/scikit-learn/results'):
+        os.mkdir('./workflows/scikit-learn/results')
     df.to_csv(
-        './workflows/docker-data-science/results/{}_results.csv'.format(name)
+        './workflows/scikit-learn/results/{}_results.csv'.format(name)
     )
 
 
