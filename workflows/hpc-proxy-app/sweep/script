@@ -1,2 +1,6 @@
 #!/usr/bin/env bash
-workflows/hpc-proxy-app/install/bin/lulesh2.0 -s {{ param_1 }} -i {{ param_2 }} > "workflows/hpc-proxy-app/output/out_{{param_1}}_{{param_2}}.txt"
+mpiexec
+-np 1 \
+./workflows/hpc-proxy-app/install/bin/lulesh2.0 \
+-s {{ param_1 }} -i {{ param_2 }} \
+> "workflows/hpc-proxy-app/output/out_{{param_1}}_{{param_2}}.txt"

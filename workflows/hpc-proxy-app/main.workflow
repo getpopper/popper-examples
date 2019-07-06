@@ -4,13 +4,13 @@ workflow "lulesh experiments" {
 
 action "install lulesh" {
   uses = "popperized/spack@master"
-  args = "install lulesh~mpi cppflags=-static cflags=-static"
+  args = "install lulesh+mpi"
 }
 
 action "create spack view" {
   needs = "install lulesh"
   uses = "popperized/spack@master"
-  args = "view -d yes hard -i ./workflows/hpc-proxy-app/install/ lulesh~mpi "
+  args = "view -d yes hard -i ./workflows/hpc-proxy-app/install/ lulesh+mpi "
 }
 
 action "install sweepj2" {
@@ -27,6 +27,6 @@ action "generate sweep" {
 
 action "run sweep" {
   needs = "generate sweep"
-  uses = "docker://debian:buster-slim"
+  uses = "popperized/spack@master"
   runs = ["sh", "-c", "chmod +x workflows/hpc-proxy-app/output/* && run-parts workflows/hpc-proxy-app/output"]
 }
