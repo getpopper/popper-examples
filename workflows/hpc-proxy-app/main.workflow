@@ -8,7 +8,7 @@ action "install lulesh" {
 }
 
 action "install sweepj2" {
-  needs = "create spack view"
+  needs = "install lulesh"
   uses = "jefftriplett/python-actions@master"
   args = "pip install sweepj2"
 }
