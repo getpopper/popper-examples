@@ -4,7 +4,7 @@ workflow "lulesh parameter sweep" {
 
 action "install lulesh" {
   uses = "popperized/spack@master"
-  args = "install lulesh+mpi"
+  args = "install --verbose -j8 lulesh+mpi"
 }
 
 action "install sweepj2" {
