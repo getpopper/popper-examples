@@ -20,9 +20,8 @@ This workflow runs in a container runtime ([Docker][docker],
 CLI tool][popper]. The following executes this workflow:
 
 ```bash
-git clone https://github.com/popperized/popper-examples
-
-cd popper-examples/workflow/hpc-proxy-app
+popper add popperized/popper-examples/workflows/hpc-proxy-app
+cd hpc-proxy-app
 
 popper run
 ```
