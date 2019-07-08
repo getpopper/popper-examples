@@ -18,7 +18,7 @@ action "generate sweep" {
   uses = "jefftriplett/python-actions@master"
   args = [
     "sweepj2",
-    "--template", "./workflows/hpc-proxy-app/sweep/script.j2",
+    "--template", "./workflows/hpc-proxy-app/sweep/script",
     "--space", "./workflows/hpc-proxy-app/sweep/space.yml",
     "--output", "./workflows/hpc-proxy-app/sweep/jobs/"
   ]
@@ -27,11 +27,14 @@ action "generate sweep" {
 action "make scripts executable" {
   needs = "generate sweep"
   uses = "actions/bin/sh@master"
-  args = "chmod +x workflows/hpc-proxy-app/sweep/*"
+  args = ["chmod +x workflows/hpc-proxy-app/sweep/jobs/*"]
 }
 
 action "run sweep" {
   needs = "make scripts executable"
   uses = "popperized/spack@master"
-  runs = ["sh", "-c", "run-parts workflows/hpc-proxy-app/sweep"]
+  runs = ["sh", "-c", "run-parts workflows/hpc-proxy-app/sweep/jobs"]
+  env = {
+    MPI_NUM_PROCESSES = "1"
+  }
 }
