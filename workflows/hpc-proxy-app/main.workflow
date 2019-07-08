@@ -7,12 +7,6 @@ action "install lulesh" {
   args = "install lulesh+mpi"
 }
 
-action "create spack view" {
-  needs = "install lulesh"
-  uses = "popperized/spack@master"
-  args = "view -d yes hard -i ./workflows/hpc-proxy-app/install/ lulesh+mpi "
-}
-
 action "install sweepj2" {
   needs = "create spack view"
   uses = "jefftriplett/python-actions@master"
