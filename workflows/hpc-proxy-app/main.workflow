@@ -27,11 +27,11 @@ action "generate sweep" {
 action "make scripts executable" {
   needs = "generate sweep"
   uses = "actions/bin/sh@master"
-  args = "chmod +x workflows/hpc-proxy-app/sweep/*
+  args = "chmod +x workflows/hpc-proxy-app/sweep/*"
 }
 
 action "run sweep" {
-  needs = "generate sweep"
+  needs = "make scripts executable"
   uses = "popperized/spack@master"
   runs = ["sh", "-c", "run-parts workflows/hpc-proxy-app/sweep"]
 }
