@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -n "$MPI_NUM_PROCESSES" ]; then
+  echo "Expecting MPI_NUM_PROCESSES variable"
+  exit 1
+fi
+
+mpir="$(spack location --install-dir openmpi)/bin/mpiexec"
+lulesh="$(spack location --install-dir lulesh)/bin/lulesh2.0"
+
+$mpir \
+  --allow-run-as-root \
+  -np $MPI_NUM_PROCESSES \
+  -i {{ iterations }} \
+  -c {{ cost }} \
+  $lulesh

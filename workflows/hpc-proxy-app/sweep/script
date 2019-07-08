@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-$(spack location --install-dir openmpi)/bin/mpiexec \
---allow-run-as-root \
--np 1 \
-$(spack location --install-dir lulesh)/bin/lulesh2.0 \
--s {{ param_1 }} -i {{ param_2 }}
