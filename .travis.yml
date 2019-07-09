@@ -7,4 +7,5 @@ install:
 - git clone https://github.com/systemslab/popper /tmp/popper
 - pip install /tmp/popper/cli
 - export PYTHONUNBUFFERED=1
-script: popper run
+script:
+- popper run
