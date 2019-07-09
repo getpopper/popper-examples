@@ -4,7 +4,7 @@ workflow "lulesh parameter sweep" {
 
 action "install lulesh" {
   uses = "popperized/spack@master"
-  args = "install --verbose -j8 lulesh+mpi"
+  args = "spack install -j8 lulesh+mpi"
 }
 
 action "install sweepj2" {
@@ -13,8 +13,14 @@ action "install sweepj2" {
   args = "pip install sweepj2"
 }
 
-action "generate sweep" {
+action "delete existing jobs" {
   needs = "install sweepj2"
+  uses = "actions/bin/sh@master"
+  args = ["rm workflows/hpc-proxy-app/sweep/jobs/*"]
+}
+
+action "generate sweep" {
+  needs = "delete existing jobs"
   uses = "jefftriplett/python-actions@master"
   args = [
     "sweepj2",
@@ -33,8 +39,5 @@ action "make scripts executable" {
 action "run sweep" {
   needs = "make scripts executable"
   uses = "popperized/spack@master"
-  runs = ["sh", "-c", "run-parts workflows/hpc-proxy-app/sweep/jobs"]
-  env = {
-    MPI_NUM_PROCESSES = "1"
-  }
+  args = "run-parts workflows/hpc-proxy-app/sweep/jobs"
 }

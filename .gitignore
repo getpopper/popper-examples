@@ -8,3 +8,5 @@ workflows/spark-bench/ansible/hosts.ini
 .terraform
 terraform.*
 tfplan
+spack/
+venv
