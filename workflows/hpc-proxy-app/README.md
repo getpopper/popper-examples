@@ -1,28 +1,48 @@
-# HPC proxy app
+# Parameter Sweep Over An HPC Proxy App
+
+This workflow exemplifies how to run a parameter sweep of an MPI proxy 
+application (LULESH).
 
 ## Workflow
-The workflow defined in [main.workflow](./main.workflow) consist of five actions
 
-* **`install lulesh`**. Installs [lulesh](https://spack.readthedocs.io/en/latest/package_list.html#lulesh)with `mpi` support, using [spack](https://spack.io/), via the [spack action](https://github.com/popperized/spack).
+The workflow defined in [main.workflow](./main.workflow) consists of 
+five actions:
 
-* **`install sweepj2`**. Installs [sweepj2](https://github.com/ivotron/sweepj2) via `pip` using [python-actions](https://github.com/jefftriplett/python-actions), to run parameter sweep over a jinja2 template.
+  * **`install lulesh`**. Installs [lulesh][lulesh] with `mpi` support 
+    using [Spack](https://spack.io/) via the [Spack Github 
+    Action](https://github.com/popperized/spack).
 
-* **`generate sweep`**. Given a [template](./sweep/script) and a [parameter space](./sweep/space.yml), it runs a parameter sweep and generates the output files with given parameters.
+  * **`install sweepj2`**. Installs the [sweepj2][sweepj2] parameter 
+    sweep generation tool via `pip` using [python-actions][pygha]. 
+    This tool takes a [Jinja2](https://jinja.pocoo.org/) template and 
+    a parameter space to generate a list of job scripts, one for each 
+    datapoint in the space.
 
-* **`make scripts executable`**. Makes the generated scripts executable.
+  * **`generate sweep`**. Passes the [script template](./sweep/script) 
+    and the [parameter space](./sweep/space.yml) to `sweepj2` to 
+    generate the sweep in an `sweep/` directory.
 
-* **`run sweep`**. Executes all the files generated in previous step.
+  * **`make scripts executable`**. Changes the permissions of the 
+    scripts generated in the previous step so they become executable.
+
+  * **`run sweep`**. Executes all the files generated in previous step 
+    by invoking the [`run-parts`][runparts] utility. The LULESH 
+    application is executed by invoking `mpirun`.
 
 ## Execution
 
 This workflow runs in a container runtime ([Docker][docker], 
 [Singularity][singularity], etc.) and can be executed with the [Popper 
-CLI tool][popper]. The following executes this workflow:
+CLI tool][popper]. To add it to your project:
 
 ```bash
 popper add popperized/popper-examples/workflows/hpc-proxy-app
-cd hpc-proxy-app
+```
 
+And to execute it:
+
+```bash
+cd hpc-proxy-app
 popper run
 ```
 
@@ -117,6 +137,10 @@ Workflow finished successfully.
 
 ```
 
+[lulesh]: https://computation.llnl.gov/projects/co-design/lulesh
 [docker]: https://get.docker.com
 [popper]: https://github.com/systemslab/popper
 [singularity]: https://github.com/sylabs/singularity
+[sweepj2]: https://github.com/ivotron/sweepj2
+[pygha]: https://github.com/jefftriplett/python-actions
+[runparts]: https://www.commandlinux.com/man-page/man8/run-parts.8.html
