@@ -1,6 +1,6 @@
 - hosts: all
   roles:
-  - { role: geerlingguy.docker }
+  - { role: geerlingguy.docker, tags: docker }
 - hosts: master
   tasks:
   - name: start spark master
@@ -34,7 +34,7 @@
     copy:
       src: ../spark
       dest: /tmp
-  - name: run example config
+  - name: run sparkpi
     shell: |
       docker run --rm \
         --entrypoint=/spark-bench/bin/spark-bench.sh \
@@ -42,17 +42,72 @@
         -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077' \
         -v /tmp/spark:/tmp/spark \
         popperized/spark-master /tmp/spark/sparkpi.conf
+  - name: run producer
+    shell: |
+      docker run --rm \
+        --entrypoint=/spark-bench/bin/spark-bench.sh \
+        --name spark-submit-producer \
+        -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077' \
+        -v /tmp/spark:/tmp/spark \
+        popperized/spark-master /tmp/spark/producer.conf
 
+# retrieve results and data files generated in previous play
 - hosts: workers
   tasks:
-  - name: wait until the job is finished and result is generated
+  - name: waiting for sparkpi results to be generated
     wait_for:
       path: /tmp/spark/results.csv/_SUCCESS
       timeout: 3600
-  - name: put all results in a single file
+  - name: put all sparkpi results in a single file
     shell: cat /tmp/spark/results.csv/* > /tmp/results.csv
-  - name: retreive results
+  - name: retreive sparkpi results
     fetch:
       src: /tmp/results.csv
+      dest: ../results/
+      flat: yes
+
+  - name: waiting for kmeans-data data files to be generated
+    wait_for:
+      path: /tmp/spark/kmeans-data.parquet/_SUCCESS
+      timeout: 3600
+  - name: register files to be copied
+    shell: (cd /tmp/spark/kmeans-data.parquet; find . -maxdepth 1 -type f) | cut -d'/' -f2
+    register: files_to_copy
+    tags:
+      - copy
+  - name: retreive results
+    fetch: src=/tmp/spark/kmeans-data.parquet/{{ item }} dest=../files/kmeans-data.parquet/ flat=yes
+    with_items: "{{ files_to_copy.stdout_lines }}"
+    tags:
+      - copy
+# push generated data-files to master node to run benchmark
+- hosts: master
+  tasks:
+  - name: copy data files
+    copy:
+      src: ../files/
+      dest: /tmp/spark
+    tags:
+      - copy
+  - name: run classic config
+    shell: |
+      docker run --rm \
+        --entrypoint=/spark-bench/bin/spark-bench.sh \
+        --name spark-submit-consumer \
+        -e SPARK_MASTER_HOST='spark://{{ hostvars[groups["master"][0]]["ansible_default_ipv4"]["address"] }}:7077' \
+        -v /tmp/spark:/tmp/spark \
+        popperized/spark-master /tmp/spark/consumer.conf
+# get benchmark results
+- hosts: workers
+  tasks:
+  - name: waiting for kmeans results to be generated
+    wait_for:
+      path: /tmp/spark/results_kmeans.csv/_SUCCESS
+      timeout: 3600
+  - name: put all results in a single file
+    shell: cat /tmp/spark/results_kmeans.csv/* > /tmp/results_kmeans.csv
+  - name: retreive kmeans results
+    fetch:
+      src: /tmp/results_kmeans.csv
       dest: ../results/
       flat: yes
