@@ -13,8 +13,10 @@ ax.figure.savefig('./workflows/spark-bench/results/plot.pdf')
 # validate
 slices = df['slices'].unique()
 for (x, y) in list(itertools.combinations(slices, 2)):
-    mape_x = (df.query('slices == {}'.format(x))['difference'].mean() / math.pi) * 100
-    mape_y = (df.query('slices == {}'.format(y))['difference'].mean() / math.pi) * 100
+    mape_x = (df.query('slices == {}'.format(x))['difference']
+              .mean() / math.pi) * 100
+    mape_y = (df.query('slices == {}'.format(y))['difference']
+              .mean() / math.pi) * 100
 
     print("MAPE slices={}: {}".format(x, mape_x))
     print("MAPE slices={}: {}".format(y, mape_y))
