@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 RUN apt update && \
-    apt install -y curl build-essential mpich python3 dump && \
+    apt install -y curl build-essential mpich python3 python3-venv dump && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -Lo /tmp/spparks.tar.gz http://www.sandia.gov/~sjplimp/tars/spparks.tar.gz && \
