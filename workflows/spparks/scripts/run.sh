@@ -2,10 +2,9 @@
 
 pushd workflows/spparks/submodules/sppark-demo/demos/visualization
 $spk < viz.spkin
-python3 -m venv ./venv
+
 source ./venv/bin/activate
 
-pip install --no-cache-dir "numpy>=1.12.0"
 dump 1.0 text potts.dump
 
-python3 pizza_dump2vtk.py potts.dump
+python pizza_dump2vtk.py potts.dump
