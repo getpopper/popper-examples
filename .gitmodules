@@ -1,3 +1,0 @@
-[submodule "workflows/spparks/submodules/sppark-demo"]
-	path = workflows/spparks/submodules/sppark-demo
-	url = https://github.com/bdecost/spparks-demo
