@@ -15,12 +15,22 @@ The workflow then only consists of a single action:
 
 ## Visualization
 
-Open the `.vtk` files in [ParaView][paraview] to create a movie.
+To visualize the `.vtk` files you can run [ParaView Web][paraview]
+on your system by using the Dockerfile in [`/visualizer`](./visualizer) directory.
 
+```bash
+docker build -t pvw-visualizer $GITHUB_WORKSPACE/workflows/spparks/visualizer
 
+docker run -p 0.0.0.0:80:80 \
+-v $GITHUB_WORKSPACE/workflows/spparks/demo/visualization:/data \
+-e PROTOCOL="ws" \
+-e SERVER_NAME="localhost" \
+-e EXTRA_PVPYTHON_ARGS="-dr" \
+-it pvw-visualizer
+```
 
 
 [spparks]: https://spparks.sandia.gov/
 [demo]: https://github.com/bdecost/spparks-demo/blob/master/spparks-demo.org#5-demo-visualization-with-paraview
 [demo-repo]: https://github.com/bdecost/spparks-demo
-[paraview]: https://www.paraview.org/
+[paraview]: http://kitware.github.io/paraviewweb/
