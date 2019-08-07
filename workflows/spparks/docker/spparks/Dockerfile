@@ -14,6 +14,7 @@ COPY ./makeconf/Makefile.demo SPPARKS/src/MAKE
 COPY ./makeconf/Makefile.demo_serial SPPARKS/src/MAKE
 
 RUN cd SPPARKS/src/STUBS && make && cd .. && \
-    make clean; make demo_serial
+    make clean; make demo_serial && \
+    mv /SPPARKS/src/spk_demo_serial /usr/bin
 
-ENV spk /SPPARKS/src/spk_demo_serial
+ENV spk /usr/bin/spk_demo_serial
