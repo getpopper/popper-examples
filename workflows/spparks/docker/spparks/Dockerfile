@@ -13,8 +13,9 @@ RUN apt update && \
 COPY ./makeconf/Makefile.demo SPPARKS/src/MAKE
 COPY ./makeconf/Makefile.demo_serial SPPARKS/src/MAKE
 
-RUN cd SPPARKS/src/STUBS && make && cd .. && \
-    make clean; make demo_serial && \
-    mv /SPPARKS/src/spk_demo_serial /usr/bin
-
-ENV spk /usr/bin/spk_demo_serial
+RUN cd SPPARKS/src/STUBS && \
+    make && \
+    cd .. && \
+    make clean \ &&
+    make && \
+    make install
