@@ -18,12 +18,11 @@ five actions:
     a parameter space to generate a list of job scripts, one for each 
     datapoint in the space.
 
+  * **`delete existing jobs`**. Deletes previously created jobs.
+
   * **`generate sweep`**. Passes the [script template](./sweep/script) 
     and the [parameter space](./sweep/space.yml) to `sweepj2` to 
     generate the sweep in an `sweep/` directory.
-
-  * **`make scripts executable`**. Changes the permissions of the 
-    scripts generated in the previous step so they become executable.
 
   * **`run sweep`**. Executes all the files generated in previous step 
     by invoking the [`run-parts`][runparts] utility. The LULESH 

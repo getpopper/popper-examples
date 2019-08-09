@@ -16,7 +16,7 @@ action "install sweepj2" {
 action "delete existing jobs" {
   needs = "install sweepj2"
   uses = "actions/bin/sh@master"
-  args = ["rm workflows/hpc-proxy-app/sweep/jobs/*"]
+  args = ["rm -fr workflows/hpc-proxy-app/sweep/jobs"]
 }
 
 action "generate sweep" {
@@ -24,20 +24,15 @@ action "generate sweep" {
   uses = "jefftriplett/python-actions@master"
   args = [
     "sweepj2",
-    "--template", "./workflows/hpc-proxy-app/sweep/script",
+    "--template", "./workflows/hpc-proxy-app/sweep/script.j2",
     "--space", "./workflows/hpc-proxy-app/sweep/space.yml",
-    "--output", "./workflows/hpc-proxy-app/sweep/jobs/"
+    "--output", "./workflows/hpc-proxy-app/sweep/jobs/",
+    "--make-executable"
   ]
 }
 
-action "make scripts executable" {
-  needs = "generate sweep"
-  uses = "actions/bin/sh@master"
-  args = ["chmod +x workflows/hpc-proxy-app/sweep/jobs/*"]
-}
-
 action "run sweep" {
-  needs = "make scripts executable"
+  needs = "generate sweep"
   uses = "popperized/spack@master"
   args = "run-parts workflows/hpc-proxy-app/sweep/jobs"
 }
