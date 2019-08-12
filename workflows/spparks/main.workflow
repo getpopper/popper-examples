@@ -5,7 +5,8 @@ workflow "SPPARKS input script demo"{
 action "run" {
     uses = "./workflows/spparks/docker/spparks"
     runs = [
-      "sh", "-c", "spk_demo_serial < workflows/spparks/scripts/viz.spkin"
+      "sh", "-c",
+      "mpirun -np 4 spk < workflows/spparks/scripts/viz.spkin"
     ]
 }
 
