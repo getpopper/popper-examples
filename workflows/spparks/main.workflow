@@ -4,11 +4,18 @@ workflow "SPPARKS input script demo"{
 
 action "run" {
     uses = "./workflows/spparks/docker/spparks"
-    runs = ["sh","-c", "$spk < workflows/spparks/scripts/viz.spkin"]
+    runs = [
+      "sh", "-c",
+      "mpirun -np 4 spk < workflows/spparks/scripts/viz.spkin"
+    ]
 }
 
 action "generate vtk" {
     needs = "run"
     uses = "./workflows/spparks/docker/spparks"
-    runs = ["sh","-c", "python workflows/spparks/scripts/pizza_dump2vtk.py workflows/spparks/potts.dump"]
+    runs = [
+      "python",
+      "workflows/spparks/scripts/pizza_dump2vtk.py", 
+      "workflows/spparks/potts.dump"
+    ]
 }

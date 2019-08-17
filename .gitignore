@@ -11,3 +11,4 @@ tfplan
 spack/
 *.pyc
 venv
+.DS_Store
