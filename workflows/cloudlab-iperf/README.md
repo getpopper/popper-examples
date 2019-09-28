@@ -5,19 +5,15 @@ Actions](https://github.com/features/actions) workflow that showcases how to run
 an experiment on [CloudLab](https://cloudlab.us). To execute this workflow 
 locally on your computer, you can install 
 [Popper](https://github.com/systemslab/popper) and 
-[Docker](https://docs.docker.com/install/). Once installed, you can import the 
-workflow into your project by doing:
+[Docker](https://docs.docker.com/install/).
+
+To run this example, assuming you have an active account on CloudLab, 
+define the required secrets in your environment (`secrets` attributes 
+used in [the workflow](./main.workflow)), followed by:
 
 ```bash
-cd myproject/
-popper add popperized/popper-examples/workflows/cloudlab-iperf
-```
-
-And to run it, assuming you have an active account on CloudLab, define the 
-required secrets in your environment (`secrets` attributes used in [the 
-workflow](./main.workflow)), followed by:
-
-```bash
+git clone https://github.com/popperized/popper-examples
+cd popper-examples/workflows/cloudlab-iperf
 popper run
 ```
 

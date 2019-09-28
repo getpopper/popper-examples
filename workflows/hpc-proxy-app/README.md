@@ -32,16 +32,12 @@ five actions:
 
 This workflow runs in a container runtime ([Docker][docker], 
 [Singularity][singularity], etc.) and can be executed with the [Popper 
-CLI tool][popper]. To add it to your project:
+CLI tool][popper]. To run it:
 
 ```bash
-popper add popperized/popper-examples/workflows/hpc-proxy-app
-```
+git clone https://github.com/popperized/popper-examples
 
-And to execute it:
-
-```bash
-cd hpc-proxy-app
+cd popper-examples/workflows/hpc-proxy-app
 popper run
 ```
 

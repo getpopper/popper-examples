@@ -6,16 +6,12 @@ output of the analysis.
 
 To execute this workflow locally on your computer, you can install 
 [Popper](https://github.com/systemslab/popper) and 
-[Docker](https://docs.docker.com/install/). Once installed, you can 
-import the workflow into your project by doing:
+[Docker](https://docs.docker.com/install/).
+
+To run this example workflow:
 
 ```bash
-cd myproject/
-popper add popperized/popper-examples/workflows/minimal-python
-```
-
-And run it by executing:
-
-```bash
+git clone https://github.com/popperized/popper-examples
+cd popper-examples/workflows/minimal-python
 popper run
 ```
