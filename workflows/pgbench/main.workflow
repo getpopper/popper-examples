@@ -4,13 +4,13 @@ workflow "run and plot pgbench performance" {
 }
 
 action "lint" {
-  uses = "actions/bin/shellcheck@master"
+  uses = "popperized/bin/shellcheck@master"
   args = "-x workflows/pgbench/scripts/*.sh"
 }
 
 action "run benchmark" {
   needs = "lint"
-  uses = "actions/docker/cli@master"
+  uses = "popperized/docker/cli@master"
   runs = "workflows/pgbench/scripts/benchmark.sh"
   env = {
     PG_IMAGES = "postgres:9.4,postgres:11.3"
@@ -20,6 +20,6 @@ action "run benchmark" {
 
 action "analyze" {
   needs = "run benchmark"
-  uses = "actions/docker/cli@master"
+  uses = "popperized/docker/cli@master"
   runs = "workflows/pgbench/scripts/analyze.sh"
 }

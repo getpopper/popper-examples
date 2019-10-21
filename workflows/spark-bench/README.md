@@ -16,9 +16,9 @@ Here `difference` is the difference between actual and calculated value of `pi`.
 ## The Workflow
 
 This workflow comprises of several actions which can be broadly classified in the following stages:
-* `setup`: The first step is to build and push the Docker images to setup a standalone Apache Spark cluster running Spark Master and Spark workers based on [Spark Docker](https://github.com/big-data-europe/docker-spark) using the [Docker actions](https://github.com/actions/docker).
+* `setup`: The first step is to build and push the Docker images to setup a standalone Apache Spark cluster running Spark Master and Spark workers based on [Spark Docker](https://github.com/big-data-europe/docker-spark) using the [Docker actions](https://github.com/popperized/docker).
 
-* `allocate resources`: Using [Terraform actions](https://github.com/innovationnorway/github-action-terraform) resources are allocated for Spark Master and Spark Workers, reading the config from [config.tf](./terraform/config.tf).
+* `allocate resources`: Using [Terraform actions](https://github.com/popperized/terraform) resources are allocated for Spark Master and Spark Workers, reading the config from [config.tf](./terraform/config.tf).
 
 * `run benchmarks`: Benchmarks are run on the allocated nodes and the result files are retrieved using the [Ansible action](https://github.com/popperized/ansible).
 

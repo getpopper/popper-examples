@@ -3,7 +3,7 @@ workflow "co2 emissions" {
 }
 
 action "download data" {
-  uses = "actions/bin/curl@master"
+  uses = "popperized/bin/curl@master"
   args = [
     "--create-dirs",
     "-Lo workflows/minimal-python/data/global.csv",

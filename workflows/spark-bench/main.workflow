@@ -4,35 +4,35 @@ workflow "Spark-bench" {
 }
 
 action "docker build master" {
-  uses = "actions/docker/cli@master"
+  uses = "popperized/docker/cli@master"
   args = "build -t popperized/spark-master ./workflows/spark-bench/docker/master"
 }
 
 action "docker build worker" {
-  uses = "actions/docker/cli@master"
+  uses = "popperized/docker/cli@master"
   args = "build -t popperized/spark-worker ./workflows/spark-bench/docker/worker"
 }
 
 action "docker login" {
   needs = ["docker build master", "docker build worker"]
-  uses = "actions/docker/login@master"
+  uses = "popperized/docker/login@master"
   secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
 }
 
 action "docker push master" {
-  uses = "actions/docker/cli@master"
+  uses = "popperized/docker/cli@master"
   needs = ["docker login"]
   args = "push popperized/spark-master"
 }
 
 action "docker push worker" {
-  uses = "actions/docker/cli@master"
+  uses = "popperized/docker/cli@master"
   needs = ["docker login"]
   args = "push popperized/spark-worker"
 }
 
 action "terraform init" {
-  uses = "innovationnorway/github-action-terraform@master"
+  uses = "popperized/terraform@master"
   needs = ["docker push master","docker push worker"]
   args=["init", "./workflows/spark-bench/terraform"]
   env = {
@@ -42,7 +42,7 @@ action "terraform init" {
   secrets = ["TF_VAR_PACKET_API_KEY"]
 }
 action "terraform plan" {
-  uses = "innovationnorway/github-action-terraform@master"
+  uses = "popperized/terraform@master"
   needs = ["terraform init"]
   #args = ["-out=tfplan"]
   args=["plan","-out=tfplan","./workflows/spark-bench/terraform"]
@@ -55,7 +55,7 @@ action "terraform plan" {
 
 action "terraform apply" {
   needs = ["terraform plan"]
-  uses = "innovationnorway/github-action-terraform@master"
+  uses = "popperized/terraform@master"
   secrets = ["TF_VAR_PACKET_API_KEY"]
   args=["apply", "-auto-approve", "./tfplan"]
   env = {
@@ -86,7 +86,7 @@ action "plot and validate" {
 }
 action "destroy" {
   needs = ["plot and validate"]
-  uses = "innovationnorway/github-action-terraform@master"
+  uses = "popperized/terraform@master"
   args = ["destroy",
             "-auto-approve",
             "./workflows/spark-bench/terraform"]
