@@ -15,7 +15,7 @@ action "install sweepj2" {
 
 action "delete existing jobs" {
   needs = "install sweepj2"
-  uses = "actions/bin/sh@master"
+  uses = "popperized/bin/sh@master"
   args = ["rm -fr workflows/hpc-proxy-app/sweep/jobs"]
 }
 

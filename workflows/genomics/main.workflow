@@ -3,7 +3,7 @@ workflow "genomics"{
 }
 
 action "generate data"{
- uses = "actions/bin/curl@master"
+ uses = "popperized/bin/curl@master"
  runs = ["sh", "-c", "workflows/genomics/scripts/generate_data.sh"]
 }
 
