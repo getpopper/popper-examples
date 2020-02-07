@@ -1,15 +1,8 @@
 workflow "run and plot pgbench performance" {
-  resolves = "analyze"
-  on = "push"
-}
-
-action "lint" {
-  uses = "popperized/bin/shellcheck@master"
-  args = "-x workflows/pgbench/scripts/*.sh"
+  resolves = "plot"
 }
 
 action "run benchmark" {
-  needs = "lint"
   uses = "popperized/docker/cli@master"
   runs = "workflows/pgbench/scripts/benchmark.sh"
   env = {
@@ -18,8 +11,9 @@ action "run benchmark" {
   }
 }
 
-action "analyze" {
+action "plot" {
   needs = "run benchmark"
-  uses = "popperized/docker/cli@master"
-  runs = "workflows/pgbench/scripts/analyze.sh"
+  uses = "docker://tensorflow/tensorflow:2.0.1-py3-jupyter"
+  runs = "jupyter"
+  args = ["nbconvert", "--execute", "--to=notebook", "workflows/pgbench/notebook/plot.ipynb"]
 }
