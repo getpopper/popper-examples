@@ -13,8 +13,8 @@ used in [the workflow](./main.workflow)), followed by:
 
 ```bash
 git clone https://github.com/popperized/popper-examples
-cd popper-examples/workflows/cloudlab-iperf
-popper run
+cd popper-examples/
+popper run -f workflows/cloudlab-iperf/main.workflow
 ```
 
 ## Workflow

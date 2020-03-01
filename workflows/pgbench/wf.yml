@@ -1,0 +1,12 @@
+steps:
+- id: run benchmark
+  uses: popperized/docker/cli@master
+  runs: scripts/benchmark.sh
+  env:
+    PG_IMAGES: postgres:9.4,postgres:11.3
+    PG_SCALE_FACTOR: '30'
+
+- id: "plot"
+  uses: docker://tensorflow/tensorflow:2.0.1-py3-jupyter
+  runs: "jupyter"
+  args: ["nbconvert", "--execute", "--to=notebook", "notebook/plot.ipynb"]

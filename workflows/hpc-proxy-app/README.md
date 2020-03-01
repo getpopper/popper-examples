@@ -1,16 +1,15 @@
 # Parameter Sweep Over An HPC Proxy App
 
 This workflow exemplifies how to run a parameter sweep of an MPI proxy 
-application (LULESH).
+application.
 
 ## Workflow
 
 The workflow defined in [main.workflow](./main.workflow) consists of 
-five actions:
+five steps:
 
   * **`install lulesh`**. Installs [lulesh][lulesh] with `mpi` support 
-    using [Spack](https://spack.io/) via the [Spack Github 
-    Action](https://github.com/popperized/spack).
+    using a [Spack](https://spack.io/) Docker image.
 
   * **`install sweepj2`**. Installs the [sweepj2][sweepj2] parameter 
     sweep generation tool via `pip` using [python-actions][pygha]. 
@@ -38,7 +37,8 @@ CLI tool][popper]. To run it:
 git clone https://github.com/popperized/popper-examples
 
 cd popper-examples/workflows/hpc-proxy-app
-popper run
+
+popper run -f wf.yml
 ```
 
 Sample output (trimmed to only show end of execution):

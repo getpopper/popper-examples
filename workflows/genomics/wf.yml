@@ -1,0 +1,16 @@
+steps:
+- id: generate data
+  uses: popperized/bin/curl@master
+  runs: ["sh", "-c", "scripts/generate_data.sh"]
+
+- id: run
+  uses: './'
+  runs: ["sh", "-c", "scripts/run.sh"]
+
+- id: concordance
+  uses: docker://openjdk:8
+  runs: ["sh", "-c", "scripts/concordance.sh"]
+
+- id: validate
+  uses: docker://debian:buster-slim
+  runs: ["sh", "-c", "scripts/validate.sh"]

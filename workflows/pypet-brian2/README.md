@@ -7,3 +7,10 @@ This workflow consists of three actions:
   * `run example`. executes the script [pypet_example.py](./scripts/pypet_example.py) and generates the output in an `.hdf5` file.
   * `visualize`. action plots the results to visualize. 
 
+To execute:
+
+```bash
+git clone https://github.com/popperized/popper-examples
+cd popper-examples
+popper run -f workflows/pypet-brian2/main.workflow
+```

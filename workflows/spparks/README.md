@@ -5,13 +5,23 @@ software package and produces [VTK][demo] files that can be visualized
 using Paraview. This workflow is taken from [this repository][gh], in 
 particular from this section of (the [visualization demo][gh-pvw]).
 
+To run the workflow:
+
+```bash
+git clone https://github.com/popperized/popper-examples
+
+cd popper-examples
+
+popper run -f workflows/spparks/main.workflow
+```
+
 ## Workflow
 
 In this example, a container image containing 
 [SPPARKS](./docker/spparks) executes the [scripts](./scripts) inside 
 this container.
 
-The workflow consists of two actions:
+The workflow consists of two steps:
 
   * **`run`**. Runs the [`viz.spkin`](./scripts/viz.spkin) script via 
     SPPARKS which generates `.dump` file.

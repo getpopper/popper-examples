@@ -15,7 +15,8 @@ Here `difference` is the difference between actual and calculated value of `pi`.
 
 ## The Workflow
 
-This workflow comprises of several actions which can be broadly classified in the following stages:
+This workflow comprises of following steps:
+
 * `setup`: The first step is to build and push the Docker images to setup a standalone Apache Spark cluster running Spark Master and Spark workers based on [Spark Docker](https://github.com/big-data-europe/docker-spark) using the [Docker actions](https://github.com/popperized/docker).
 
 * `allocate resources`: Using [Terraform actions](https://github.com/popperized/terraform) resources are allocated for Spark Master and Spark Workers, reading the config from [config.tf](./terraform/config.tf).
@@ -30,3 +31,16 @@ This workflow comprises of several actions which can be broadly classified in th
 
 * `ANSIBLE_SSH_KEY_DATA`. A base64-encoded string containing the private key used to authenticate with hosts referenced in the ansible inventory. Example encoding from a terminal: `cat ~/.ssh/id_rsa | base64`
 * `TF_VAR_PACKET_API_KEY`. Your Packet API Auth token.This depends on the Terraform provider you are using(here [Packet](https://www.packet.com/)).
+
+
+## Execution
+
+To run the workflow:
+
+```bash
+git clone https://github.com/popperized/popper-examples
+
+cd popper-examples
+
+popper run -f workflows/spark-bench/main.workflow
+```

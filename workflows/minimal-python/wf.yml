@@ -1,0 +1,16 @@
+steps:
+- id: download data
+  uses: popperized/bin/curl@master
+  args: [
+    "--create-dirs",
+    "-Lo data/global.csv",
+    "https://github.com/datasets/co2-fossil-global/raw/master/global.csv"
+  ]
+
+- id: run analysis
+  uses: popperized/python-actions@master
+  args: ["scripts/get_mean_by_group.py", "data/global.csv", "5"]
+
+- id: validate results
+  uses: popperized/python-actions@master
+  args: ["scripts/validate_output.py", "data/global_per_capita_mean.csv"]

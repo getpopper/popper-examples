@@ -1,0 +1,26 @@
+steps:
+- id: install lulesh
+  uses: popperized/spack@master
+  args: spack install -j8 lulesh+mpi
+
+- id: install sweepj2
+  uses: popperized/python-actions@master
+  args: "pip install sweepj2"
+
+- id: delete existing jobs
+  uses: popperized/bin/sh@master
+  args: "rm -fr sweep/jobs"
+
+- id: generate sweep
+  uses: jefftriplett/python-actions@master
+  args: [
+    "sweepj2",
+    "--template", "./sweep/script.j2",
+    "--space", "./sweep/space.yml",
+    "--output", "./sweep/jobs/",
+    "--make-executable"
+  ]
+
+- id: run sweep
+  uses: popperized/spack@master
+  args: "run-parts ./sweep/jobs"
