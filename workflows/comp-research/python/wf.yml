@@ -1,0 +1,9 @@
+steps:
+- id:   "jupyter_interactive"
+  uses: "docker://continuumio/anaconda3"
+  args: ["bash"]
+  options:
+    ports: 
+      8888/tcp: 8888
+    stdin_open: True
+    tty: True
