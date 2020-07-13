@@ -6,7 +6,7 @@ in the same environment as the final workflow.
 Computational notebooks are a great tool for exploratory work. We cover here how to launch 
 a Jupyter notebook using Popper.
 
-In your local shell
+In your local shell, execute the step in interactive mode
 ```bash
 popper sh -f wf.yml jupyter
 ```
