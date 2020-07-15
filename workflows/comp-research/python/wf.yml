@@ -1,9 +1,11 @@
 steps:
-- id:   "jupyter_interactive"
+- id:   "get-data"
+  uses: "docker://alpine:3.11"
+  args: ['sh -c src/data/get_data.sh']
+
+- id:   "jupyter"
   uses: "docker://continuumio/anaconda3"
-  args: ["bash"]
-  options:
+  args: ["sh"] 
+  options: 
     ports: 
       8888/tcp: 8888
-    stdin_open: True
-    tty: True
