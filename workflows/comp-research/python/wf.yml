@@ -1,11 +1,18 @@
 steps:
-- id:   "get-data"
-  uses: "docker://alpine:3.11"
-  args: ['sh -c src/data/get_data.sh']
+- id: "pull_data"
+  uses: "byrnedo/alpine-curl:0.1.8"
+  args: ["sh", "-c", "src/data/get_data.sh"]
 
-- id:   "jupyter"
-  uses: "docker://continuumio/anaconda3"
+- id: "notebook"
+  uses: "docker://continuumio/miniconda3"
   args: ["sh"] 
   options: 
     ports: 
       8888/tcp: 8888
+
+# TODO: build latex paper
+#
+# - id: "paper"
+#   uses: "docker://blang:latex-ctanbasic"
+#   args: ["sh", "-c", "pdlatex", "paper_main.tex"]
+  

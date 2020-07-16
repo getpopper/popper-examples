@@ -1,0 +1,6 @@
+name: example-env
+channels:
+  - conda-forge
+  - base
+dependencies:
+  - jupyter-lab
