@@ -11,7 +11,6 @@ ENV PYTHONDONTWRITEBYTECODE=true
 # conda cache/package tarbarlls and python bytecode
 COPY environment.yml .
 RUN conda env update -f environment.yml \
-    && conda clean -afy \                                         
+    && conda clean -afy \
     && find /opt/conda/ -follow -type f -name '*.pyc' -delete 
-
 CMD [ "/bin/bash" ]
