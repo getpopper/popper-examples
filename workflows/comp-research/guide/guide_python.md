@@ -86,7 +86,7 @@ environment.
 
 
 
-## Keeping track of the environment
+## Package management
 
 It can be difficult to guess in advance which software libraries will be needed. 
 Instead, we recommend updating the workflow requirements as you go using one of 
@@ -94,7 +94,7 @@ the package managers available for Python.
 
 ### conda
  
-We recommend using conda for managing packages, due to its superior dependency 
+Conda is recommended for managing packages, due to its superior dependency 
 management and support for data analysis work. 
 While executing the `notebook` step interactively, extra packages can be installed as
 needed using 
