@@ -17,7 +17,7 @@ To help follow allong, see the final [repository]() for this workflow.
 
 TODO: introduction to use and structuring of a workflow
 
-Often, this can be done with a simple shell script
+In our example, this can be done with a simple shell script
 
 ```sh
 mkdir -p data/raw
@@ -30,7 +30,7 @@ done
 echo "Files downloaded:"
 ls 
 ```
-Now, wrap this in a workflow step:
+Now, wrap this in Popper workflow in `wf.yml`:
 ```yaml
 steps:
   - id:"get-data"
@@ -51,7 +51,7 @@ to do both in the same environment.
 Computational notebooks are a great tool for exploratory work. We cover here how to 
 launch a Jupyter notebook using Popper.
 
-Add a new step to workflow in `wf.yml`
+Add a new step to the workflow in `wf.yml`
 ```yml
 - id: "notebook"
   uses: ""
