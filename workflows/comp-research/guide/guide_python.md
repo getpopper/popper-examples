@@ -68,7 +68,7 @@ In your local shell, execute the step in interactive mode
 ```sh
 popper sh -f wf.yml jupyter
 ```
-In the shell in the docker container, run
+In docker container's shell, run
 ```sh
 jupyter lab --ip 0.0.0.0 --no-browser --allow-root 
 ```
