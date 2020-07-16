@@ -1,10 +1,9 @@
-mkdir -p data.raw
+#!/bin/sh
 cd data/raw
-URLS = [TODO]
 
-for url in URLS 
-do 
-    curl $url
-done
+wget "https://s3.amazonaws.com/drivendata-prod/data/66/public/test_set_features.csv"
+wget "https://s3.amazonaws.com/drivendata-prod/data/66/public/training_set_labels.csv"
+wget "https://s3.amazonaws.com/drivendata-prod/data/66/public/training_set_features.csv"
+
 echo "Files downloaded:"
-ls
+ls 

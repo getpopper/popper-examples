@@ -1,8 +1,7 @@
 steps:
-- id: "pull_data"
-  uses: "docker://byrnedo/alpine-curl:0.1.8"
-  runs: ["sh"]
-  args: ["src/data/get_data.sh"]
+- id: "get_data"
+  uses: "docker://jacobcarlborg/docker-alpine-wget"
+  args: ["sh", "src/get_data.sh"]
 
 - id: "notebook"
   uses: "./"
@@ -15,17 +14,16 @@ steps:
 # placeholders for modeling and process-data steps
 - id: "process_data"
   uses: "./"
-  args: ["echo", "processing data "]
+  args: ["python", "--version"]
   skip_pull: True
 
 - id: "model"
   uses: "./"
-  args: ["echo", "model step"]
+  args: ["python", "--version"]
   skip_pull: True
 
 - id: "paper"
   uses: "docker://blang/latex:ctanbasic"
-  runs: ["sh"]
   args: ["pdflatex", "paper.tex"]
-  dir: "/workspace/report"
+  dir: "/workspace/paper"
   

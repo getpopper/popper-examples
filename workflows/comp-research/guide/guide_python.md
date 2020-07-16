@@ -3,43 +3,44 @@
 **Pre-requisites**: basic knowledge of git, command line and Python. It is also 
 recommended to read through the 
 [documentation](https://popper.readthedocs.io/en/latest/sections/getting_started.html)
-for Poppper. 
+for Popper. 
 
 To adapt the recommendations of this guide to your own workflow, fork this 
 [template repository]() or use the [Cookiecutter template](). (TODO: fix links)
 
 ### Case study:
 
-Thoughout this guide, [TODO]() is used as an example project for developing the workflow.
+Thoughout this guide, the  [Flu Shot Learning](https://www.drivendata.org/competitions/66/flu-shot-learning/) competition on Driven Data is used as an example project for developing the workflow.
 To help follow allong, see the final [repository]() for this workflow.
 
 ## Downloading data
 
-TODO: introduction to use and structuring of a workflow
-
+A computational workflow should automate the acquisition of data to ensure
+that the correct version of the data is used.
 In our example, this can be done with a simple shell script
 
 ```sh
-mkdir -p data/raw
+#!/bin/sh
 cd data/raw
-URLS = [TODO]
-for url in URLS
-do 
-    curl $url
-done
+
+wget "https://s3.amazonaws.com/drivendata-prod/data/66/public/test_set_features.csv"
+wget "https://s3.amazonaws.com/drivendata-prod/data/66/public/training_set_labels.csv"
+wget "https://s3.amazonaws.com/drivendata-prod/data/66/public/training_set_features.csv"
+
 echo "Files downloaded:"
 ls 
 ```
-Now, wrap this in Popper workflow in `wf.yml`:
+Now, wrap this step using a Popper workflow. In `wf.yml`,
 ```yaml
 steps:
-  - id:"get-data"
-    uses: "byrnedo/alpine-curl:0.1.8"
-    args: ['sh', '-c', 'get_data.sh']
+  - id: "get-data"
+    uses: "docker://jacobcarlborg/docker-alpine-wget"
+    runs: ["sh"]
+    args: ["src/get_data.sh"]
 ```
 Remarks:
 - it is important to ensure that the Docker images contains the necessary utilities. 
-For instance, a default Alpine image does not include `curl` 
+For instance, a default Alpine image does not include `wget` 
 
 
 ## Interactive development
@@ -54,27 +55,28 @@ launch a Jupyter notebook using Popper.
 Add a new step to the workflow in `wf.yml`
 ```yml
 - id: "notebook"
-  uses: ""
+  uses: "./"
   args: ["sh"] 
   options: 
     ports: 
       8888/tcp: 8888
 ```
+
 Remarks:
-- `uses` is left empty, as this step uses an image built from the `Dockerfile` in the local workspace directory
+- `uses` is set to `./` (current directory), as this step uses an image built from the `Dockerfile` in the local workspace directory
 - `ports` is set to `{8888/tcp: 8888}` which will allow the host machine to connect to the notebook server in the container
 
 In your local shell, execute the step in interactive mode
 ```sh
 popper sh -f wf.yml jupyter
 ```
-In docker container's shell, run
+In the docker container's shell, run
 ```sh
 jupyter lab --ip 0.0.0.0 --no-browser --allow-root 
 ```
 Skip this second step if you only need the shell interface
 
-**Remarks**:
+Remarks:
 - `--ip 0.0.0.0` allows the user to access JupyterLab from outside the container (by default, 
 Jupyter only allows access from `localhost`)
 - `--no-browser` tells jupyter to not expect to find a browser in the docker container
@@ -83,7 +85,6 @@ image), which Jupyter does not enable by default
 
 Copy and paste the generated link in the browser on your host machine to access the JupyterLab 
 environment.
-
 
 
 ## Package management
@@ -121,10 +122,22 @@ Modify the run command `RUN` in the provided `Dockerfile` to
 RUN pip install -r requirements.txt
 ```
 
-## Models and visualizations
+## Models and visualization
 
 TODO
 
-## Generating a paper/report
+## Building a paper using LaTeX
 
-TODO
+It is easy to wrap the generation of the final paper in a Popper workflow.
+This is  useful to ensure that the paper is always built with the most up-to-date data and figures.
+
+```yaml
+- id: "paper"
+  uses: "docker://blang/latex:ctanbasic"
+  args: ["pdflatex", "paper.tex"]
+  dir: "/workspace/paper"
+```
+Remarks:
+- This step uses a basic LaTeX installation. For more sophisticated needs,
+use a full [TexLive image](https://hub.docker.com/r/blang/latex/tags) 
+- `dir` is set to `workspace/paper` so that Popper looks for, and outputs files in the `paper` folder
