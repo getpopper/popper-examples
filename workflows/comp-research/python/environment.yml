@@ -3,4 +3,4 @@ channels:
   - conda-forge
   - base
 dependencies:
-  - jupyter-lab
+  - jupyter-lsb

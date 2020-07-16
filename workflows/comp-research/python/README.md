@@ -10,8 +10,8 @@
 In addition, for local experimentation:
 - conda
 
-## Analysis
 
+## Running the workflow
 ```sh
 popper run -f wf.yml
 ```
