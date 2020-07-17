@@ -142,3 +142,7 @@ cython_debug/
 *.npy
 *.pickle
 *.ckpt
+
+# latex
+*.pdf 
+*.aux

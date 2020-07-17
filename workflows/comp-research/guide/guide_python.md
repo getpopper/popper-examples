@@ -1,17 +1,31 @@
 # Reproducible Computational Research with Python and Popper
 
-**Pre-requisites**: basic knowledge of git, command line and Python. It is also 
-recommended to read through the 
+This guide explains how to use Popper to develop and run reproducible workflows
+in for computational research in fields such as physics, machine learning or
+bioinformatics
+
+## Getting started
+
+[TODO: introduction to reproducibility and major concepts in Popper?]
+
+### Pre-requisites
+
+Basic knowledge of git, command line and Python. It is also 
+recommended to read through the rest of the
 [documentation](https://popper.readthedocs.io/en/latest/sections/getting_started.html)
 for Popper. 
 
 To adapt the recommendations of this guide to your own workflow, fork this 
 [template repository]() or use the [Cookiecutter template](). (TODO: fix links)
 
-### Case study:
+### Case study
 
-Thoughout this guide, the  [Flu Shot Learning](https://www.drivendata.org/competitions/66/flu-shot-learning/) competition on Driven Data is used as an example project for developing the workflow.
+Thoughout this guide, the  
+[Flu Shot Learning](https://www.drivendata.org/competitions/66/flu-shot-learning/) 
+competition on Driven Data is used as an example project for developing the workflow.
 To help follow allong, see the final [repository]() for this workflow.
+
+**Note:** this is a placeholder for testing purposes, example is not definitive
 
 ## Downloading data
 
@@ -124,7 +138,10 @@ RUN pip install -r requirements.txt
 
 ## Models and visualization
 
-TODO
+Following the above advice, wrap your code for data processing, modeling and generating
+figures
+
+[TODO: Examples for all three]
 
 ## Building a paper using LaTeX
 
