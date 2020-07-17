@@ -22,8 +22,9 @@ To adapt the recommendations of this guide to your own workflow, fork this
 
 Thoughout this guide, the  
 [Flu Shot Learning](https://www.drivendata.org/competitions/66/flu-shot-learning/) 
-competition on Driven Data is used as an example project for developing the workflow.
-To help follow allong, see the final [repository]() for this workflow.
+research competition on Driven Data is used as an example project for developing the workflow. To help follow allong, see the final [repository]() for this workflow.
+
+[TODO: fix links]
 
 **Note:** this is a placeholder for testing purposes, example is not definitive
 
@@ -154,6 +155,7 @@ This is  useful to ensure that the paper is always built with the most up-to-dat
   args: ["pdflatex", "paper.tex"]
   dir: "/workspace/paper"
 ```
+
 Remarks:
 - This step uses a basic LaTeX installation. For more sophisticated needs,
 use a full [TexLive image](https://hub.docker.com/r/blang/latex/tags) 
