@@ -1,5 +1,6 @@
 # Python workflow example
 
+Anders Poirel,  25/07/2020
 
 ## Requirements
 
@@ -11,7 +12,7 @@ In addition, for local experimentation:
 - conda
 
 
-## Running the workflow
+## Reproducing the results
 ```sh
 popper run -f wf.yml
 ```

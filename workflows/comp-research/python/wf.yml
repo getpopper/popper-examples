@@ -1,28 +1,25 @@
 steps:
-- id: "get_data"
+- id: "dataset"
   uses: "docker://jacobcarlborg/docker-alpine-wget"
-  args: ["sh", "src/get_data.sh"]
-
+  runs: ["sh"]
+  args: ["src/get_data.sh"]
+ 
 - id: "notebook"
-  uses: "./"
+  uses: "./containers/"
   args: ["jupyter", "--version"] 
   options: 
     ports: 
       8888/tcp: 8888
-          
-# placeholders for modeling and process-data steps
-- id: "process_data"
-  uses: "./"
-  args: ["python", "--version"]
-  skip_pull: True
-
-- id: "model"
-  uses: "./"
-  args: ["python", "--version"]
-  skip_pull: True
+    
+- id: "figures"
+  uses: "./containers/"
+  args: ["python, src/evaluate_model.py"]
+    
+- id: "predict"
+  uses: "./containers/"
+  args: ["python, src/predict.py"]
 
 - id: "paper"
   uses: "docker://blang/latex:ctanbasic"
   args: ["pdflatex", "paper.tex"]
   dir: "/workspace/paper"
-  
