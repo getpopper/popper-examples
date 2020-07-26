@@ -1,7 +1,13 @@
 # Computational Research in Popper
 
-`python` contains an example of a workflow for statistically-oriented research in Python using the Jupyter Lab IDE. 
-`rstudio` is an example of a workflow for statisically-oriented research in R using the RStudio Server IDE.
+This folder contains examples of Popper workflows of intermediate complexity in  computational science.
+Both attempt to reflect best practices for developing Popper workflows in computational fiels
+- [python](https://github.com/getpopper/popper-examples/tree/master/workflows/comp-research-python) 
+ is a machine learning workflow in Python using the Jupyter Lab IDE. 
+- [rstudio](https://github.com/getpopper/popper-examples/tree/master/workflows/comp-research-rstudio)
+ is a machine learning workflow in R using the RStudio Server IDE.
+
+To adapt the approach demonstrated here to your own work, see the guide for [computational research with Popper]().
 
 ## Requirements
 
