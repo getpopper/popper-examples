@@ -9,8 +9,7 @@ steps:
   options: 
     ports: 
       8888/tcp: 8888
-  skip_pull: True
-    
+          
 # placeholders for modeling and process-data steps
 - id: "process_data"
   uses: "./"

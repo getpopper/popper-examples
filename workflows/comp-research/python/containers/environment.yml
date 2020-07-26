@@ -1,0 +1,6 @@
+name: base
+channels:
+  - conda-forge
+  - base
+dependencies:
+  - jupyterlab=1.0.10
