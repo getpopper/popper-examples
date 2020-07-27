@@ -1,10 +1,8 @@
 steps:
 - id: "dataset"
   uses: "docker://jacobcarlborg/docker-alpine-wget"
-  runs: ["sh"]
-  args: ["src/get_data.sh"]
-  dir: "/workspace/data"
- 
+  args: ["sh", "src/get_data.sh", "data"]
+  
 - id: "notebook"
   uses: "./containers/"
   args: ["jupyter", "--version"] 
@@ -22,5 +20,5 @@ steps:
 
 - id: "paper"
   uses: "docker://blang/latex:ctanbasic"
-  args: ["latexmk", "-c", "-pdf", "paper.tex"]
+  args: ["latexmk", "-pdf", "paper.tex"]
   dir: "/workspace/paper"
