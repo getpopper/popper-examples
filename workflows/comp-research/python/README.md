@@ -16,7 +16,7 @@ This workflow shows examples of using Popper to automate common tasks in computa
 - visualizing results
 - generating a paper with up-to-date results
 
-## ⚙ Requirements
+##  Requirements
 
 - Popper
 - Docker
@@ -26,13 +26,13 @@ In addition, for local experimentation:
 - conda
 
 
-## ♻ Reproducing the results
+## Reproducing the results
 
 ```sh
 popper run -f wf.yml
 ```
 
-## 📁 Project structure
+## Project structure
 
 ```
 ├── LICENSE
