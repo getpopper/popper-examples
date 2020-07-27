@@ -9,7 +9,7 @@
 }
 
 \usepackage{graphicx}
-\graphicspath{ {./../output/figures/} }
+\graphicspath{ {./../results/figures/} }
 
 \title{Flu Shot Learning: Prediction H1N1 and Seasonal Flu Vaccines}
 \author{Anders Poirel \\ University of California, Santa Cruz}
@@ -24,10 +24,10 @@
 This paper describes our approach in 
 the \href{https://www.drivendata.org/competitions/66/flu-shot-learning/}{Flu Shot Learning}
 on Driven Data \cite{driven-data}
-The goal of the competition is to predict how likely individuals are to receive their H1N1 and
-seasonal flue vaccines. Specifically, participants are asked to predict a probability for
-each vaccine. Competition ranking is based on the ROC AUC of predictions on a hold-out
-test set.
+The goal of the competition is to predict how likely individuals are to receive their 
+H1N1 and seasonal flue vaccines. Specifically, participants are asked to predict a 
+probability for each vaccine. Competition ranking is based on the ROC AUC of predictions 
+on a hold-out test set.
 
 \section{Model}
 
@@ -55,9 +55,9 @@ appear to affect performance significantly.
 
 \subsection{Hidden test set}
 
-After submission to the competition website, the model's predictions scored 0.8342 ROC AUC on the hidden test set,
-enough to beat the organizer's benchmark (.8185). At time of writing, this score places
-181st out of 948 on the competition leaderboard. 
+After submission to the competition website, the model's predictions scored 0.8342 ROC AUC 
+on the hidden test set, enough to beat the organizer's benchmark (.8185). 
+At time of writing, this score places 181st out of 948 on the competition leaderboard. 
 
 \section{Future Work}
 
@@ -67,7 +67,7 @@ Furthermore, model stacking will generally improve results \cite{elements}, in p
 in this type of machine learning competitions where test sets are guaranteed to be sourced
 from the same distribution as training data.
 
-\bibliography{references}{}
+\bibliography{references}
 \bibliographystyle{plain}
 
 \end{document}

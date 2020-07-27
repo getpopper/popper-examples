@@ -3,6 +3,7 @@ steps:
   uses: "docker://jacobcarlborg/docker-alpine-wget"
   runs: ["sh"]
   args: ["src/get_data.sh"]
+  dir: "/workspace/data"
  
 - id: "notebook"
   uses: "./containers/"
@@ -21,5 +22,5 @@ steps:
 
 - id: "paper"
   uses: "docker://blang/latex:ctanbasic"
-  args: ["pdflatex", "paper.tex"]
+  args: ["latexmk", "-pdf", "paper.tex"]
   dir: "/workspace/paper"

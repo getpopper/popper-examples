@@ -9,14 +9,14 @@ machine learning competition on Driven Data. The competition's goal is to predic
  [ROC AUC score](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) of their
   predictions on a hold-out test set.
 
-This workflow shows examples of using Popper to automate common tasks in computational research:
+This workflow shows examples of Popper automating common tasks in computational research:
 - downloading/generating data
 - using a Jupyter notebook
 - fitting/simulating a model
 - visualizing results
 - generating a paper with up-to-date results
 
-## ⚙ Requirements
+## Requirements
 
 - Popper
 - Docker
@@ -25,14 +25,13 @@ This workflow shows examples of using Popper to automate common tasks in computa
 In addition, for local experimentation:
 - conda
 
-
-## ♻ Reproducing the results
+## Reproducing the results
 
 ```sh
 popper run -f wf.yml
 ```
 
-## 📁 Project structure
+## Project structure
 
 ```
 ├── LICENSE
