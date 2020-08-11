@@ -2,8 +2,21 @@ steps:
 - id: "dataset"
   uses: "docker://jacobcarlborg/docker-alpine-wget"
   args: ["sh", "src/get_data.sh", "data"]
-  
+
+- id: "dataset"
+  uses: "docker://jacobcarlborg/docker-alpine-wget"
+  args: ["sh", "src/get_data.sh", "data"]
+
+- id: "rstudio"
+  uses: "docker://rocker/rstudio:4.0.0"
+  args: ["r", "--version"]
+  options:
+    password: password
+    ports:
+      8787: 8787
+
 - id: "paper"
   uses: "docker://blang/latex:ctanbasic" 
   args: ["latexmk", "-pdf", "paper.tex"]
   dir: "/workspace/paper"
+
