@@ -1,0 +1,73 @@
+\documentclass{article}[12pt]
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage{graphicx}
+\graphicspath{ {./../results/figures/} }
+
+\title{Flu Shot Learning: Prediction H1N1 and Seasonal Flu Vaccines}
+\author{Anders Poirel \\ University of California, Santa Cruz}
+\date{\today}
+
+\begin{document}
+    
+\maketitle
+
+\section{Introduction}
+
+This paper describes our approach in 
+the \href{https://www.drivendata.org/competitions/66/flu-shot-learning/}{Flu Shot Learning}
+on Driven Data \cite{driven-data}
+The goal of the competition is to predict how likely individuals are to receive their 
+H1N1 and seasonal flue vaccines. Specifically, participants are asked to predict a 
+probability for each vaccine. Competition ranking is based on the ROC AUC of predictions 
+on a hold-out test set.
+
+\section{Model}
+
+Our approach uses a logistic regression model. 
+\textbf{FIXME: Update with appropriate libraries}.
+Numerical features were standardized and imputed using the K-nearest neighbors
+algorithm. Categorical features were one-hot encoded and imputed with ``missing''
+flags. \\
+We tuned a single hyper-parameter for this pipeline, logistic regression's regularization
+parameter $C$, using cross-validation on 5 folds. 
+
+\section{Results}
+
+\subsection{Cross-validation}
+
+Cross-validation scores suggest that the model does not over-fit for any choice
+of $C$. Indeed, performance degrades for low values of $C$ (stronger regularization).
+The best tested value is $C = 0.464$, although selecting a higher value does not 
+appear to affect performance significantly.
+
+\begin{figure}
+\caption{Cross validation mean scores}
+\includegraphics[width=\textwidth]{reg_performance.png}
+\end{figure}
+
+\subsection{Hidden test set}
+
+After submission to the competition website, the model's predictions scored 0.8342 ROC AUC 
+on the hidden test set, enough to beat the organizer's benchmark (.8185). 
+At time of writing, this score places 181st out of 948 on the competition leaderboard. 
+
+\section{Future Work}
+
+Our  model's validation curve shows few signs of over-fitting. As such, it is likely that
+higher scores can be achieved by using a more flexible model (e.g. gradient boosted trees).
+Furthermore, model stacking will generally improve results \cite{elements}, in particular
+in this type of machine learning competitions where test sets are guaranteed to be sourced
+from the same distribution as training data.
+
+\bibliography{references}
+\bibliographystyle{plain}
+
+\end{document}
