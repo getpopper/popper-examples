@@ -8,8 +8,10 @@ steps:
   args: ["sh", "src/get_data.sh", "data"]
 
 - id: "rstudio"
-  uses: "./containers"
+  uses: "./"
   args: ["r", "--version"]
+  env:
+    DISABLE_AUTH: "true"
   options:
     ports:
       8787: 8787
