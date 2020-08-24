@@ -8,14 +8,11 @@ steps:
   args: ["sh", "src/get_data.sh", "data"]
 
 - id: "rstudio"
-  uses: "docker://rocker/rstudio:4.0.0"
+  uses: "./containers"
   args: ["r", "--version"]
   options:
     ports:
       8787: 8787
-    environment:
-      ["DISABLE_AUTH=true"]
-    
     
 - id: "paper"
   uses: "docker://blang/latex:ctanbasic" 

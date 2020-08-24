@@ -1,0 +1,25 @@
+{
+  "R": {
+    "Version": "3.6.3",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://mran.microsoft.com/snapshot/2020-04-24"
+      }
+    ]
+  },
+  "Packages": {
+    "renv": {
+      "Package": "renv",
+      "Version": "0.11.0-23",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "renv",
+      "RemoteUsername": "rstudio",
+      "RemoteRef": "0.11.0-23",
+      "RemoteSha": "735e17f696e17873895891f4e0a84c578344e0f6",
+      "Hash": "ebdc0ae13a7e17d9b10b777fc10abee7"
+    }
+  }
+}
