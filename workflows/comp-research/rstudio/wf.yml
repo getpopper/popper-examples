@@ -3,21 +3,15 @@ steps:
   uses: "docker://jacobcarlborg/docker-alpine-wget"
   args: ["sh", "src/get_data.sh", "data"]
 
-- id: "dataset"
-  uses: "docker://jacobcarlborg/docker-alpine-wget"
-  args: ["sh", "src/get_data.sh", "data"]
-
 - id: "rstudio"
   uses: "./"
   args: ["r", "--version"]
-  env:
-    DISABLE_AUTH: "true"
+  env: {DISABLE_AUTH: "true"}
   options:
     ports:
       8787: 8787
     
 - id: "paper"
-  uses: "docker://blang/latex:ctanbasic" 
+  uses: "docker://apoirel/popper-rstudio:4.0.0" 
   args: ["latexmk", "-pdf", "paper.tex"]
   dir: "/workspace/paper"
-

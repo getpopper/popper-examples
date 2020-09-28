@@ -41,9 +41,6 @@ vignettes/*.pdf
 # translation temp files
 po/*~
 
-# renv
-renv/
-!renv/activate.R
-
 # R projects artifacts
 *.Rproj
+.Rproj.user

@@ -1,17 +1,6 @@
-FROM asachet/rocker-tidymodels:3.6.1
-
+FROM apoirel/popper-rstudio:4.0.0
 LABEL maintainer="apoirel@ucsc.edu"
-LABEL description="This images is used as a base for developing data analysis workflows. \
-Organization follows the R packages convention"
-LABEL version="0.1"
-
-# move configuration file where rstudio server will find it
-COPY rsession.conf /etc/rstudio 
-
-# install R packages specified in DESCRIPTION
-WORKDIR /dummy
-COPY DESCRIPTION .
-RUN R -e "devtools::install_deps()"
-
-EXPOSE 8787
-CMD ["bin/sh"] 
+RUN ["install2.r", "versions"]
+RUN ["Rscript", "-e", "versions::install.versions('dplyr', '0.8.5')", "-e", "versions::install.versions('forcats', '0.5.0')", "-e", "versions::install.versions('ggplot2', '3.3.0')", "-e", "versions::install.versions('readr', '1.3.1')", "-e", "versions::install.versions('stringr', '1.4.0')", "-e", "versions::install.versions('tibble', '3.0.1')", "-e", "versions::install.versions('tidyr', '1.0.2')", "-e", "versions::install.versions('tidyverse', '1.3.0')"]
+WORKDIR /payload/
+CMD ["bin/sh"]
