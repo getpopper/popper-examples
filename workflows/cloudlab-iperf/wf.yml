@@ -1,0 +1,47 @@
+steps:
+
+- id: allocate resources
+  uses: docker://popperized/geni:v0.9.9.2
+  # writes to geni/manifest.xml
+  args: ['geni/config.py', 'apply']
+  secrets:
+  - GENI_FRAMEWORK
+  - GENI_PROJECT
+  - GENI_USERNAME
+  - GENI_KEY_PASSPHRASE
+  - GENI_PUBKEY_DATA
+  - GENI_CERT_DATA
+
+- id: generate ansible inventory
+  uses: docker://popperized/geni:v0.9.9.2
+  # override the entrypoint so we don't need to provide credentials, as they
+  # are not needed for the 'get-inventory' subcommand
+  runs: 'python'
+  # convert geni/manifest.xml to ansible/hosts.yaml
+  args: ['geni/config.py', 'get-inventory']
+
+
+- id: run test
+  uses: docker://getpopper/ansible:v2.9.7
+  args: ['-i', 'ansible/hosts.yaml', 'ansible/playbook.yml']
+  env:
+    ANSIBLE_LOG_PATH: ansible/ansible.log
+    ANSIBLE_SSH_CONTROL_PATH: /dev/shm/cp%%h-%%p-%%r
+    ANSIBLE_HOST_KEY_CHECKING: 'false'
+  secrets:
+  - ANSIBLE_SSH_KEY_DATA
+
+- id: release resources
+  uses: docker://getpopper/geni:v0.9.9.2
+  args: ['geni/config.py', 'destroy']
+  secrets:
+  - GENI_FRAMEWORK
+  - GENI_PROJECT
+  - GENI_USERNAME
+  - GENI_KEY_PASSPHRASE
+  - GENI_PUBKEY_DATA
+  - GENI_CERT_DATA
+
+- id: plot results
+  uses: docker://ivotron/gnuplot:5.0
+  runs: ['gnuplot/plot.sh']

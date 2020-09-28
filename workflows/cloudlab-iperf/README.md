@@ -1,72 +1,93 @@
 # `cloudlab-iperf`
 
-This folder contains an example [Github 
-Actions](https://github.com/features/actions) workflow that showcases how to run 
-an experiment on [CloudLab](https://cloudlab.us). To execute this workflow 
-locally on your computer, you can install 
-[Popper](https://github.com/systemslab/popper) and 
-[Docker](https://docs.docker.com/install/).
+A workflow for running an end-to-end iperf test on CloudLab using 
+`geni-lib` and Ansible. It assumes basic knowledge of how these two 
+tools work. The workflow in [`wf.yml`](./wf.yml) runs an iperf on a 
+[Cloudlab][cloudlab] allocation using Ansible. The workflow consists 
+of the following steps:
 
-To run this example, assuming you have an active account on CloudLab, 
-define the required secrets in your environment (`secrets` attributes 
-used in [the workflow](./main.workflow)), followed by:
+  * **`allocate resources`**. Request for resources to CloudLab and 
+    wait for them to be instantiated. The configuration is specified 
+    in the [`geni/config.py`](./geni/config.py)
 
-```bash
-git clone https://github.com/popperized/popper-examples
-cd popper-examples/
-popper run -f workflows/cloudlab-iperf/main.workflow
-```
+  * **`generate ansible inventory`**. Generates an Ansible inventory 
+    out of the GENI manifest produced by the previous `allocate 
+    resources` step. This is used by the subsequent `run test` step.
 
-## Workflow
+  * **`run test`**. Runs the [Ansible 
+    playbook](./ansible/playbook.yml) that executes three high-level 
+    tasks: launch an [iperf Docker container][iperf] on each allocated 
+    node, executes an iperf test, and retrieves output files.
 
-The steps in the workflow are the following:
+  * **`release resources`**. Releases the CloudLab resources used for 
+    the test.
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/473117/57112776-61330900-6cf6-11e9-8260-7259ef19c324.png">
-</p>
+  * **`plot results`**. Plots results of the test using a 
+    [Gnuplot](http://www.gnuplot.info) Docker image.
 
-> Diagram above obtained with:
->
-> ```bash
->  popper dot --wfile workflows/cloudlab-iperf/main.workflow | dot -Tpng -o wf.png
-> ```
+## Usage
 
-You can also see the contents of the [`.workflow` file](./main.workflow). 
-High-level description of the steps in the workflow:
+To execute this workflow:
 
- 1. `"build context"`. Uses the [GENI `build-context` 
-    action](https://github.com/popperized/geni/tree/master/build-context) to 
-    create a geni-lib context that is used by subsequent GENI-based actions.
- 2. `"request resources"`. Uses the [GENI `exec` 
-    action](https://github.com/popperized/geni/tree/master/exec) to allocate two 
-    nodes on a CloudLab site. This action also creates an Ansible inventory used 
-    in the next step.
- 3. `"run test"`. Executes an [Ansible 
-    action](https://github.com/popperized/ansible) that launches an [`iperf` 
-    Docker 
-    container](http://networkstatic.net/measuring-network-bandwidth-using-iperf-and-docker/) 
-    on each allocated node, executes an iperf test, and retrieves output files.
- 4. `"teardown"`. Releases the CloudLab resources used for the test (using the 
-    [GENI `exec` action](https://github.com/popperized/geni/tree/master/exec) 
-    again).
- 5. `"plot results"`. Plots results of the test using a 
-    [Gnuplot](http://www.gnuplot.info/) Docker image.
+ 1. Clone this repository or copy the contents of this folder into 
+    your project:
 
-The input scripts for each of the actions executed in the workflow are contained 
-in the `geni`, `ansible`, and `gnuplot` subfolders. After a successful 
-execution, the entire folder looks like the following:
+    ```bash
+    git clone https://github.com/getpopper/popper-examples
+
+    cd workflows/cloudlab-iperf
+    ```
+
+ 2. Define the secrets expected by the workflow, declared in the 
+    `secrets` attribute of steps:
+
+    ```bash
+    export GENI_FRAMEWORK=emulab-ch2
+    export GENI_PROJECT=<project>
+    export GENI_USERNAME=<username>
+    export GENI_KEY_PASSPHRASE='<password>'
+    export GENI_PUBKEY_DATA=$(cat ~/.ssh/id_rsa.pub | base64)
+    export GENI_CERT_DATA=$(cat ~/.ssh/cloudlab.pem | base64)
+
+    export ANSIBLE_SSH_KEY_DATA=$(cat ~/.ssh/id_rsa | base64)
+    ```
+
+    See [the GENI image's README][gd] for more information about the 
+    secrets related to the GENI steps; similarly [see here][cad] for 
+    the Ansible step.
+
+ 3. Tweak the following to your needs:
+
+     * The experiment name in the [GENI config 
+       file](./geni/config.py). Changing the name of the experiment 
+       avoids having another member of your project running the script 
+       and resulting in name clashes.
+
+     * Specify in the `deploy` step which Ansible playbook is to be 
+       executed (see the [`ansible/playbooks/`](./ansible/playbooks) 
+       folder. Multiple playbooks may exist, depending on what type of 
+       deployment is needed (e.g. ).
+
+ 4. Execute the workflow by doing:
+
+    ```bash
+    popper run -f wf.yml
+    ```
+
+The inputs for each step are contained in the `geni/`, `ansible/`, and 
+`gnuplot/` subfolders. After a successful execution, the entire folder 
+looks like the following:
 
 ```
 $ tree -aI .git workflows/cloudlab-iperf/
 workflows/cloudlab-iperf/
 ├── README.md
 ├── ansible
+│   ├── hosts.yaml     <<<<<
 │   └── playbook.yml
 ├── geni
-│   ├── hosts          <<<<<
-│   ├── manifest.xml   <<<<<
-│   ├── release.py
-│   └── request.py
+│   ├── config.py
+│   └── manifest.xml   <<<<<
 ├── gnuplot
 │   ├── graph-tcp-data.p
 │   └── plot.sh
@@ -79,7 +100,13 @@ workflows/cloudlab-iperf/
     └── transfer.pdf   <<<<<
 ```
 
-Lines marked with `<<<<` denote output files generated by the execution of the 
-workflow.
+Lines marked with `<<<<` denote output files generated by the 
+execution of the workflow.
 
-Visit <https://github.com/systemslab/popper> to learn more about Popper.
+For more information on Popper, visit <https://github.com/getpopper/popper>.
+
+[cloudlab]: https://cloudlab.us
+[gd]: https://github.com/popperized/library/tree/master/geni
+[cad]: https://github.com/popperized/library/tree/master/ansible
+[iperf]: http://networkstatic.net/measuring-network-bandwidth-using-iperf-and-docker
+
