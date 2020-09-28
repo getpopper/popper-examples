@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-mpirun \
-  --allow-run-as-root \
-  -np {{ nodes }} \
-  lulesh2.0 \
-    -i {{ iterations }} \
-    -c {{ cost }}
