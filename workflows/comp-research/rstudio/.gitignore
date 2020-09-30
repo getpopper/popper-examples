@@ -44,3 +44,7 @@ po/*~
 # R projects artifacts
 *.Rproj
 .Rproj.user
+
+
+# data
+*csv
