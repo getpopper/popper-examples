@@ -14,7 +14,8 @@ get_predictions <- function(target, ignored, df_train, df_test) {
     predictions <-
         get_lr_model(df_train, target, ignored) %>%
         fit(data = df_train) %>%
-        predict(df_test, type = "prob") # targets are probabilities
+        predict(df_test, type = "prob") %>%# targets are probabilities
+        select(".pred_1")
 }
 
 preds_seasonal <- 
@@ -23,7 +24,6 @@ preds_seasonal <-
 preds_h1n1 <- 
     get_predictions("h1n1_vaccine", "seasonal_vaccine", df_train, df_test) %>%
     select(".pred1")
-
 
 df_submission %>%
   mutate(h1n1_vaccine = preds_h1n1) %>%
