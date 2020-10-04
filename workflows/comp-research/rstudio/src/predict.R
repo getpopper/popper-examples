@@ -1,6 +1,8 @@
 library(tidyverse)
 library(tidymodels)
-DATA_PATH = "../../data"
+DATA_PATH = "data"
+
+source("src/models.R")
 
 df_train <- read_csv(paste(DATA_PATH, "training_set_features.csv", sep = "/"))
 y_train <- read_csv(paste(DATA_PATH, "training_set_labels.csv", sep = "/"))
@@ -15,19 +17,20 @@ get_predictions <- function(target, ignored, df_train, df_test) {
         get_lr_model(df_train, target, ignored) %>%
         fit(data = df_train) %>%
         predict(df_test, type = "prob") %>%# targets are probabilities
-        select(".pred_1")
+        pull(".pred_1")
+
+    return(predictions)
 }
 
 preds_seasonal <- 
-    get_predictions("seasonal_vaccine", "h1n1_vaccine", df_train, df_test) %>%
-    select(".pred1")
+    get_predictions("seasonal_vaccine", "h1n1_vaccine", df_train, df_test)
+
 preds_h1n1 <- 
-    get_predictions("h1n1_vaccine", "seasonal_vaccine", df_train, df_test) %>%
-    select(".pred1")
+    get_predictions("h1n1_vaccine", "seasonal_vaccine", df_train, df_test)
 
 df_submission %>%
   mutate(h1n1_vaccine = preds_h1n1) %>%
   mutate(seasonal_vaccine = preds_seasonal) %>%
-  write_csv('../output/submission.csv')
+  write_csv('output/submission.csv')
 
 
