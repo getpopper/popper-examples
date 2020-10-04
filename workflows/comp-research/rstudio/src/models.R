@@ -6,7 +6,6 @@ get_lr_model <- function(df_train, target, ignored) {
 
     rec <-
         recipe(as.formula(paste(target, "~ .")), data = df_train) %>% 
-        step_rm(respondent_id) %>% 
         step_medianimpute(all_numeric()) %>% 
         step_normalize(all_numeric(), -all_outcomes()) %>% 
         step_unknown(all_nominal()) %>% 
