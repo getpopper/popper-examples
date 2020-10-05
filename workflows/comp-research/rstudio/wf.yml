@@ -1,4 +1,5 @@
 steps:
+
 - id: "dataset"
   uses: "docker://jacobcarlborg/docker-alpine-wget"
   args: ["sh", "src/get_data.sh", "data"]
@@ -11,7 +12,17 @@ steps:
     ports:
       8787: 8787
     
+- id: "figures"
+  uses: "./"
+  args: ["Rscript", "evaluate_model.R"]
+  dir: "/workspace/src"
+
+- id: "predict"
+  uses: "./"
+  args: ["Rscript", "predict.R"]
+  dir: "/workspace/src"
+
 - id: "paper"
-  uses: "docker://apoirel/popper-rstudio:4.0.0" 
+  uses: "./" 
   args: ["latexmk", "-pdf", "paper.tex"]
   dir: "/workspace/paper"
