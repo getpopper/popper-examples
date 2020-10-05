@@ -45,6 +45,8 @@ po/*~
 *.Rproj
 .Rproj.user
 
+# knit output
+*.html
 
 # data
 *csv
