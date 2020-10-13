@@ -1,5 +1,4 @@
 steps:
-
 - id: "dataset"
   uses: "docker://jacobcarlborg/docker-alpine-wget"
   args: ["sh", "src/get_data.sh", "data"]
