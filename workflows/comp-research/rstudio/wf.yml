@@ -5,8 +5,7 @@ steps:
 
 - id: "rstudio"
   uses: "./"
-  args: ["r", "--version"]
-  env: {DISABLE_AUTH: "true"}
+  args: ["rstudio-server", "start"]
   options:
     ports:
       8787: 8787
@@ -14,12 +13,11 @@ steps:
 - id: "figures"
   uses: "./"
   args: ["Rscript", "evaluate_model.R"]
-  dir: "/workspace/src"
+
 
 - id: "predict"
   uses: "./"
   args: ["Rscript", "predict.R"]
-  dir: "/workspace/src"
 
 - id: "paper"
   uses: "./" 

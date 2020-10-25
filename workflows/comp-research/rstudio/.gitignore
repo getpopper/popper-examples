@@ -50,3 +50,12 @@ po/*~
 
 # data
 *csv
+
+# latex output
+*.aux
+*.bbl 
+*.blg
+*.fdb_latexmk
+*.fls 
+*.log
+*.out

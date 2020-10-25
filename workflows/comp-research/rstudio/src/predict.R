@@ -1,10 +1,10 @@
 library(tidyverse)
 library(tidymodels)
 
-DATA_PATH = "../data"
-OUTPUT_PATH = "../output"
+DATA_PATH = "data"
+OUTPUT_PATH = "output"
 
-source("models.R")
+source("src/models.R")
 
 df_train <- read_csv(paste(DATA_PATH, "training_set_features.csv", sep = "/"))
 y_train <- read_csv(paste(DATA_PATH, "training_set_labels.csv", sep = "/"))

@@ -33,8 +33,7 @@ on a hold-out test set.
 
 Our approach uses a logistic regression model. Our pipeline was developed using
 \texttt{tidyverse}\cite{tidyverse} and \texttt{tidymodels}\cite{tidymodels}. 
-Numerical features were standardized and imputed using the K-nearest neighbors
-algorithm. Categorical features were one-hot encoded and imputed with ``missing''
+Numerical features were standardized and imputed using the mean. Categorical features were one-hot encoded and imputed with ``missing''
 flags. \\
 We tuned a single hyper-parameter for this pipeline, logistic regression's regularization
 parameter $C$, using cross-validation on 5 folds. 
@@ -72,10 +71,10 @@ At time of writing, this score places 181st out of 948 on the competition leader
 
 \section{Future Work}
 
-Our  model's validation curve shows few signs of over-fitting. As such, it is likely that
+Our  model's validation curve shows no sign of over-fitting. As such, it is likely that
 higher scores can be achieved by using a more flexible model (e.g. gradient boosted trees).
 Furthermore, model stacking will generally improve results \cite{elements}, in particular
-in this type of machine learning competitions where test sets are guaranteed to be sourced
+in this kind of machine learning competition, where test sets are guaranteed to be sourced
 from the same distribution as training data.
 
 \bibliography{references}
