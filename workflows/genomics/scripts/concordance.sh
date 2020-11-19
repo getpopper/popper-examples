@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -eux
 
 # SnpSift Concordance
 
@@ -21,9 +22,7 @@
 # Sample names are defined in '#CHROM' line of the header section.
 # Concordance is calculated only if sample label matches in both files.
 
-BASE_PATH="./workflows/genomics"
-java -jar ${BASE_PATH}/data/snpEff/SnpSift.jar concordance -v \
-    ${BASE_PATH}/files/SRR097977_final_variant_output_mac.vcf \
-    ${BASE_PATH}/results/vcf/SRR097977_final_variants.vcf
-
-
+java -jar ./data/snpEff/SnpSift.jar \
+  concordance -v \
+    ./files/SRR097977_final_variant_output_mac.vcf \
+    ./results/vcf/SRR097977_final_variants.vcf
