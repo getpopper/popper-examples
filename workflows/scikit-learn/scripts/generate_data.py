@@ -27,11 +27,9 @@ def generate_learning_curve(name, estimator, X, y):
     df = pd.DataFrame({'score_sizes': score_sizes,
                        'train_score_means': train_score_means,
                        'test_score_means': test_score_means})
-    if not os.path.exists('./workflows/scikit-learn/results'):
-        os.mkdir('./workflows/scikit-learn/results')
-    df.to_csv(
-        './workflows/scikit-learn/results/{}_results.csv'.format(name)
-    )
+    if not os.path.exists('./results'):
+        os.mkdir('./results')
+    df.to_csv('./results/{}_results.csv'.format(name))
 
 
 nb_estimator = GaussianNB()

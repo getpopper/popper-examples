@@ -1,11 +1,15 @@
 ---
 dist: xenial
 language: python
-python: 3.7
+python: 3.8
 services: docker
+env:
+#- WF=./workflows/comp-research
+- WF=./workflows/genomics
+- WF=./workflows/minimal-python
+- WF=./workflows/pgbench
+- WF=./workflows/scikit-learn
 install:
-- git clone https://github.com/systemslab/popper /tmp/popper
-- pip install /tmp/popper/cli
-- export PYTHONUNBUFFERED=1
+- pip install popper==2020.9.1
 script:
-- popper run
+- popper run -f $WF/wf.yml -w $WF/
