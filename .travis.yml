@@ -4,13 +4,11 @@ language: python
 python: 3.8
 services: docker
 env:
-- WF=./workflows/cloudlab-iperf
-- WF=./workflows/comp-research
+#- WF=./workflows/comp-research
 - WF=./workflows/genomics
 - WF=./workflows/minimal-python
 - WF=./workflows/pgbench
 - WF=./workflows/scikit-learn
-- WF=./workflows/spparks
 install:
 - pip install popper==2020.9.1
 script:
