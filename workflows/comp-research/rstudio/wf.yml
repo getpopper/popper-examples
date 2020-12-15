@@ -1,0 +1,25 @@
+steps:
+- id: "dataset"
+  uses: "docker://jacobcarlborg/docker-alpine-wget"
+  args: ["sh", "src/get_data.sh", "data"]
+
+- id: "rstudio"
+  uses: "./"
+  args: ["rstudio-server", "start"]
+  options:
+    ports:
+      8787: 8787
+    
+- id: "figures"
+  uses: "./"
+  args: ["Rscript", "evaluate_model.R"]
+
+
+- id: "predict"
+  uses: "./"
+  args: ["Rscript", "predict.R"]
+
+- id: "paper"
+  uses: "./" 
+  args: ["latexmk", "-pdf", "paper.tex"]
+  dir: "/workspace/paper"
